@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ナレッジポータル | Amazon Research OS</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; color: #1a1a2e; }
+    header { background: #1a1a2e; color: #fff; padding: 20px 32px; display: flex; align-items: center; gap: 16px; }
+    header h1 { font-size: 1.4rem; font-weight: 700; }
+    header span { font-size: 0.85rem; opacity: 0.6; }
+    .toolbar { padding: 16px 32px; display: flex; gap: 12px; align-items: center; background: #fff; border-bottom: 1px solid #e5e7eb; flex-wrap: wrap; }
+    .toolbar input { flex: 1; min-width: 200px; padding: 8px 14px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.9rem; }
+    .btn { padding: 7px 16px; border: 1px solid #d1d5db; border-radius: 6px; background: #fff; cursor: pointer; font-size: 0.85rem; transition: all .15s; }
+    .btn:hover, .btn.active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+    main { padding: 24px 32px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+    .card { background: #fff; border-radius: 10px; border: 1px solid #e5e7eb; padding: 20px; display: flex; flex-direction: column; gap: 10px; transition: box-shadow .15s; }
+    .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+    .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .card-title { font-size: 1rem; font-weight: 700; }
+    .badge { font-size: 0.72rem; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+    .badge-amazon { background: #fff3cd; color: #856404; }
+    .badge-rakuten { background: #fde8e8; color: #b91c1c; }
+    .badge-both { background: #dbeafe; color: #1e40af; }
+    .card-meta { font-size: 0.8rem; color: #6b7280; }
+    .card-summary { font-size: 0.88rem; line-height: 1.6; color: #374151; }
+    .kpi-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .kpi { font-size: 0.78rem; background: #f3f4f6; padding: 4px 10px; border-radius: 4px; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag { font-size: 0.72rem; background: #ede9fe; color: #5b21b6; padding: 2px 8px; border-radius: 4px; }
+    .card-footer { margin-top: auto; display: flex; justify-content: flex-end; }
+    .card-link { font-size: 0.82rem; color: #2563eb; text-decoration: none; font-weight: 600; }
+    .card-link:hover { text-decoration: underline; }
+    .empty { text-align: center; padding: 60px; color: #9ca3af; }
+    @media (max-width: 600px) { main { padding: 16px; } header { padding: 16px; } .toolbar { padding: 12px 16px; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>ナレッジポータル</h1>
+    <span>Amazon Research OS | BabyGoo / fungoo | 株式会社ASAGIRI</span>
+  </div>
+</header>
+
+<div class="toolbar">
+  <input type="text" id="search" placeholder="商品名・ASIN・タグで検索...">
+  <button class="btn active" data-filter="all">すべて</button>
+  <button class="btn" data-filter="Amazon">Amazon</button>
+  <button class="btn" data-filter="楽天">楽天</button>
+</div>
+
+<main>
+  <div class="grid" id="grid">
+    <!-- カードはJSで生成 -->
+  </div>
+  <div class="empty" id="empty" style="display:none">レポートが見つかりません</div>
+</main>
+
+<script>
+const REPORTS = [
+  {
+    id: "babycutlery-202606",
+    createdAt: "2026-07-01",
+    period: "2026年3〜6月",
+    product: "ベビーカトラリー",
+    category: "ベビー用品",
+    brand: "BabyGoo",
+    asin: "",
+    platforms: ["楽天"],
+    summary: "3月スーパーSALEで481万円達成後、5月に在庫切れ13日間で機会損失約118万円。6月SALEで321万円に回復。CTR改善とSEO回復が直近の課題。",
+    kpi: ["CVR: 13〜15%（目標比2倍）", "ACOS: 19.7%（6月悪化）", "TACOS: 5.72%", "在庫切れ: 13日間"],
+    tags: ["カトラリー", "離乳食", "スプーン", "ベビー", "2026-06", "在庫切れ"],
+    file: "2026-06/babycutlery.html"
+  }
+];
+
+function platformBadge(platforms) {
+  if (platforms.includes("Amazon") && platforms.includes("楽天")) return '<span class="badge badge-both">Amazon & 楽天</span>';
+  if (platforms.includes("Amazon")) return '<span class="badge badge-amazon">Amazon</span>';
+  if (platforms.includes("楽天")) return '<span class="badge badge-rakuten">楽天</span>';
+  return '';
+}
+
+function render(reports) {
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  if (!reports.length) { grid.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  grid.innerHTML = reports.map(r => `
+    <div class="card" data-platforms="${r.platforms.join(',')}">
+      <div class="card-header">
+        <div class="card-title">${r.product}</div>
+        ${platformBadge(r.platforms)}
+      </div>
+      <div class="card-meta">${r.period} ／ ${r.brand} ／ ASIN: ${r.asin || '—'}</div>
+      <div class="card-summary">${r.summary}</div>
+      <div class="kpi-row">${(r.kpi || []).map(k => `<span class="kpi">${k}</span>`).join('')}</div>
+      <div class="tags">${(r.tags || []).map(t => `<span class="tag">#${t}</span>`).join('')}</div>
+      <div class="card-footer">
+        <a class="card-link" href="${r.file}">レポートを開く →</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filter() {
+  const query = document.getElementById('search').value.toLowerCase();
+  const active = document.querySelector('.btn.active')?.dataset.filter || 'all';
+  const filtered = REPORTS.filter(r => {
+    const matchPlatform = active === 'all' || r.platforms.includes(active);
+    const matchSearch = !query ||
+      r.product.toLowerCase().includes(query) ||
+      (r.asin || '').toLowerCase().includes(query) ||
+      (r.tags || []).some(t => t.toLowerCase().includes(query));
+    return matchPlatform && matchSearch;
+  });
+  render(filtered);
+}
+
+document.querySelectorAll('.btn[data-filter]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.btn[data-filter]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filter();
+  });
+});
+document.getElementById('search').addEventListener('input', filter);
+
+render(REPORTS);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+# 月次販売分析レポート 作成プロンプト
+# Amazon Research OS — BabyGoo / fungoo | 株式会社ASAGIRI
+
+## ワークフロー（3フェーズ制・厳守）
+
+PHASE 1: テキスト分析レポートを出力 → ユーザーに確認を求める
+PHASE 2: ユーザー承認後に HTML ファイルを生成する
+PHASE 3: ユーザー承認後に GitHub Pages へ公開する
+
+各フェーズを連続実行しないこと。必ず各フェーズ後に次の確認を取ること。
+- PHASE 1 末尾: 「HTMLを作成してよいですか？」
+- PHASE 2 末尾: 「GitHub Pages に公開しますか？」
+
+---
+
+## PHASE 1 出力形式（Markdownテキスト）
+
+### レポート構成（6セクション固定）
+
+1. **月次サマリー**
+   - 対象期間・対象商品
+   - 売上合計・前月比・主要KPI
+
+2. **チャネル構成**
+   - Amazon / 楽天 / その他の売上比率
+   - チャネル別前月比
+
+3. **モール別総括**
+   - Amazon: アクセス数・CVR・TACOS・在庫状況
+   - 楽天: アクセス数・CTR・CVR・ACOS・RPP状況
+
+4. **ユニットエコノミクス**
+   - 客単価・広告費・利益率
+   - 売上分解: アクセス数 × 転換率 × 客単価
+
+5. **顧客インサイト**
+   - レビュー傾向・購買動機
+   - 返品・クレーム傾向（あれば）
+
+6. **アクション案**
+   - 優先度HIGH / MEDIUM / LOW で分類
+   - 各アクションに担当・期限を付記
+
+---
+
+## PHASE 2 HTML生成ルール
+
+- 出力先: outputs/reports/[商品名]_analysis_[YYYYMM].html
+- デザイン: reports/2026-06/babyrobe.html と同一CSSデザインシステムを使用
+- 文字コード: UTF-8
+
+---
+
+## PHASE 3 公開手順
+
+1. outputs/reports/[ファイル名].html を reports/YYYY-MM/[ascii名].html にコピー
+2. reports/index.html の REPORTS 配列に新エントリを追加
+   必須フィールド: id / createdAt / period / product / category / brand / asin / platforms / summary / kpi[] / tags[] / file
+3. git add reports/ && git commit -m "docs: add [商品名] report [YYYYMM]" && git push origin master
+4. 公開URL案内: https://yukiura-code.github.io/amazon-research-os/reports/
+
+---
+
+## KPI 基準値（判断基準）
+
+| 指標 | Amazon | 楽天 |
+|------|--------|------|
+| サムネイル CTR | — | 1〜2% |
+| 商品ページ CVR | — | 5〜8% |
+| TACOS | 〜15%（超えたら要改善） | — |
+| ACOS | — | 〜50%（超えたら採算割れ警戒） |
+
+## 売上分解公式
+
+売上 = アクセス数 × 転換率（CTR × CVR） × 客単価
