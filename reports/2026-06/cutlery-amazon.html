@@ -21,7 +21,6 @@
     }
     body { font-family: 'Helvetica Neue', 'Noto Sans JP', Arial, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; }
 
-    /* ── Header ── */
     .header { background: var(--primary); color: #fff; }
     .header-top { max-width: 1100px; margin: 0 auto; padding: 24px 28px 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
     .header-left .breadcrumb { font-size: 0.72rem; opacity: .45; margin-bottom: 8px; }
@@ -32,25 +31,17 @@
     .asin-badge .label { opacity: .65; font-size: 0.7rem; margin-bottom: 3px; }
     .platform-tag { display: inline-block; background: #c45c00; color: #fff; font-size: 0.74rem; font-weight: 700; padding: 3px 10px; border-radius: 4px; margin-top: 6px; }
 
-    /* ── Nav ── */
     .nav { background: rgba(0,0,0,.22); border-top: 1px solid rgba(255,255,255,.08); }
     .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 28px; display: flex; gap: 4px; overflow-x: auto; }
     .nav a { display: block; padding: 10px 14px; font-size: 0.78rem; color: rgba(255,255,255,.6); text-decoration: none; white-space: nowrap; border-bottom: 2px solid transparent; transition: all .15s; }
     .nav a:hover { color: #fff; border-bottom-color: var(--accent); }
 
-    /* ── Alert Banner ── */
-    .alert-banner { background: #fff8ec; border-left: 4px solid var(--warn); padding: 12px 28px; font-size: 0.83rem; color: #7a4500; }
-    .alert-banner-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 10px; }
-
-    /* ── Main ── */
     .main { max-width: 1100px; margin: 0 auto; padding: 28px 28px 40px; }
     .section { background: var(--card); border-radius: 10px; border: 1px solid var(--border); padding: 26px 28px; margin-bottom: 22px; }
 
-    /* ── Section Title ── */
     .section-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
     .section-title .num { width: 24px; height: 24px; background: var(--accent); color: #fff; border-radius: 50%; font-size: 0.72rem; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
-    /* ── KPI Cards ── */
     .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; margin-bottom: 20px; }
     .kpi-card { background: var(--bg); border-radius: 8px; padding: 16px 18px; border: 1px solid var(--border); }
     .kpi-card.amz { border-top: 3px solid #c45c00; }
@@ -63,10 +54,7 @@
     .kpi-card.good .value { color: var(--green); }
     .kpi-card.bad  .value { color: var(--red); }
     .kpi-card.warn .value { color: var(--warn); }
-    .kpi-card.crit { border-color: var(--red); background: #fdf5f5; }
-    .kpi-card.crit .value { color: var(--red); }
 
-    /* ── Tables ── */
     .table-wrap { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
     thead { background: var(--primary); color: #fff; }
@@ -80,43 +68,38 @@
     .g { color: var(--green); font-weight: 700; }
     .r { color: var(--red);   font-weight: 700; }
     .w { color: var(--warn);  font-weight: 700; }
-    .badge-danger { background: var(--red); color: #fff; font-size: 0.7rem; padding: 1px 6px; border-radius: 3px; font-weight: 700; }
 
-    /* ── Bar Chart (horizontal) ── */
     .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
     .bar-label { display: flex; justify-content: space-between; width: 160px; flex-shrink: 0; font-size: 0.8rem; }
     .bar-label span:last-child { font-weight: 700; }
     .bar-track { flex: 1; background: var(--border); border-radius: 4px; height: 10px; overflow: hidden; }
     .bar-fill { height: 100%; border-radius: 4px; }
 
-    /* ── Vertical bar chart ── */
     .vchart { display: flex; align-items: flex-end; gap: 14px; height: 90px; margin: 12px 0 6px; }
     .vbar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
     .vbar-val { font-size: 0.72rem; font-weight: 700; color: var(--text); }
     .vbar { width: 100%; border-radius: 4px 4px 0 0; }
     .vbar-label { font-size: 0.7rem; color: var(--muted); }
 
-    /* ── Insight Cards ── */
     .insight-card { padding: 14px 16px; border-radius: 8px; border-left: 4px solid; font-size: 0.84rem; line-height: 1.7; margin-bottom: 10px; }
     .insight-card .ic-title { font-weight: 700; margin-bottom: 5px; font-size: 0.85rem; }
     .insight-card.success { background: #f0faf5; border-color: var(--green); color: #0e4929; }
     .insight-card.warn    { background: #fffaed; border-color: var(--warn);  color: #6b3800; }
     .insight-card.danger  { background: #fdf5f5; border-color: var(--red);   color: #7a1a1a; }
+    .insight-card.info    { background: #eef6ff; border-color: var(--accent2); color: #1e3a5f; }
 
-    /* ── Two column ── */
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-    /* ── Stock Timeline ── */
     .stock-wrap { margin-top: 18px; }
     .stock-title { font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
     .stock-days { display: flex; gap: 2px; flex-wrap: wrap; }
-    .day { width: 14px; height: 14px; border-radius: 2px; }
-    .day.ok   { background: #b7e4c7; }
-    .day.zero { background: var(--red); }
-    .stock-legend { display: flex; gap: 16px; font-size: 0.73rem; color: var(--muted); margin-top: 6px; }
+    .day { width: 14px; height: 14px; border-radius: 2px; cursor: default; }
+    .day.ok     { background: #b7e4c7; }
+    .day.low    { background: #fde68a; }
+    .day.prime  { background: #bfdbfe; }
+    .stock-legend { display: flex; gap: 16px; font-size: 0.73rem; color: var(--muted); margin-top: 6px; flex-wrap: wrap; }
     .leg-dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 4px; vertical-align: middle; }
 
-    /* ── Action Items ── */
     .action-list { display: flex; flex-direction: column; gap: 12px; }
     .action-item { background: var(--bg); border-radius: 8px; border: 1px solid var(--border); padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start; }
     .icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.68rem; font-weight: 800; flex-shrink: 0; text-align: center; }
@@ -134,13 +117,10 @@
     .action-meta { display: flex; gap: 14px; margin-top: 8px; font-size: 0.74rem; color: var(--muted); flex-wrap: wrap; }
     .action-meta strong { color: var(--text); }
 
-    /* ── Callout Box ── */
     .callout { border-radius: 8px; padding: 12px 16px; font-size: 0.83rem; margin: 12px 0; }
     .callout.info  { background: #eef6ff; border: 1px solid #bfdbfe; color: #1e3a5f; }
     .callout.warn  { background: #fffaed; border: 1px solid #fde68a; color: #6b3800; }
-    .callout.crit  { background: #fdf5f5; border: 1px solid #fca5a5; color: #7a1a1a; }
 
-    /* ── Footer ── */
     .footer { text-align: center; font-size: 0.72rem; color: var(--muted); padding: 24px; border-top: 1px solid var(--border); margin-top: 8px; }
 
     @media(max-width:680px) {
@@ -156,7 +136,6 @@
 </head>
 <body>
 
-<!-- ── Header ── -->
 <div class="header">
   <div class="header-top">
     <div class="header-left">
@@ -167,6 +146,7 @@
         <span class="meta-chip">B0FC6CDGPH</span>
         <span class="meta-chip">BabyGoo</span>
         <span class="meta-chip">発売 2024/12/03</span>
+        <span class="meta-chip">更新 2026/07/02</span>
       </div>
     </div>
     <div class="asin-badge">
@@ -187,14 +167,6 @@
   </div>
 </div>
 
-<!-- ── Alert Banner ── -->
-<div class="alert-banner">
-  <div class="alert-banner-inner">
-    ⚠️ <strong>緊急：</strong>6月26〜30日（5日間）の売上が完全にゼロ。在庫切れの可能性が高く、AmazonのSEOスコアへの最大級のマイナス影響が懸念されます。即時確認が必要です。
-  </div>
-</div>
-
-<!-- ── Main ── -->
 <div class="main">
 
   <!-- ===== 1: 月次サマリー ===== -->
@@ -215,12 +187,12 @@
       <div class="kpi-card amz warn">
         <div class="label">5月 売上金額</div>
         <div class="value">423万円</div>
-        <div class="sub">前月比 <span class="r">−10.2%</span>（漸減）</div>
+        <div class="sub">前月比 <span class="r">−10.2%</span></div>
       </div>
-      <div class="kpi-card amz crit">
+      <div class="kpi-card amz warn">
         <div class="label">6月 売上金額</div>
-        <div class="value">331万円</div>
-        <div class="sub">前月比 <span class="r">−21.7%</span> <span class="badge-danger">26〜30日ゼロ</span></div>
+        <div class="value">368万円</div>
+        <div class="sub">前月比 <span class="r">−12.9%</span>（プライムデー前）</div>
       </div>
     </div>
 
@@ -242,8 +214,8 @@
         <div class="vbar-label">5月</div>
       </div>
       <div class="vbar-col">
-        <div class="vbar-val">331</div>
-        <div class="vbar" style="height:70%;background:var(--red);opacity:.7;"></div>
+        <div class="vbar-val">368</div>
+        <div class="vbar" style="height:78%;background:var(--warn);opacity:.8;"></div>
         <div class="vbar-label">6月</div>
       </div>
     </div>
@@ -295,26 +267,30 @@
           </tr>
           <tr>
             <td>6月</td>
-            <td>3,310,749円</td>
-            <td class="r">−21.7%</td>
-            <td class="r">1,722個 ⚠</td>
-            <td class="r">13,838</td>
-            <td class="g">12.4%</td>
-            <td>¥1,941</td>
-            <td>スタイルSALE / <span class="badge-danger">6/26〜30 売上0</span></td>
+            <td>3,682,969円</td>
+            <td class="r">−12.9%</td>
+            <td>1,918個</td>
+            <td>15,258</td>
+            <td class="g">12.6%</td>
+            <td>¥1,939</td>
+            <td>スタイルSALE・プライムデー前売り（6/26〜28）</td>
           </tr>
           <tr class="total">
             <td>4ヶ月合計</td>
-            <td>16,718,754円</td>
+            <td>17,091,974円</td>
             <td>—</td>
-            <td>8,895個</td>
-            <td>68,479</td>
+            <td>9,091個</td>
+            <td>69,899</td>
             <td>13.2%（平均）</td>
-            <td>¥1,904（平均）</td>
+            <td>¥1,903（平均）</td>
             <td></td>
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <div class="callout info" style="margin-top:14px;">
+      <strong>4ヶ月累計：</strong>売上 ¥17,091,974（¥1,709万） / 9,091個 / 平均CVR 13.2%。4月がピーク（¥471万・CVR 16.0%）で、5・6月は漸減トレンド。CVR は全月で業界目標（5〜8%）を大幅に上回り商品ページ品質は高い。
     </div>
   </div>
 
@@ -338,8 +314,8 @@
           <div class="bar-track"><div class="bar-fill" style="width:57%;background:var(--green);"></div></div>
         </div>
         <div class="bar-row">
-          <div class="bar-label"><span>6月</span><span class="g">55.8%</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:55.8%;background:var(--green);opacity:.8;"></div></div>
+          <div class="bar-label"><span>6月</span><span class="g">55.2%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:55.2%;background:var(--green);opacity:.85;"></div></div>
         </div>
 
         <div class="table-wrap" style="margin-top:16px;">
@@ -351,7 +327,7 @@
               <tr><td>3月</td><td>1,632,534円</td><td class="w">36.5%</td><td>2,840,163円</td><td class="w">63.5%</td></tr>
               <tr><td>4月</td><td>2,635,744円</td><td class="g">56.0%</td><td>2,070,942円</td><td>44.0%</td></tr>
               <tr><td>5月</td><td>2,410,315円</td><td class="g">57.0%</td><td>1,818,307円</td><td>43.0%</td></tr>
-              <tr><td>6月</td><td>1,847,398円</td><td class="g">55.8%</td><td>1,463,351円</td><td>44.2%</td></tr>
+              <tr><td>6月</td><td>2,034,074円</td><td class="g">55.2%</td><td>1,648,895円</td><td>44.8%</td></tr>
             </tbody>
           </table>
         </div>
@@ -362,12 +338,12 @@
           新生活セールが重なり広告流入が急増。セール期間特有の現象で、4月以降はオーガニック比率が55〜57%台に回復・安定。
         </div>
         <div class="insight-card success">
-          <div class="ic-title">✅ 4月以降オーガニック比率が安定</div>
-          セール終了後にオーガニック56〜57%で安定。広告依存度を抑えながら売上を維持できており、SEO基盤が着実に構築されている。
+          <div class="ic-title">✅ 4月以降オーガニック比率が安定（55〜57%）</div>
+          セール終了後もオーガニック過半数を維持。広告依存度を抑えながら売上を維持できており、SEO基盤が着実に構築されている。
         </div>
-        <div class="insight-card danger">
-          <div class="ic-title">🔴 SP・SB広告とも規模縮小傾向</div>
-          広告費が4ヶ月で毎月削減（¥337K→¥251K→¥226K→¥200K）。効率化は進んでいるが、6月のアクセス減少（−37% vs 3月）との因果関係を精査する必要あり。
+        <div class="insight-card info">
+          <div class="ic-title">💡 6月は広告費縮小でもオーガニック安定</div>
+          広告費が4ヶ月で削減（¥337K→¥224K）しながらもオーガニック比率は55%を維持。SEO力の底上げが成功している証拠。
         </div>
       </div>
     </div>
@@ -393,10 +369,10 @@
           <div class="bar-track"><div class="bar-fill" style="width:83%;background:var(--green);"></div></div>
         </div>
         <div class="bar-row">
-          <div class="bar-label"><span>6月</span><span class="g">12.4%</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:78%;background:var(--green);opacity:.85;"></div></div>
+          <div class="bar-label"><span>6月</span><span class="g">12.6%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:79%;background:var(--green);opacity:.85;"></div></div>
         </div>
-        <div class="callout info" style="margin-top:12px;">全期間で業界目標（5〜8%）の<strong>1.5〜2倍</strong>を達成。商品ページ品質・価格設定は問題なし。</div>
+        <div class="callout info" style="margin-top:12px;">全期間で業界目標（5〜8%）の<strong>1.5〜2倍</strong>を達成。商品ページ品質・価格設定は問題なし。ただし4月16.0%から6月12.6%へ低下傾向に注意。</div>
       </div>
       <div>
         <div style="font-size:0.82rem; font-weight:700; margin-bottom:12px;">TACOS<span style="font-size:0.72rem; font-weight:400; color:var(--green); margin-left:6px;">目標 〜15%</span></div>
@@ -405,18 +381,18 @@
           <div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--warn);"></div></div>
         </div>
         <div class="bar-row">
-          <div class="bar-label"><span>4月</span><span class="g">4.95%</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:33%;background:var(--green);"></div></div>
+          <div class="bar-label"><span>4月</span><span class="g">5.33%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:36%;background:var(--green);"></div></div>
         </div>
         <div class="bar-row">
           <div class="bar-label"><span>5月</span><span class="g">5.36%</span></div>
           <div class="bar-track"><div class="bar-fill" style="width:36%;background:var(--green);"></div></div>
         </div>
         <div class="bar-row">
-          <div class="bar-label"><span>6月</span><span class="g">6.05%</span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:40%;background:var(--green);"></div></div>
+          <div class="bar-label"><span>6月</span><span class="g">6.08%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:41%;background:var(--green);opacity:.85;"></div></div>
         </div>
-        <div class="callout info" style="margin-top:12px;">全月で15%の警戒ラインを<strong>一度も超えず</strong>。4〜6月は5〜6%台と極めて効率的な広告運用。</div>
+        <div class="callout info" style="margin-top:12px;">全月で15%の警戒ラインを<strong>一度も超えず</strong>。4〜6月は5〜6%台と極めて効率的な広告運用が続いている。</div>
       </div>
     </div>
 
@@ -450,8 +426,8 @@
           </tr>
           <tr>
             <td>4月</td>
-            <td>250,867円</td>
-            <td class="g">4.95%</td>
+            <td>250,866円</td>
+            <td class="g">5.33%</td>
             <td>248,316円</td>
             <td class="g">8.31</td>
             <td>0.70%</td>
@@ -465,75 +441,76 @@
             <td class="g">5.36%</td>
             <td>226,404円</td>
             <td class="g">8.79</td>
-            <td>0.54%</td>
+            <td>0.69%</td>
             <td>39.2円</td>
             <td>41,828円</td>
-            <td>3.18</td>
+            <td>3.42</td>
           </tr>
           <tr>
             <td>6月</td>
-            <td>200,224円</td>
-            <td class="g">6.05%</td>
-            <td>200,224円</td>
-            <td class="w">7.26</td>
-            <td>0.67%</td>
-            <td>40.8円</td>
-            <td>38,334円</td>
-            <td class="r">3.18</td>
+            <td>223,870円</td>
+            <td class="g">6.08%</td>
+            <td>223,870円</td>
+            <td class="w">7.37</td>
+            <td>0.69%</td>
+            <td>40.5円</td>
+            <td>45,100円</td>
+            <td>3.06</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <div class="insight-card warn" style="margin-top:14px;">
-      <div class="ic-title">6月のSP ROAS低下（9.48→7.26）と売上減少</div>
-      6月はSP広告費が最小（¥200K）にもかかわらずROASが最低値（7.26）に。アクセス数の減少（13,838）と6/26〜30の在庫切れが主因。在庫切れ期間は広告を配信しても売上が立たないため、ROASが構造的に悪化する。
+      <div class="ic-title">SP ROAS が緩やかに低下（9.48→7.37）</div>
+      4ヶ月で SP ROAS が低下トレンド。CPC が ¥36.8→¥40.5 と上昇しており、競合入札の激化が示唆される。インプレッションも6月は801K（前月比−24.6%）と縮小。ROAS は依然7倍超で健全だが、インプレッション回復とCTR改善が課題。
     </div>
 
-    <!-- 在庫タイムライン -->
+    <!-- 販売状況タイムライン（6月） -->
     <div class="stock-wrap">
-      <div class="stock-title">在庫状況タイムライン（6月）</div>
+      <div class="stock-title">販売状況タイムライン（6月 日次）</div>
       <div style="font-size:0.76rem; color:var(--muted); margin-bottom:4px;">■ 6月（1日〜30日）</div>
       <div class="stock-days">
-        <div class="day ok" title="6/1"></div>
-        <div class="day ok" title="6/2"></div>
-        <div class="day ok" title="6/3"></div>
-        <div class="day ok" title="6/4"></div>
-        <div class="day ok" title="6/5"></div>
-        <div class="day ok" title="6/6"></div>
-        <div class="day ok" title="6/7"></div>
-        <div class="day ok" title="6/8"></div>
-        <div class="day ok" title="6/9"></div>
-        <div class="day ok" title="6/10"></div>
-        <div class="day ok" title="6/11"></div>
-        <div class="day ok" title="6/12"></div>
-        <div class="day ok" title="6/13"></div>
-        <div class="day ok" title="6/14"></div>
-        <div class="day ok" title="6/15"></div>
-        <div class="day ok" title="6/16"></div>
-        <div class="day ok" title="6/17"></div>
-        <div class="day ok" title="6/18"></div>
-        <div class="day ok" title="6/19"></div>
-        <div class="day ok" title="6/20"></div>
-        <div class="day ok" title="6/21"></div>
-        <div class="day ok" title="6/22"></div>
-        <div class="day ok" title="6/23"></div>
-        <div class="day ok" title="6/24"></div>
-        <div class="day ok" title="6/25"></div>
-        <div class="day zero" title="6/26 売上ゼロ"></div>
-        <div class="day zero" title="6/27 売上ゼロ"></div>
-        <div class="day zero" title="6/28 売上ゼロ"></div>
-        <div class="day zero" title="6/29 売上ゼロ"></div>
-        <div class="day zero" title="6/30 売上ゼロ"></div>
+        <div class="day ok" title="6/1 ¥181,550"></div>
+        <div class="day ok" title="6/2 ¥197,670"></div>
+        <div class="day ok" title="6/3 ¥121,410"></div>
+        <div class="day ok" title="6/4 ¥137,340"></div>
+        <div class="day ok" title="6/5 ¥121,410"></div>
+        <div class="day ok" title="6/6 ¥139,320"></div>
+        <div class="day ok" title="6/7 ¥124,390"></div>
+        <div class="day ok" title="6/8 ¥108,480"></div>
+        <div class="day ok" title="6/9 ¥104,500"></div>
+        <div class="day ok" title="6/10 ¥149,099"></div>
+        <div class="day ok" title="6/11 ¥135,340"></div>
+        <div class="day ok" title="6/12 ¥120,380"></div>
+        <div class="day ok" title="6/13 ¥125,380"></div>
+        <div class="day ok" title="6/14 ¥117,430"></div>
+        <div class="day ok" title="6/15 ¥121,410"></div>
+        <div class="day ok" title="6/16 ¥149,280"></div>
+        <div class="day ok" title="6/17 ¥146,290"></div>
+        <div class="day ok" title="6/18 ¥139,320"></div>
+        <div class="day ok" title="6/19 ¥133,340"></div>
+        <div class="day ok" title="6/20 ¥108,480"></div>
+        <div class="day ok" title="6/21 ¥130,360"></div>
+        <div class="day ok" title="6/22 ¥119,430"></div>
+        <div class="day ok" title="6/23 ¥117,420"></div>
+        <div class="day ok" title="6/24 ¥110,460"></div>
+        <div class="day ok" title="6/25 ¥151,260"></div>
+        <div class="day prime" title="6/26 ¥110,460（プライムデー前売り）"></div>
+        <div class="day prime" title="6/27 ¥148,280（プライムデー前売り）"></div>
+        <div class="day prime" title="6/28 ¥110,480（プライムデー前売り）"></div>
+        <div class="day low" title="6/29 ¥1,000（プライムデー本番待機）"></div>
+        <div class="day low" title="6/30 ¥2,000（プライムデー本番待機）"></div>
       </div>
       <div class="stock-legend">
-        <span><span class="leg-dot" style="background:#b7e4c7;"></span>通常販売</span>
-        <span><span class="leg-dot" style="background:var(--red);"></span>売上ゼロ（在庫切れ疑い）</span>
+        <span><span class="leg-dot" style="background:#b7e4c7;"></span>通常販売（¥100K超/日）</span>
+        <span><span class="leg-dot" style="background:#bfdbfe;"></span>プライムデー前売り期間</span>
+        <span><span class="leg-dot" style="background:#fde68a;"></span>プライムデー本番待機（購入控え）</span>
       </div>
-      <div class="callout crit" style="margin-top:12px;">
-        <strong>6月26〜30日（5日間）の売上が完全にゼロ</strong><br>
-        推定機会損失：約 <strong>375,000円</strong>（6月日次平均 75,017円 × 5日）<br>
-        AmazonのSEOは「直近1週間の実績」が最重要。在庫切れはSEOスコアへの最大級のダメージ。7月の順位回復策が急務。
+      <div class="callout warn" style="margin-top:12px;">
+        <strong>6/29〜30 の超低売上（¥1,000〜¥2,000）はプライムデー本番を前にした顧客の購入待機が原因。</strong><br>
+        在庫切れではなく需要の先送り現象。7/1〜のプライムデー本番での反動需要が期待される。
+        日次平均（6/1〜28）は約 ¥130,000 で安定推移しており、6月の基礎体力に問題はない。
       </div>
     </div>
   </div>
@@ -545,13 +522,13 @@
     <div class="kpi-grid">
       <div class="kpi-card amz good">
         <div class="label">4ヶ月累計売上</div>
-        <div class="value">1,672万円</div>
-        <div class="sub">8,895個</div>
+        <div class="value">1,709万円</div>
+        <div class="sub">9,091個</div>
       </div>
       <div class="kpi-card amz good">
         <div class="label">4ヶ月累計粗利</div>
-        <div class="value">210万円</div>
-        <div class="sub">利益率 14.4%（通算）</div>
+        <div class="value">215万円</div>
+        <div class="sub">利益率 12.6%（通算）</div>
       </div>
       <div class="kpi-card amz good">
         <div class="label">ROAS 最高（SP 3月）</div>
@@ -559,9 +536,9 @@
         <div class="sub">広告1円で9.48円回収</div>
       </div>
       <div class="kpi-card amz warn">
-        <div class="label">ROAS 最低（SP 6月）</div>
-        <div class="value">7.26</div>
-        <div class="sub">在庫切れ影響</div>
+        <div class="label">粗利率 最高（6月）</div>
+        <div class="value">14.3%</div>
+        <div class="sub">広告効率化で利益構造改善</div>
       </div>
     </div>
 
@@ -574,8 +551,8 @@
             <th>売上金額</th>
             <th>広告費</th>
             <th>粗利</th>
-            <th>利益率</th>
-            <th>ACOS</th>
+            <th>粗利率</th>
+            <th>SP ACOS</th>
             <th>客単価</th>
           </tr>
         </thead>
@@ -586,16 +563,16 @@
             <td>336,911円</td>
             <td class="g">469,574円</td>
             <td class="w">10.5%</td>
-            <td>13.8%</td>
+            <td>10.5%</td>
             <td>¥1,884</td>
           </tr>
           <tr>
             <td>4月</td>
             <td>4,706,686円</td>
-            <td>250,867円</td>
+            <td>250,866円</td>
             <td class="g">560,183円</td>
             <td class="g">11.9%</td>
-            <td>11.9%</td>
+            <td>12.0%</td>
             <td>¥1,878</td>
           </tr>
           <tr>
@@ -609,21 +586,21 @@
           </tr>
           <tr>
             <td>6月</td>
-            <td>3,310,749円</td>
-            <td>200,224円</td>
-            <td class="g">476,726円</td>
-            <td class="g">14.4%</td>
-            <td class="w">13.8%</td>
-            <td>¥1,941</td>
+            <td>3,682,969円</td>
+            <td>223,870円</td>
+            <td class="g">525,518円</td>
+            <td class="g">14.3%</td>
+            <td>13.6%</td>
+            <td>¥1,939</td>
           </tr>
           <tr class="total">
             <td>合計</td>
-            <td>16,718,754円</td>
-            <td>1,014,406円</td>
-            <td class="g">2,099,445円</td>
-            <td class="g">14.4%</td>
-            <td>13.8%（通算）</td>
-            <td>¥1,904（平均）</td>
+            <td>17,091,974円</td>
+            <td>1,038,051円</td>
+            <td class="g">2,148,237円</td>
+            <td class="g">12.6%</td>
+            <td>12.3%（通算）</td>
+            <td>¥1,903（平均）</td>
           </tr>
         </tbody>
       </table>
@@ -631,12 +608,17 @@
 
     <div class="callout info" style="margin-top:14px;">
       <strong>売上分解（4月・最良月）：</strong> 15,914アクセス × CVR 16.0% × 客単価¥1,878 ＝ ¥4,706,686<br>
-      <strong>コスト構造：</strong> 販売単価¥900 / 送料¥506 / 在庫管理費¥33.5 / Amazon手数料 10%（¥190相当）
+      <strong>コスト構造（1個当たり）：</strong> 商品原価¥900 / 送料¥506 / 在庫管理費¥33.5 / Amazon手数料5%（¥97相当）
     </div>
 
     <div class="insight-card success" style="margin-top:14px;">
-      <div class="ic-title">📈 利益率が右肩上がりで改善（10.5%→14.4%）</div>
-      広告費を毎月圧縮（¥337K→¥200K）しながらCVRを高水準（12〜16%）で維持。売上は減少傾向だが1件あたりの利益は改善しており、収益構造は健全化している。
+      <div class="ic-title">📈 粗利率が右肩上がりで改善（10.5%→14.3%）</div>
+      売上は減少傾向だが、広告費の効率的な削減（¥337K→¥224K）により1ユニット当たりの利益は¥196→¥274へ拡大。売上数量が減っても収益構造は健全化している。
+    </div>
+
+    <div class="insight-card warn" style="margin-top:0;">
+      <div class="ic-title">⚠️ 売上数量は3ヶ月連続減少（2,547→2,229→1,918）</div>
+      CVR低下（16.0%→12.6%）とアクセス微減が重なっている。利益率は改善しているが、売上規模の回復も中長期で必要。プライムデー以降の需要回復に期待。
     </div>
   </div>
 
@@ -648,29 +630,29 @@
       <div>
         <div class="insight-card success">
           <div class="ic-title">🧺 複数個まとめ買いが主流</div>
-          販売単価¥900に対し客単価が常時¥1,878〜¥1,941（≒2.1倍）。平均約2個/注文のセット・まとめ買いが定着。育児期に複数色・複数サイズを同時購入するニーズが強い。
+          販売単価¥900に対し客単価が常時¥1,878〜¥1,939（≒2.1倍）。平均約2個/注文のセット・まとめ買いが定着。育児期に複数色・複数サイズを同時購入するニーズが強い。
         </div>
         <div class="insight-card success">
-          <div class="ic-title">🔑 主力キーワードが明確</div>
-          広告施策メモより「哺乳瓶スプーン」「離乳食スプーン」「ベビースプーン」「赤ちゃんスプーン」が購買KW。これらは購買意欲の高い具体的ニーズKWで、CVRが高い。
+          <div class="ic-title">🔑 主力キーワードが明確・高ROAS</div>
+          「離乳食スプーン」ROAS 612%と突出。「ベビースプーン」「赤ちゃんスプーン」「赤ちゃんカトラリーセット」も購買CVRが高い。これらKWへの重点投資を継続すべき。
         </div>
         <div class="insight-card warn">
           <div class="ic-title">📉 3月→4月のアクセス急落（−27%）</div>
-          3月の高アクセス（21,959）は新生活セール効果。4月は平常水準（15,914）に収束したが同時にCVRが10.9%→16.0%に急改善。セール期は「見るだけ」客が多く、平常期は「買う気のある客」が来る構造。
+          3月の高アクセス（21,959）は新生活セール効果。4月に平常水準（15,914）へ収束したが、同時にCVRが10.9%→16.0%へ急改善。セール期は「見るだけ」客が多く、平常期は「買う気のある客」が来る構造。
         </div>
       </div>
       <div>
-        <div class="insight-card danger">
-          <div class="ic-title">🔴 6月後半の急ブレーキ（在庫切れ疑い）</div>
-          6月25日まで安定販売（平均69個/日）だったが6/26〜30が5日連続ゼロ。単純な需要減ではなく在庫切れが最有力原因。Amazon SEOにおいて在庫切れのマイナスは最大級。
+        <div class="insight-card info">
+          <div class="ic-title">🛍 プライムデー効果に期待（6/29〜7月）</div>
+          6月末のプライムデー前売りセール（6/26〜28）では通常水準の売上を維持。6/29〜30はプライムデー本番を控えた購入待機（¥1,000〜¥2,000/日）で、在庫問題ではない。7月のプライムデー本番での反動増に期待。
         </div>
         <div class="insight-card success">
-          <div class="ic-title">🎯 競合ターゲティング強化</div>
-          広告施策メモにASINターゲティング追加記録：B08TRC94R6 / B0FH28W9QG / B08X6T91Z3 / B0DVBTTBJR等。高ROASの競合ASIN経由流入が購買CVRを押し上げている可能性がある。
+          <div class="ic-title">🎯 競合ターゲティング強化が奏功</div>
+          B08TRC94R6（高ROAS・1ページ目未表示→入札38→50円）、B0FH28W9QG・B08X6T91Z3等のASINターゲティング追加により、競合商品ページからの流入CVRを押し上げている。
         </div>
         <div class="insight-card warn">
-          <div class="ic-title">📊 SB（スポンサーブランド）の効率課題</div>
-          SB ROAS は 2.58〜3.65 と SP（7.26〜9.48）に比べ大幅に低い。SBは認知獲得目的として許容できるが、費用対効果の継続監視が必要。
+          <div class="ic-title">📊 CVRの低下傾向（16.0%→12.6%）が主課題</div>
+          4月の16.0%から毎月下落。アクセス数は比較的安定しているため、商品ページ（A+コンテンツ・メイン画像・バレット）の品質強化によるCVR回復が売上回復の鍵。
         </div>
       </div>
     </div>
@@ -693,12 +675,12 @@
           <tr>
             <td>ASINターゲティング追加（SP）</td>
             <td>4〜5月</td>
-            <td>B08TRC94R6・B0FH28W9QG・B08X6T91Z3・B0DVBTTBJR 等を追加</td>
+            <td>B08TRC94R6・B0FH28W9QG・B08X6T91Z3・B0DVBTTBJR・B0DSP858Q6 追加</td>
           </tr>
           <tr>
             <td>「赤ちゃんスプーン」入札強化</td>
             <td>4〜5月</td>
-            <td>18→30円（インプレッション拡大目的）→ 30→50円（改善確認後）</td>
+            <td>18→30円（インプレッション拡大目的）→ 30→50円（改善確認後さらに引き上げ）</td>
           </tr>
           <tr>
             <td>SD広告 配信開始</td>
@@ -706,9 +688,9 @@
             <td>ベビーカトラリー向けSD広告を新規開始（効果測定中）</td>
           </tr>
           <tr>
-            <td>「離乳食スプーン」KW強化</td>
+            <td>「離乳食スプーン」KW最優先化</td>
             <td>6月</td>
-            <td>40→50円へ入札引き上げ（ROAS 612%の優良KW）</td>
+            <td>入札40→50円へ引き上げ（ROAS 612%の最優良KW）</td>
           </tr>
         </tbody>
       </table>
@@ -722,25 +704,25 @@
     <div class="action-list">
 
       <div class="action-item">
-        <div class="icon icon-amz">在庫</div>
+        <div class="icon icon-amz">CVR</div>
         <div class="action-body">
           <div class="action-head">
-            <div class="action-title">【H-1】6月26〜30日の在庫状況を即時確認・補充 ← 最優先</div>
+            <div class="action-title">【H-1】CVR改善施策（商品ページ強化）← 最優先</div>
             <span class="pri high">HIGH</span>
           </div>
           <div class="action-desc">
-            5日連続ゼロ売上はAmazon SEOへの最大級のダメージ。「直近1週間の販売実績」が最重要指標のため、補充後も順位回復に数週間かかる。
+            4月16.0%→6月12.6%へのCVR低下が売上減の主因。アクセス数は比較的安定しているため、商品ページ品質の改善でダイレクトに売上回復が見込める。
             <ul>
-              <li>セラーセントラルの在庫状況・入荷予定を即時確認</li>
-              <li>在庫切れ確認後、FBAへの緊急納品を手配</li>
-              <li>在庫残○○日以下でアラート通知の仕組みを導入</li>
-              <li>常時30日分以上の在庫確保をルール化</li>
+              <li>メイン画像の刷新：季節感・離乳食シーン訴求のA/Bテスト実施</li>
+              <li>A+コンテンツ：まとめ買いお得感・月齢別使い方シーンを追加</li>
+              <li>バレット（箇条書き）：「赤ちゃんカトラリーセット」「離乳食スプーン」KWを最初に配置</li>
+              <li>価格・クーポン設定の見直し（セール外期間でも購入を促すクーポン配置）</li>
             </ul>
           </div>
           <div class="action-meta">
-            <span><strong>目標：</strong>在庫復旧後7日以内にSEO順位回復着手</span>
-            <span><strong>担当：</strong>物流・EC担当</span>
-            <span><strong>期限：</strong>即時</span>
+            <span><strong>目標：</strong>CVR 14%以上に回復</span>
+            <span><strong>担当：</strong>EC・商品企画担当</span>
+            <span><strong>期限：</strong>7月中旬</span>
           </div>
         </div>
       </div>
@@ -749,44 +731,21 @@
         <div class="icon icon-amz">SP</div>
         <div class="action-body">
           <div class="action-head">
-            <div class="action-title">【H-2】在庫復旧後にSP広告入札を一時的に引き上げ</div>
+            <div class="action-title">【H-2】プライムデー後のSPインプレッション回復</div>
             <span class="pri high">HIGH</span>
           </div>
           <div class="action-desc">
-            在庫切れ後のAmazonSEO回復には「直近の購買実績」を積み上げる必要がある。入荷後即座に広告経由の売上を作りSEOスコアを回復させる。
+            6月SP インプレッション 801K（前月比−24.6%）と縮小。CPC も¥40.5 と上昇傾向。プライムデー後の需要波及期に合わせてSP入札を強化し、SEO順位回復の足がかりを作る。
             <ul>
-              <li>主力KW（「離乳食スプーン」「ベビースプーン」「哺乳瓶スプーン」）入札を一時+20〜30%引き上げ</li>
-              <li>「離乳食スプーン」はROAS 612%の優良KW → 入荷後は最優先でインプレッション確保</li>
-              <li>1〜2週間で順位動向を確認し、回復したら入札を通常水準に戻す</li>
+              <li>「離乳食スプーン」（ROAS 612%）の入札を50→60円に引き上げ、インプレ確保</li>
+              <li>「赤ちゃんカトラリーセット」KWを新規追加・入札30〜40円でテスト</li>
+              <li>プライムデー本番（7/1〜）のROAS・CVRを速やかに集計し入札調整</li>
             </ul>
           </div>
           <div class="action-meta">
-            <span><strong>目標：</strong>入荷後2週間以内に主要KW上位復帰</span>
+            <span><strong>目標：</strong>7月 SPインプレッション 900K超回復</span>
             <span><strong>担当：</strong>広告担当</span>
-            <span><strong>期限：</strong>入荷後即日</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="action-item">
-        <div class="icon icon-amz">流入</div>
-        <div class="action-body">
-          <div class="action-head">
-            <div class="action-title">【M-1】アクセス数の回復・増加施策</div>
-            <span class="pri mid">MEDIUM</span>
-          </div>
-          <div class="action-desc">
-            6月は13,838件まで低下（3月比−37%）。単純なSEO低下に加え、広告費削減の影響もある。アクセス改善でCVRの高さを活かして売上を伸ばせる状態にある。
-            <ul>
-              <li>SEO：商品タイトル・箇条書きに「哺乳瓶スプーン」「赤ちゃん用カトラリー」等のKWを追加</li>
-              <li>SB広告：CTRが低い（〜0.01%）→ クリエイティブ（バナー画像）の刷新</li>
-              <li>SP広告：6月のCTR 0.54〜0.67%は改善余地あり。入札調整とターゲティング精査</li>
-            </ul>
-          </div>
-          <div class="action-meta">
-            <span><strong>目標：</strong>月間アクセス 16,000以上の回復</span>
-            <span><strong>担当：</strong>EC・広告担当</span>
-            <span><strong>期限：</strong>7月中</span>
+            <span><strong>期限：</strong>7月上旬</span>
           </div>
         </div>
       </div>
@@ -795,15 +754,15 @@
         <div class="icon icon-amz">SB</div>
         <div class="action-body">
           <div class="action-head">
-            <div class="action-title">【M-2】SB広告のROAS改善・クリエイティブ見直し</div>
+            <div class="action-title">【M-1】SB広告効率改善（クリエイティブ見直し）</div>
             <span class="pri mid">MEDIUM</span>
           </div>
           <div class="action-desc">
-            SB ROASは2.58〜3.65とSP（7.26〜9.48）に対して大幅に低い。SP広告費が月¥200Kに縮小した今、SBの費用対効果検証が必要。
+            SB ROAS は 2.58〜3.65 と SP（7.37〜9.48）に比べ低水準。認知獲得目的として許容範囲だが、クリエイティブ刷新で効率改善の余地がある。
             <ul>
-              <li>SB広告のKW・ターゲティングを精査し低ROASのKWを除外</li>
-              <li>クリエイティブ（ヘッダー画像・コピー）を「まとめ買いお得」訴求に変更</li>
-              <li>SBのCVRレポートを確認し購買につながっているKWを特定</li>
+              <li>ヘッダー画像を「離乳食シーン×複数カラー」訴求に変更（まとめ買い促進）</li>
+              <li>低ROASのKWを除外し「離乳食スプーン」「ベビーカトラリー」に集中</li>
+              <li>目標：SB ROAS 4.0以上</li>
             </ul>
           </div>
           <div class="action-meta">
@@ -818,15 +777,15 @@
         <div class="icon icon-both">SD</div>
         <div class="action-body">
           <div class="action-head">
-            <div class="action-title">【L-1】SD広告（5月開始）の効果測定と最適化</div>
-            <span class="pri low">LOW</span>
+            <div class="action-title">【M-2】SD広告（5月開始）の効果測定と最適化</div>
+            <span class="pri mid">MEDIUM</span>
           </div>
           <div class="action-desc">
             5月下旬にSD広告を開始。現在のデータでは独立した効果測定が困難なため、継続観測が必要。
             <ul>
               <li>SD専用レポートでCPC・ROAS・CVR を月次モニタリング</li>
               <li>競合商品ページへのリターゲティングと類似オーディエンスの効果比較</li>
-              <li>3ヶ月後（8月時点）でROAS 3.0未満なら縮小検討</li>
+              <li>3ヶ月後（8月時点）でROAS 3.0未満なら予算縮小を検討</li>
             </ul>
           </div>
           <div class="action-meta">
@@ -841,11 +800,11 @@
         <div class="icon icon-both">設計</div>
         <div class="action-body">
           <div class="action-head">
-            <div class="action-title">【L-2】まとめ買い・セット促進施策</div>
+            <div class="action-title">【L-1】まとめ買い・セット促進施策（客単価¥2,000超へ）</div>
             <span class="pri low">LOW</span>
           </div>
           <div class="action-desc">
-            客単価¥1,900（単価¥900の約2倍）からまとめ買いが定着していることが確認済み。これを意図的に促進することで客単価・CVRをさらに引き上げられる。
+            客単価¥1,903（単価¥900の約2.1倍）からまとめ買いが定着していることが確認済み。これを意図的に促進することで客単価・CVRをさらに引き上げられる。
             <ul>
               <li>「2点購入でXX%OFF」クーポンの設定</li>
               <li>商品ページに「よく一緒に購入される」バリエーション（色違い等）を明示</li>
@@ -860,13 +819,36 @@
         </div>
       </div>
 
+      <div class="action-item">
+        <div class="icon icon-both">中長期</div>
+        <div class="action-body">
+          <div class="action-head">
+            <div class="action-title">【L-2】楽天チャネル展開の検討</div>
+            <span class="pri low">LOW</span>
+          </div>
+          <div class="action-desc">
+            現状Amazon単一チャネル。楽天でも「ベビーカトラリー」「離乳食スプーン」カテゴリは需要が旺盛で、Amazon同様のまとめ買いニーズが期待できる。
+            <ul>
+              <li>楽天出品コストと競合状況の事前調査</li>
+              <li>楽天版レビュー獲得戦略の策定</li>
+              <li>Amazon売上データを基にした需要予測</li>
+            </ul>
+          </div>
+          <div class="action-meta">
+            <span><strong>目標：</strong>楽天展開可否判断</span>
+            <span><strong>担当：</strong>EC戦略担当</span>
+            <span><strong>期限：</strong>8〜9月検討</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
 </div><!-- /main -->
 
 <div class="footer">
-  Amazon Research OS | カトラリー（Amazon） 2026年3〜6月 | ASIN: B0FC6CDGPH | BabyGoo / fungoo | 株式会社ASAGIRI | 社内限定
+  Amazon Research OS | カトラリー（Amazon） 2026年3〜6月 | ASIN: B0FC6CDGPH | BabyGoo / fungoo | 株式会社ASAGIRI | 社内限定 | 更新: 2026/07/02
 </div>
 
 </body>
