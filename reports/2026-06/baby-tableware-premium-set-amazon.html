@@ -3,789 +3,957 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ベビー食器セットプレミアム 販売分析 2026年3〜6月 | Amazon Research OS</title>
+  <title>ベビー食器セットプレミアム 月次販売分析 2026年3〜6月 | Amazon Research OS</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', sans-serif; background: #f5f7fa; color: #1a1a2e; line-height: 1.6; }
+    :root {
+      --primary: #1a2b4a;
+      --accent:  #e8630a;
+      --accent2: #2e7dd1;
+      --bg:      #f4f6f9;
+      --card:    #ffffff;
+      --text:    #1e2a3a;
+      --muted:   #6b7a8d;
+      --border:  #dde2ea;
+      --green:   #1a7f4b;
+      --red:     #c0392b;
+      --warn:    #d4860a;
+      --amazon:  #c45c00;
+    }
+    body { font-family: 'Helvetica Neue', 'Noto Sans JP', Arial, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; }
 
     /* ── Header ── */
-    .site-header { background: #1a1a2e; color: #fff; padding: 16px 32px; display: flex; align-items: center; gap: 12px; }
-    .site-header a { color: rgba(255,255,255,.55); font-size: .82rem; text-decoration: none; }
-    .site-header a:hover { color: #fff; }
-    .site-header .sep { color: rgba(255,255,255,.3); }
+    .header { background: var(--primary); color: #fff; }
+    .header-top { max-width: 1100px; margin: 0 auto; padding: 24px 28px 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+    .header-left .breadcrumb { font-size: 0.72rem; opacity: .45; margin-bottom: 8px; }
+    .header-left h1 { font-size: 1.5rem; font-weight: 800; letter-spacing: -.02em; }
+    .header-left .meta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .header-left .meta-chip { font-size: 0.72rem; background: rgba(255,255,255,.1); padding: 2px 10px; border-radius: 12px; opacity: .8; }
+    .asin-badge { background: rgba(255,255,255,.12); border-radius: 8px; padding: 10px 16px; text-align: right; font-size: 0.76rem; opacity: .75; white-space: nowrap; }
+    .asin-badge .label { opacity: .65; font-size: 0.7rem; margin-bottom: 3px; }
+    .asin-badge .asin-val { font-family: monospace; font-size: 0.88rem; font-weight: 700; color: #fff; letter-spacing: .04em; }
+    .platform-tag { display: inline-block; background: #c45c00; color: #fff; font-size: 0.74rem; font-weight: 700; padding: 3px 10px; border-radius: 4px; margin-top: 6px; }
 
-    .report-header { background: linear-gradient(135deg, #1a1a2e 0%, #2d2d5e 100%); color: #fff; padding: 40px 32px 32px; }
-    .report-header .label { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; opacity: .6; margin-bottom: 8px; }
-    .report-header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; }
-    .report-header .meta { font-size: .88rem; opacity: .7; display: flex; gap: 20px; flex-wrap: wrap; }
-    .platform-badge { display: inline-block; background: #ef4444; color: #fff; font-size: .72rem; font-weight: 700; padding: 2px 10px; border-radius: 20px; margin-left: 10px; vertical-align: middle; }
+    /* ── Nav ── */
+    .nav { background: rgba(0,0,0,.22); border-top: 1px solid rgba(255,255,255,.08); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 28px; display: flex; gap: 4px; overflow-x: auto; }
+    .nav a { display: block; padding: 10px 14px; font-size: 0.78rem; color: rgba(255,255,255,.6); text-decoration: none; white-space: nowrap; border-bottom: 2px solid transparent; transition: all .15s; }
+    .nav a:hover { color: #fff; border-bottom-color: var(--accent); }
 
-    /* ── Layout ── */
-    .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
-    .section { background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; padding: 28px; margin-bottom: 24px; }
-    .section-title { font-size: 1.1rem; font-weight: 700; color: #1a1a2e; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #f3f4f6; display: flex; align-items: center; gap: 8px; }
-    .section-title .icon { font-size: 1.2rem; }
+    /* ── Alert Banner ── */
+    .alert-banner { background: #fffaed; border-left: 4px solid var(--warn); padding: 12px 28px; font-size: 0.83rem; color: #7a4500; }
+    .alert-banner-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+    /* ── Main ── */
+    .main { max-width: 1100px; margin: 0 auto; padding: 28px 28px 40px; }
+    .section { background: var(--card); border-radius: 10px; border: 1px solid var(--border); padding: 26px 28px; margin-bottom: 22px; }
+
+    /* ── Section Title ── */
+    .section-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .section-title .num { width: 24px; height: 24px; background: var(--accent); color: #fff; border-radius: 50%; font-size: 0.72rem; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
     /* ── KPI Cards ── */
-    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
-    .kpi-card { background: #fff; border-radius: 10px; border: 1px solid #e5e7eb; padding: 18px 16px; text-align: center; }
-    .kpi-card .kpi-label { font-size: .75rem; color: #6b7280; margin-bottom: 6px; }
-    .kpi-card .kpi-value { font-size: 1.5rem; font-weight: 700; color: #1a1a2e; }
-    .kpi-card .kpi-sub { font-size: .72rem; color: #9ca3af; margin-top: 4px; }
-    .kpi-card.highlight { border-color: #6366f1; background: #f5f3ff; }
-    .kpi-card.highlight .kpi-value { color: #4f46e5; }
-    .kpi-card.danger { border-color: #ef4444; background: #fff5f5; }
-    .kpi-card.danger .kpi-value { color: #dc2626; }
-    .kpi-card.success { border-color: #22c55e; background: #f0fdf4; }
-    .kpi-card.success .kpi-value { color: #16a34a; }
-    .kpi-card.warn { border-color: #f59e0b; background: #fffbeb; }
-    .kpi-card.warn .kpi-value { color: #d97706; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; margin-bottom: 20px; }
+    .kpi-card { background: var(--bg); border-radius: 8px; padding: 16px 18px; border: 1px solid var(--border); }
+    .kpi-card.amazon { border-top: 3px solid var(--amazon); }
+    .kpi-card .label { font-size: 0.73rem; color: var(--muted); margin-bottom: 5px; }
+    .kpi-card .value { font-size: 1.5rem; font-weight: 800; color: var(--text); line-height: 1.15; }
+    .kpi-card .sub { font-size: 0.72rem; color: var(--muted); margin-top: 3px; }
+    .kpi-card .diff { font-size: 0.73rem; font-weight: 700; margin-top: 4px; }
+    .kpi-card .diff.up   { color: var(--green); }
+    .kpi-card .diff.down { color: var(--red); }
+    .kpi-card.good .value { color: var(--green); }
+    .kpi-card.bad  .value { color: var(--red); }
+    .kpi-card.warn .value { color: var(--warn); }
+    .kpi-card.crit { border-color: var(--red); background: #fdf5f5; }
+    .kpi-card.crit .value { color: var(--red); }
 
     /* ── Tables ── */
-    table { width: 100%; border-collapse: collapse; font-size: .88rem; }
-    th { background: #f9fafb; color: #6b7280; font-weight: 600; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; padding: 10px 14px; text-align: left; border-bottom: 1px solid #e5e7eb; }
-    td { padding: 11px 14px; border-bottom: 1px solid #f3f4f6; vertical-align: top; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+    thead { background: var(--primary); color: #fff; }
+    th { padding: 9px 12px; text-align: right; font-size: 0.77rem; font-weight: 600; white-space: nowrap; }
+    th:first-child { text-align: left; }
+    td { padding: 9px 12px; border-bottom: 1px solid var(--border); text-align: right; white-space: nowrap; }
+    td:first-child { text-align: left; font-weight: 600; }
     tr:last-child td { border-bottom: none; }
-    tr:hover td { background: #fafafa; }
-    .num { text-align: right; font-variant-numeric: tabular-nums; }
-    .td-month { font-weight: 700; }
+    tr:hover td { background: var(--bg); }
+    tr.total td { border-top: 2px solid var(--border); font-weight: 700; background: #f9fafb; }
+    .g { color: var(--green); font-weight: 700; }
+    .r { color: var(--red);   font-weight: 700; }
+    .w { color: var(--warn);  font-weight: 700; }
+    .badge-warn { background: var(--warn); color: #fff; font-size: 0.7rem; padding: 1px 6px; border-radius: 3px; font-weight: 700; }
 
-    /* ── Bar Chart (pure CSS) ── */
-    .bar-wrap { display: flex; flex-direction: column; gap: 10px; }
-    .bar-row { display: flex; align-items: center; gap: 12px; }
-    .bar-label { width: 36px; font-size: .8rem; color: #6b7280; text-align: right; flex-shrink: 0; }
-    .bar-track { flex: 1; background: #f3f4f6; border-radius: 4px; height: 22px; overflow: hidden; }
-    .bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: .75rem; color: #fff; font-weight: 600; transition: width .3s; }
-    .bar-fill.m3 { background: #6366f1; }
-    .bar-fill.m4 { background: #8b5cf6; }
-    .bar-fill.m5 { background: #f59e0b; }
-    .bar-fill.m6 { background: #ef4444; }
-    .bar-value { width: 90px; font-size: .8rem; color: #374151; text-align: right; flex-shrink: 0; }
+    /* ── Bar Chart ── */
+    .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .bar-label { display: flex; justify-content: space-between; width: 140px; flex-shrink: 0; font-size: 0.8rem; }
+    .bar-label span:last-child { font-weight: 700; }
+    .bar-track { flex: 1; background: var(--border); border-radius: 4px; height: 10px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 4px; }
 
-    /* ── Trend indicators ── */
-    .up { color: #16a34a; font-weight: 600; }
-    .down { color: #dc2626; font-weight: 600; }
-    .neutral { color: #6b7280; }
-
-    /* ── Priority Tags ── */
-    .priority { display: inline-block; padding: 2px 10px; border-radius: 4px; font-size: .72rem; font-weight: 700; margin-right: 8px; }
-    .p-high { background: #fee2e2; color: #b91c1c; }
-    .p-mid { background: #fef3c7; color: #92400e; }
-    .p-low { background: #dcfce7; color: #15803d; }
-
-    /* ── Action Items ── */
-    .action-list { display: flex; flex-direction: column; gap: 16px; }
-    .action-item { border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px 18px; }
-    .action-item.high { border-left: 4px solid #ef4444; }
-    .action-item.medium { border-left: 4px solid #f59e0b; }
-    .action-item.low { border-left: 4px solid #22c55e; }
-    .action-title { font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
-    .action-body { font-size: .88rem; color: #374151; line-height: 1.7; }
-    .action-meta { margin-top: 8px; font-size: .78rem; color: #6b7280; display: flex; gap: 16px; flex-wrap: wrap; }
+    /* ── Vertical bar chart ── */
+    .vchart { display: flex; align-items: flex-end; gap: 14px; height: 90px; margin: 12px 0 6px; }
+    .vbar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .vbar-val { font-size: 0.72rem; font-weight: 700; color: var(--text); }
+    .vbar { width: 100%; border-radius: 4px 4px 0 0; }
+    .vbar-label { font-size: 0.7rem; color: var(--muted); }
 
     /* ── Insight Cards ── */
-    .insight-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
-    .insight-card { background: #f9fafb; border-radius: 8px; padding: 16px; border: 1px solid #f3f4f6; }
-    .insight-card .i-title { font-size: .82rem; font-weight: 700; color: #4f46e5; margin-bottom: 6px; }
-    .insight-card .i-body { font-size: .85rem; color: #374151; line-height: 1.6; }
+    .insight-card { padding: 14px 16px; border-radius: 8px; border-left: 4px solid; font-size: 0.84rem; line-height: 1.7; margin-bottom: 10px; }
+    .insight-card .ic-title { font-weight: 700; margin-bottom: 5px; font-size: 0.85rem; }
+    .insight-card.success { background: #f0faf5; border-color: var(--green); color: #0e4929; }
+    .insight-card.warn    { background: #fffaed; border-color: var(--warn);  color: #6b3800; }
+    .insight-card.danger  { background: #fdf5f5; border-color: var(--red);   color: #7a1a1a; }
+    .insight-card.info    { background: #eef6ff; border-color: var(--accent2); color: #1e3a5f; }
 
-    /* ── Alert Box ── */
-    .alert { border-radius: 8px; padding: 14px 18px; margin-bottom: 16px; font-size: .88rem; display: flex; gap: 10px; align-items: flex-start; }
-    .alert.red { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
-    .alert.green { background: #f0fdf4; border: 1px solid #bbf7d0; color: #14532d; }
-    .alert.yellow { background: #fffbeb; border: 1px solid #fde68a; color: #78350f; }
-    .alert .alert-icon { font-size: 1.1rem; flex-shrink: 0; }
-
-    /* ── Progress bar ── */
-    .progress-track { background: #f3f4f6; border-radius: 20px; height: 8px; overflow: hidden; }
-    .progress-fill { height: 100%; border-radius: 20px; }
-
-    /* ── Two-column ── */
+    /* ── Two column ── */
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-    /* ── Footer ── */
-    footer { text-align: center; padding: 32px; font-size: .78rem; color: #9ca3af; }
+    /* ── Cost Table ── */
+    .cost-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 12px; }
+    .cost-cell { background: var(--bg); border-radius: 6px; padding: 12px 14px; border: 1px solid var(--border); }
+    .cost-cell .cl { font-size: 0.72rem; color: var(--muted); margin-bottom: 4px; }
+    .cost-cell .cv { font-size: 1.1rem; font-weight: 700; color: var(--text); }
 
-    @media (max-width: 640px) {
-      .report-header { padding: 24px 16px 20px; }
-      .report-header h1 { font-size: 1.4rem; }
-      .container { padding: 16px 12px; }
-      .section { padding: 18px 14px; }
-      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    /* ── Action Items ── */
+    .action-list { display: flex; flex-direction: column; gap: 12px; }
+    .action-item { background: var(--bg); border-radius: 8px; border: 1px solid var(--border); padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start; }
+    .icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.68rem; font-weight: 800; flex-shrink: 0; text-align: center; }
+    .icon-amazon { background: #fff3e6; color: #c45c00; }
+    .action-body { flex: 1; }
+    .action-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+    .action-title { font-size: 0.88rem; font-weight: 700; }
+    .pri { font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; }
+    .pri.high { background: #fee2e2; color: #991b1b; }
+    .pri.mid  { background: #fef3c7; color: #92400e; }
+    .pri.low  { background: #d1fae5; color: #065f46; }
+    .action-desc { font-size: 0.81rem; color: var(--muted); line-height: 1.7; }
+    .action-desc ul { padding-left: 18px; margin-top: 4px; }
+    .action-meta { display: flex; gap: 14px; margin-top: 8px; font-size: 0.74rem; color: var(--muted); flex-wrap: wrap; }
+    .action-meta strong { color: var(--text); }
+
+    /* ── Callout ── */
+    .callout { border-radius: 8px; padding: 12px 16px; font-size: 0.83rem; margin: 12px 0; }
+    .callout.info  { background: #eef6ff; border: 1px solid #bfdbfe; color: #1e3a5f; }
+    .callout.warn  { background: #fffaed; border: 1px solid #fde68a; color: #6b3800; }
+    .callout.crit  { background: #fdf5f5; border: 1px solid #fca5a5; color: #7a1a1a; }
+
+    /* ── Footer ── */
+    .footer { text-align: center; font-size: 0.72rem; color: var(--muted); padding: 24px; border-top: 1px solid var(--border); margin-top: 8px; }
+
+    @media(max-width:680px) {
+      .header-top { padding: 18px 16px; }
+      .nav-inner { padding: 0 12px; }
+      .main { padding: 16px; }
+      .section { padding: 18px 16px; }
       .two-col { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+      .bar-label { width: 80px; font-size: 0.72rem; }
     }
   </style>
 </head>
 <body>
 
-<div class="site-header">
-  <a href="../../reports/index.html">← ナレッジポータル</a>
-  <span class="sep">/</span>
-  <span style="font-size:.82rem;opacity:.7;">ベビー食器セットプレミアム 2026年3〜6月</span>
-</div>
-
-<div class="report-header">
-  <div class="label">月次販売分析レポート</div>
-  <h1>ベビー食器セットプレミアム <span class="platform-badge">Amazon</span></h1>
-  <div class="meta">
-    <span>分析期間：2026年3月1日〜6月30日</span>
-    <span>ASIN：B0DHX4121R</span>
-    <span>ブランド：BabyGoo / fungoo</span>
-    <span>発売日：2024年12月3日</span>
-    <span>作成：2026年7月1日</span>
+<!-- ── Header ── -->
+<div class="header">
+  <div class="header-top">
+    <div class="header-left">
+      <div class="breadcrumb">Amazon Research OS › レポート › 2026-06</div>
+      <h1>ベビー食器セットプレミアム</h1>
+      <div class="meta-row">
+        <span class="meta-chip">2026年3〜6月</span>
+        <span class="meta-chip">B0DHX4121R</span>
+        <span class="meta-chip">BabyGoo / fungoo</span>
+        <span class="meta-chip">SP広告 + SB広告</span>
+        <span class="meta-chip">発売 2024/12/03</span>
+      </div>
+    </div>
+    <div class="asin-badge">
+      <div class="label">ASIN</div>
+      <div class="asin-val">B0DHX4121R</div>
+      <span class="platform-tag">Amazon</span>
+    </div>
+  </div>
+  <div class="nav">
+    <div class="nav-inner">
+      <a href="#summary">① 月次サマリー</a>
+      <a href="#channel">② チャネル構成</a>
+      <a href="#overview">③ Amazon総括</a>
+      <a href="#unit">④ ユニットエコノミクス</a>
+      <a href="#insight">⑤ 顧客インサイト</a>
+      <a href="#action">⑥ アクション案</a>
+    </div>
   </div>
 </div>
 
-<div class="container">
-
-  <!-- ── KPI サマリー ── -->
-  <div class="kpi-grid">
-    <div class="kpi-card highlight">
-      <div class="kpi-label">4ヶ月累計売上</div>
-      <div class="kpi-value">¥1,855万</div>
-      <div class="kpi-sub">6,317個</div>
-    </div>
-    <div class="kpi-card success">
-      <div class="kpi-label">最高月（3月）</div>
-      <div class="kpi-value">¥603万</div>
-      <div class="kpi-sub">新生活セール効果・2,127個</div>
-    </div>
-    <div class="kpi-card danger">
-      <div class="kpi-label">6月末 在庫切れ</div>
-      <div class="kpi-value">5日間</div>
-      <div class="kpi-sub">6/26〜30 売上ゼロ・SEO毀損</div>
-    </div>
-    <div class="kpi-card warn">
-      <div class="kpi-label">6月 ACOS</div>
-      <div class="kpi-value">15.6%</div>
-      <div class="kpi-sub">基準値（15%）に到達</div>
-    </div>
-    <div class="kpi-card success">
-      <div class="kpi-label">TACOS（全月）</div>
-      <div class="kpi-value">3〜6%</div>
-      <div class="kpi-sub">基準値（15%）を大きく下回る</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">CVR（全月平均）</div>
-      <div class="kpi-value">~6.9%</div>
-      <div class="kpi-sub">ページ品質は安定</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">広告費累計</div>
-      <div class="kpi-value">¥81.8万</div>
-      <div class="kpi-sub">SP+SB 4ヶ月合計</div>
-    </div>
-    <div class="kpi-card success">
-      <div class="kpi-label">粗利累計</div>
-      <div class="kpi-value">¥807万</div>
-      <div class="kpi-sub">平均利益率 43.5%</div>
-    </div>
+<!-- ── Alert Banner ── -->
+<div class="alert-banner">
+  <div class="alert-banner-inner">
+    ⚠️ <strong>要注意：</strong>6月のACOS が 18.4%（前月比+6.2pt）と4ヶ月で最高値に上昇。また3月→6月でアクセス数が <strong>▲37.4%</strong> に累積低下中。プライムデー（7月）を前に広告KW整理とSP入札強化が急務です。
   </div>
+</div>
 
-  <!-- ── Section 1: 月次サマリー ── -->
-  <div class="section">
-    <div class="section-title"><span class="icon">📊</span>1. 月次サマリー</div>
+<!-- ── Main ── -->
+<div class="main">
 
-    <div class="alert red">
-      <span class="alert-icon">🚨</span>
-      <span><strong>6月26〜30日（5日間）に売上・アクセスが完全にゼロ：</strong>在庫切れの可能性が極めて高い。Amazon SEOでは直近1週間の実績ウェイトが最大であり、この5日間の欠品は通常期の5〜10倍のSEO毀損に相当。7月以降のアクセス回復が最大の懸念事項。</span>
-    </div>
-    <div class="alert yellow">
-      <span class="alert-icon">⚠️</span>
-      <span><strong>3月をピークに売上が4ヶ月連続下落：</strong>3月新生活セール効果（¥603万）から4月▼18.9%→5月▼8.8%→6月▼29.4%と急落。CVRは安定しているため、アクセス数の継続的な減少（3月比▼47%）が主因。</span>
-    </div>
+  <!-- ===== 1: 月次サマリー ===== -->
+  <div class="section" id="summary">
+    <div class="section-title"><span class="num">1</span> 月次サマリー</div>
 
-    <div style="margin-bottom:24px;">
-      <div style="font-size:.8rem;color:#6b7280;margin-bottom:10px;">売上金額（月別）</div>
-      <div class="bar-wrap">
-        <div class="bar-row">
-          <div class="bar-label">3月</div>
-          <div class="bar-track"><div class="bar-fill m3" style="width:100%">¥6,033,489</div></div>
-          <div class="bar-value">2,127個</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">4月</div>
-          <div class="bar-track"><div class="bar-fill m4" style="width:81.1%">¥4,896,438</div></div>
-          <div class="bar-value">1,623個</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">5月</div>
-          <div class="bar-track"><div class="bar-fill m5" style="width:74.0%">¥4,465,235</div></div>
-          <div class="bar-value">1,489個</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">6月</div>
-          <div class="bar-track"><div class="bar-fill m6" style="width:52.3%">¥3,153,584</div></div>
-          <div class="bar-value">1,078個</div>
-        </div>
+    <div class="kpi-grid">
+      <div class="kpi-card amazon">
+        <div class="label">3月 売上金額</div>
+        <div class="value">¥603万</div>
+        <div class="sub">新生活セール（先行・本番・FINAL）</div>
+        <div class="diff up">2,127個 ／ CVR 6.88%</div>
+      </div>
+      <div class="kpi-card amazon warn">
+        <div class="label">4月 売上金額</div>
+        <div class="value">¥490万</div>
+        <div class="sub">前月比 <span class="r">▼18.8%</span>｜セール特需剥落</div>
+        <div class="diff down">1,623個 ／ CVR 7.86%</div>
+      </div>
+      <div class="kpi-card amazon">
+        <div class="label">5月 売上金額</div>
+        <div class="value">¥447万</div>
+        <div class="sub">前月比 <span class="r">▼8.8%</span>｜下落継続</div>
+        <div class="diff">1,489個 ／ CVR 6.53%</div>
+      </div>
+      <div class="kpi-card amazon crit">
+        <div class="label">6月 売上金額</div>
+        <div class="value">¥369万</div>
+        <div class="sub">前月比 <span class="r">▼17.4%</span>｜4ヶ月最低</div>
+        <div class="diff down">1,268個 ／ CVR 6.75%</div>
       </div>
     </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>月</th>
-          <th>主なイベント</th>
-          <th class="num">売上数量</th>
-          <th class="num">前月比</th>
-          <th class="num">売上金額</th>
-          <th class="num">CVR</th>
-          <th class="num">アクセス</th>
-          <th class="num">客単価</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="td-month">3月</td>
-          <td>新生活セール（前行・本番・FINAL）</td>
-          <td class="num">2,127個</td>
-          <td class="num neutral">—</td>
-          <td class="num">¥6,033,489</td>
-          <td class="num">6.88%</td>
-          <td class="num">30,906</td>
-          <td class="num">¥2,915</td>
-        </tr>
-        <tr>
-          <td class="td-month">4月</td>
-          <td>通常期</td>
-          <td class="num">1,623個</td>
-          <td class="num down">▼18.9%</td>
-          <td class="num">¥4,896,438</td>
-          <td class="num" style="color:#16a34a;font-weight:700;">7.87%</td>
-          <td class="num">20,634</td>
-          <td class="num">¥3,105</td>
-        </tr>
-        <tr>
-          <td class="td-month">5月</td>
-          <td>スタイルSALE</td>
-          <td class="num">1,489個</td>
-          <td class="num down">▼8.8%</td>
-          <td class="num">¥4,465,235</td>
-          <td class="num">6.53%</td>
-          <td class="num">22,810</td>
-          <td class="num">¥2,841</td>
-        </tr>
-        <tr style="background:#fff5f5;">
-          <td class="td-month" style="color:#dc2626;">6月 🚨</td>
-          <td>スタイルSALE・残りわずかSALE（26〜30日 在庫切れ疑い）</td>
-          <td class="num">1,078個</td>
-          <td class="num down">▼29.4%</td>
-          <td class="num">¥3,153,584</td>
-          <td class="num">6.54%</td>
-          <td class="num" style="color:#dc2626;font-weight:700;">16,483</td>
-          <td class="num">¥2,998</td>
-        </tr>
-        <tr style="background:#f9fafb;font-weight:700;">
-          <td class="td-month">累計</td>
-          <td>—</td>
-          <td class="num">6,317個</td>
-          <td class="num">—</td>
-          <td class="num">¥18,548,746</td>
-          <td class="num">—</td>
-          <td class="num">—</td>
-          <td class="num">¥2,965</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- ── Section 2: チャネル構成 ── -->
-  <div class="section">
-    <div class="section-title"><span class="icon">🛒</span>2. チャネル構成</div>
-
-    <p style="font-size:.88rem;color:#374151;margin-bottom:16px;">プラットフォームは<strong>Amazon JP 単一チャネル</strong>。楽天チャネルのデータは含まれていない。SKUは4点セット・7点セット・通常の複数バリエーション構成。</p>
-
-    <table>
-      <thead>
-        <tr>
-          <th>チャネル</th>
-          <th class="num">3月</th>
-          <th class="num">4月</th>
-          <th class="num">5月</th>
-          <th class="num">6月</th>
-          <th class="num">4ヶ月累計</th>
-          <th>比率</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Amazon JP（B0DHX4121R）</strong></td>
-          <td class="num">¥6,033,489</td>
-          <td class="num">¥4,896,438</td>
-          <td class="num">¥4,465,235</td>
-          <td class="num">¥3,153,584</td>
-          <td class="num">¥18,548,746</td>
-          <td>100%</td>
-        </tr>
-        <tr>
-          <td style="color:#9ca3af;">楽天</td>
-          <td class="num" style="color:#9ca3af;">—</td>
-          <td class="num" style="color:#9ca3af;">—</td>
-          <td class="num" style="color:#9ca3af;">—</td>
-          <td class="num" style="color:#9ca3af;">—</td>
-          <td class="num" style="color:#9ca3af;">—</td>
-          <td style="color:#9ca3af;">—</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div style="margin-top:20px;font-size:.85rem;font-weight:600;color:#374151;margin-bottom:10px;">客単価の推移（SKUミックスの変化を示唆）</div>
-    <div style="display:flex;flex-direction:column;gap:8px;">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <span style="width:36px;font-size:.78rem;color:#6b7280;text-align:right;">3月</span>
-        <div class="progress-track" style="flex:1;"><div class="progress-fill" style="width:54.5%;background:#6366f1;height:8px;border-radius:20px;"></div></div>
-        <span style="font-size:.78rem;width:60px;text-align:right;">¥2,915</span>
+    <div style="font-size:0.77rem; color:var(--muted); margin-bottom:4px;">月次売上推移（万円） ※3月を最大値（100%）として比較</div>
+    <div class="vchart">
+      <div class="vbar-col">
+        <div class="vbar-val">603万</div>
+        <div class="vbar" style="height:100%;background:var(--accent2);"></div>
+        <div class="vbar-label">3月</div>
       </div>
-      <div style="display:flex;align-items:center;gap:10px;">
-        <span style="width:36px;font-size:.78rem;color:#6b7280;text-align:right;">4月</span>
-        <div class="progress-track" style="flex:1;"><div class="progress-fill" style="width:58.0%;background:#22c55e;height:8px;border-radius:20px;"></div></div>
-        <span style="font-size:.78rem;width:60px;text-align:right;font-weight:700;color:#16a34a;">¥3,105</span>
+      <div class="vbar-col">
+        <div class="vbar-val">490万</div>
+        <div class="vbar" style="height:81%;background:var(--warn);opacity:.85;"></div>
+        <div class="vbar-label">4月</div>
       </div>
-      <div style="display:flex;align-items:center;gap:10px;">
-        <span style="width:36px;font-size:.78rem;color:#6b7280;text-align:right;">5月</span>
-        <div class="progress-track" style="flex:1;"><div class="progress-fill" style="width:53.1%;background:#f59e0b;height:8px;border-radius:20px;"></div></div>
-        <span style="font-size:.78rem;width:60px;text-align:right;">¥2,841</span>
+      <div class="vbar-col">
+        <div class="vbar-val">447万</div>
+        <div class="vbar" style="height:74%;background:var(--warn);opacity:.75;"></div>
+        <div class="vbar-label">5月</div>
       </div>
-      <div style="display:flex;align-items:center;gap:10px;">
-        <span style="width:36px;font-size:.78rem;color:#6b7280;text-align:right;">6月</span>
-        <div class="progress-track" style="flex:1;"><div class="progress-fill" style="width:56.0%;background:#ef4444;height:8px;border-radius:20px;"></div></div>
-        <span style="font-size:.78rem;width:60px;text-align:right;">¥2,998</span>
+      <div class="vbar-col">
+        <div class="vbar-val">369万</div>
+        <div class="vbar" style="height:61%;background:var(--red);opacity:.75;"></div>
+        <div class="vbar-label">6月</div>
       </div>
     </div>
-    <p style="font-size:.78rem;color:#6b7280;margin-top:8px;">4月は客単価¥3,105と最高。高価格SKU（7点セット等）が多く売れた月。</p>
-  </div>
 
-  <!-- ── Section 3: モール別総括 ── -->
-  <div class="section">
-    <div class="section-title"><span class="icon">📈</span>3. モール別総括（Amazon JP）</div>
+    <div class="callout info" style="margin-top:16px;">
+      <strong>3月の高実績はセール特需：</strong>新生活セール（先行・本番・FINAL 計4回）によりインプレッション <strong>268万回</strong>（4月比+456%）を記録。3月の数値は構造的ベースラインではなく、4〜6月が真の実力値。
+    </div>
 
-    <div style="margin-bottom:24px;">
-      <div style="font-size:.85rem;font-weight:600;color:#374151;margin-bottom:12px;">アクセス・転換の動向</div>
+    <div class="table-wrap" style="margin-top:18px;">
       <table>
         <thead>
           <tr>
-            <th>指標</th>
-            <th class="num">3月</th>
-            <th class="num">4月</th>
-            <th class="num">5月</th>
-            <th class="num">6月</th>
-            <th>評価</th>
+            <th>月</th>
+            <th>売上金額</th>
+            <th>前月比</th>
+            <th>売上個数</th>
+            <th>アクセス数</th>
+            <th>CVR</th>
+            <th>客単価</th>
+            <th>主要イベント</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>アクセス人数</td>
-            <td class="num">30,906</td>
-            <td class="num">20,634 <span class="down" style="font-size:.75rem;">▼33%</span></td>
-            <td class="num">22,810 <span class="up" style="font-size:.75rem;">+11%</span></td>
-            <td class="num" style="color:#dc2626;font-weight:700;">16,483 <span class="down" style="font-size:.75rem;">▼28%</span></td>
-            <td>3月比▼47%。売上低迷の主因</td>
+            <td>3月</td>
+            <td>¥6,033,489</td>
+            <td>—</td>
+            <td>2,127個</td>
+            <td>30,906</td>
+            <td class="g">6.88%</td>
+            <td>¥2,915</td>
+            <td>新生活セール先行／本番／FINAL（計4回）</td>
           </tr>
           <tr>
-            <td>転換率（CVR）</td>
-            <td class="num">6.88%</td>
-            <td class="num" style="color:#16a34a;font-weight:700;">7.87%</td>
-            <td class="num">6.53%</td>
-            <td class="num">6.54%</td>
-            <td>全月安定。ページ品質は問題なし</td>
+            <td>4月</td>
+            <td>¥4,896,438</td>
+            <td class="r">▼18.8%</td>
+            <td>1,623個</td>
+            <td class="r">20,634</td>
+            <td class="g">7.86%</td>
+            <td>¥3,105</td>
+            <td>スタイルSALE（複数回）</td>
           </tr>
           <tr>
-            <td>客単価</td>
-            <td class="num">¥2,915</td>
-            <td class="num" style="color:#16a34a;font-weight:700;">¥3,105</td>
-            <td class="num">¥2,841</td>
-            <td class="num">¥2,998</td>
-            <td>4月に高単価SKU多売。安定水準</td>
+            <td>5月</td>
+            <td>¥4,465,235</td>
+            <td class="r">▼8.8%</td>
+            <td>1,489個</td>
+            <td>22,810</td>
+            <td>6.53%</td>
+            <td>¥3,065</td>
+            <td>残りわずか前夜のお買いSALE／スタイルSALE</td>
+          </tr>
+          <tr>
+            <td>6月</td>
+            <td class="r">¥3,688,284</td>
+            <td class="r">▼17.4%</td>
+            <td class="r">1,268個</td>
+            <td class="r">19,333</td>
+            <td>6.75%</td>
+            <td>¥2,987</td>
+            <td>スタイルSALE（上旬）</td>
+          </tr>
+          <tr class="total">
+            <td>4ヶ月合計</td>
+            <td>¥19,083,446</td>
+            <td>—</td>
+            <td>6,507個</td>
+            <td>93,683（累計）</td>
+            <td>—</td>
+            <td>¥2,933（平均）</td>
+            <td>—</td>
           </tr>
         </tbody>
       </table>
     </div>
+  </div>
 
-    <div style="margin-bottom:24px;">
-      <div style="font-size:.85rem;font-weight:600;color:#374151;margin-bottom:12px;">広告パフォーマンス（SP + SB 合計）</div>
+  <!-- ===== 2: チャネル構成 ===== -->
+  <div class="section" id="channel">
+    <div class="section-title"><span class="num">2</span> チャネル構成</div>
+
+    <div class="callout info">
+      <strong>Amazon 単独：</strong>全売上が Amazon（ASIN: B0DHX4121R）のみ。楽天・Yahoo は未出品。チャネル集中リスクがある。
+    </div>
+
+    <div style="margin-top:18px;">
+      <div style="font-size:0.8rem; font-weight:600; color:var(--muted); margin-bottom:12px;">月別 売上構成（Amazon 100%）</div>
+      <div class="bar-row">
+        <div class="bar-label"><span>3月</span><span>¥603万</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent2);"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label"><span>4月</span><span class="w">¥490万</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:81%;background:var(--warn);opacity:.85;"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label"><span>5月</span><span class="w">¥447万</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:74%;background:var(--warn);opacity:.75;"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label"><span>6月</span><span class="r">¥369万</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:61%;background:var(--red);opacity:.75;"></div></div>
+      </div>
+    </div>
+
+    <div class="table-wrap" style="margin-top:20px;">
       <table>
         <thead>
           <tr>
-            <th>指標</th>
-            <th class="num">3月</th>
-            <th class="num">4月</th>
-            <th class="num">5月</th>
-            <th class="num">6月</th>
-            <th>基準</th>
-            <th>評価</th>
+            <th>チャネル</th>
+            <th>3月</th>
+            <th>4月</th>
+            <th>5月</th>
+            <th>6月</th>
+            <th>累計</th>
+            <th>構成比</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>広告費合計</td>
-            <td class="num">¥349,312</td>
-            <td class="num">¥161,021</td>
-            <td class="num">¥181,880</td>
-            <td class="num">¥126,445</td>
+            <td>Amazon（B0DHX4121R）</td>
+            <td>¥6,033,489</td>
+            <td>¥4,896,438</td>
+            <td>¥4,465,235</td>
+            <td>¥3,688,284</td>
+            <td class="g">¥19,083,446</td>
+            <td class="g">100%</td>
+          </tr>
+          <tr>
+            <td>楽天</td>
             <td>—</td>
-            <td>4月以降大幅削減</td>
-          </tr>
-          <tr>
-            <td>ROAS</td>
-            <td class="num">7.98</td>
-            <td class="num" style="color:#16a34a;font-weight:700;">8.15</td>
-            <td class="num">7.27</td>
-            <td class="num" style="color:#dc2626;font-weight:700;">6.40</td>
             <td>—</td>
-            <td>低下傾向。6月は注意</td>
-          </tr>
-          <tr>
-            <td>TACOS</td>
-            <td class="num">5.79%</td>
-            <td class="num" style="color:#16a34a;font-weight:700;">3.29%</td>
-            <td class="num">4.07%</td>
-            <td class="num">4.01%</td>
-            <td>〜15%</td>
-            <td>全月で基準を大きく下回る ✅</td>
-          </tr>
-          <tr>
-            <td>ACOS</td>
-            <td class="num">12.53%</td>
-            <td class="num" style="color:#16a34a;">12.27%</td>
-            <td class="num">13.76%</td>
-            <td class="num" style="color:#d97706;font-weight:700;">15.63% ⚠️</td>
-            <td>〜15%</td>
-            <td>6月は基準値に到達。要注意</td>
-          </tr>
-          <tr>
-            <td>CPC（平均）</td>
-            <td class="num">¥41.4</td>
-            <td class="num">¥41.0</td>
-            <td class="num" style="color:#dc2626;font-weight:700;">¥46.3</td>
-            <td class="num" style="color:#dc2626;font-weight:700;">¥47.1</td>
             <td>—</td>
-            <td>5月以降+14%上昇</td>
-          </tr>
-          <tr>
-            <td>CPO（注文あたり広告費）</td>
-            <td class="num">¥373</td>
-            <td class="num" style="color:#16a34a;">¥367</td>
-            <td class="num">¥408</td>
-            <td class="num" style="color:#dc2626;font-weight:700;">¥486</td>
             <td>—</td>
-            <td>3月比+30%悪化</td>
+            <td>¥0</td>
+            <td class="r">0%</td>
+          </tr>
+          <tr class="total">
+            <td>合計</td>
+            <td>¥6,033,489</td>
+            <td>¥4,896,438</td>
+            <td>¥4,465,235</td>
+            <td>¥3,688,284</td>
+            <td>¥19,083,446</td>
+            <td>100%</td>
           </tr>
         </tbody>
       </table>
     </div>
+  </div>
+
+  <!-- ===== 3: Amazon総括 ===== -->
+  <div class="section" id="overview">
+    <div class="section-title"><span class="num">3</span> Amazon総括</div>
 
     <div class="two-col">
       <div>
-        <div style="font-size:.82rem;font-weight:600;color:#374151;margin-bottom:10px;">SP（スポンサープロダクト）</div>
-        <table>
-          <thead>
-            <tr><th>指標</th><th class="num">3月</th><th class="num">4月</th><th class="num">5月</th><th class="num">6月</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>インプレッション</td><td class="num">502,549</td><td class="num">402,087</td><td class="num">570,561</td><td class="num">435,028</td></tr>
-            <tr><td>クリック数</td><td class="num">4,247</td><td class="num">3,736</td><td class="num">3,927</td><td class="num">2,684</td></tr>
-            <tr><td>広告費</td><td class="num">¥172,325</td><td class="num">¥152,310</td><td class="num">¥181,880</td><td class="num">¥126,445</td></tr>
-            <tr><td>ROAS</td><td class="num" style="color:#16a34a;font-weight:700;">10.41</td><td class="num">8.30</td><td class="num">7.27</td><td class="num" style="color:#dc2626;">6.40</td></tr>
-            <tr><td>CPC</td><td class="num">¥40.6</td><td class="num">¥40.8</td><td class="num" style="color:#dc2626;">¥46.3</td><td class="num" style="color:#dc2626;">¥47.1</td></tr>
-          </tbody>
-        </table>
+        <div style="font-size:0.85rem; font-weight:700; margin-bottom:12px; color:var(--text);">アクセス・転換率推移</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>月</th>
+                <th>アクセス数</th>
+                <th>前月比</th>
+                <th>転換率</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>3月</td>
+                <td>30,906</td>
+                <td>—</td>
+                <td class="g">6.88%</td>
+              </tr>
+              <tr>
+                <td>4月</td>
+                <td class="r">20,634</td>
+                <td class="r">▼33.2%</td>
+                <td class="g">7.86%</td>
+              </tr>
+              <tr>
+                <td>5月</td>
+                <td class="w">22,810</td>
+                <td class="g">+10.5%</td>
+                <td>6.53%</td>
+              </tr>
+              <tr>
+                <td>6月</td>
+                <td class="r">19,333</td>
+                <td class="r">▼15.2%</td>
+                <td>6.75%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div>
-        <div style="font-size:.82rem;font-weight:600;color:#374151;margin-bottom:10px;">SB（スポンサーブランド）</div>
+        <div style="font-size:0.85rem; font-weight:700; margin-bottom:12px; color:var(--text);">広告効率推移</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>月</th>
+                <th>TACOS</th>
+                <th>ACOS</th>
+                <th>ROAS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>3月</td>
+                <td class="g">5.79%</td>
+                <td class="g">12.53%</td>
+                <td class="g">7.98x</td>
+              </tr>
+              <tr>
+                <td>4月</td>
+                <td class="g">3.29%</td>
+                <td class="g">12.27%</td>
+                <td class="g">8.15x</td>
+              </tr>
+              <tr>
+                <td>5月</td>
+                <td class="g">4.07%</td>
+                <td class="g">12.24%</td>
+                <td class="g">7.27x</td>
+              </tr>
+              <tr>
+                <td>6月</td>
+                <td class="g">3.94%</td>
+                <td class="w">18.39%</td>
+                <td class="w">6.16x</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;">
+      <div class="insight-card success">
+        <div class="ic-title">強み：TACOS は全月 3〜6% 台と健全（基準 15% 以下）</div>
+        全月で TACOS 目標を大幅に下回る。4月は 3.29%、6月も 3.94% と低水準を維持。売上の大部分がオーガニック（4月 73%・6月 70%）で支えられており、広告依存度は低い。
+      </div>
+      <div class="insight-card warn">
+        <div class="ic-title">警戒：アクセス数が3月比▼37.4% まで累積低下中</div>
+        3月のセール後にアクセスが戻っていない。4→6月の3ヶ月でさらに▼6.2%。セール効果（3月）が剥落した後の自然検索流入が弱く、SEO 順位の低下または広告インプレッション不足が原因と推察される。
+      </div>
+      <div class="insight-card danger">
+        <div class="ic-title">重大：6月の ACOS が 18.4% に急上昇（前月 12.2%）</div>
+        5月まで 12% 台で安定していた ACOS が6月に+6.2pt 悪化。広告クリックからの転換効率が低下しており、KW入札の最適化が必要。Amazon 基準（ACOS～50%）の範囲内だが4ヶ月で最悪値。
+      </div>
+    </div>
+
+    <div style="margin-top:20px;">
+      <div style="font-size:0.85rem; font-weight:700; margin-bottom:10px;">広告詳細推移（SP + SB 合算）</div>
+      <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>指標</th><th class="num">3月</th><th class="num">4月</th><th class="num">5月</th><th class="num">6月</th></tr>
+            <tr>
+              <th>月</th>
+              <th>広告費合計</th>
+              <th>クリック数</th>
+              <th>CPC</th>
+              <th>TACOS</th>
+              <th>ACOS</th>
+              <th>ROAS</th>
+            </tr>
           </thead>
           <tbody>
-            <tr><td>インプレッション</td><td class="num">2,183,875</td><td class="num">2,343,716</td><td class="num">2,267,840</td><td class="num">1,939,341</td></tr>
-            <tr><td>クリック数</td><td class="num">4,194</td><td class="num">4,007</td><td class="num">3,919</td><td class="num">3,079</td></tr>
-            <tr><td>広告費</td><td class="num">¥176,986</td><td class="num">¥186,418</td><td class="num">¥166,778</td><td class="num">¥128,294</td></tr>
-            <tr><td>ROAS</td><td class="num">5.61</td><td class="num">4.04</td><td class="num">3.99</td><td class="num">4.03</td></tr>
-            <tr><td>CPC</td><td class="num">¥42.2</td><td class="num">¥46.5</td><td class="num">¥42.6</td><td class="num">¥41.7</td></tr>
+            <tr>
+              <td>3月</td>
+              <td>¥349,312</td>
+              <td>8,441</td>
+              <td>¥41.4</td>
+              <td class="g">5.79%</td>
+              <td class="g">12.53%</td>
+              <td class="g">7.98x</td>
+            </tr>
+            <tr>
+              <td>4月</td>
+              <td>¥161,021</td>
+              <td>3,930</td>
+              <td>¥41.0</td>
+              <td class="g">3.29%</td>
+              <td class="g">12.27%</td>
+              <td class="g">8.15x</td>
+            </tr>
+            <tr>
+              <td>5月</td>
+              <td>¥181,880</td>
+              <td>3,927</td>
+              <td>¥46.3</td>
+              <td class="g">4.07%</td>
+              <td class="g">12.24%</td>
+              <td class="g">7.27x</td>
+            </tr>
+            <tr>
+              <td>6月</td>
+              <td>¥151,422</td>
+              <td>3,197</td>
+              <td class="w">¥47.4</td>
+              <td class="g">3.94%</td>
+              <td class="w">18.39%</td>
+              <td class="w">6.16x</td>
+            </tr>
+            <tr class="total">
+              <td>4ヶ月合計</td>
+              <td>¥843,635</td>
+              <td>19,495</td>
+              <td>¥43.3（平均）</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <p style="font-size:.78rem;color:#6b7280;margin-top:10px;">SB ROASはSPの約0.5〜0.6倍。ブランド認知向上効果を考慮しても、4〜5倍程度のROASは改善余地あり。</p>
+
+    <div style="margin-top:20px;">
+      <div style="font-size:0.85rem; font-weight:700; margin-bottom:10px;">SP広告 ROAS 月次推移（主力チャネル）</div>
+      <div style="font-size:0.77rem; color:var(--muted); margin-bottom:4px;">SP ROAS ※3月を最大値として比較</div>
+      <div class="vchart" style="height:70px;">
+        <div class="vbar-col">
+          <div class="vbar-val" style="color:var(--green);">10.4x</div>
+          <div class="vbar" style="height:100%;background:var(--green);opacity:.75;"></div>
+          <div class="vbar-label">3月</div>
+        </div>
+        <div class="vbar-col">
+          <div class="vbar-val">8.3x</div>
+          <div class="vbar" style="height:80%;background:var(--accent2);opacity:.75;"></div>
+          <div class="vbar-label">4月</div>
+        </div>
+        <div class="vbar-col">
+          <div class="vbar-val">7.3x</div>
+          <div class="vbar" style="height:70%;background:var(--warn);opacity:.8;"></div>
+          <div class="vbar-label">5月</div>
+        </div>
+        <div class="vbar-col">
+          <div class="vbar-val" style="color:var(--red);">6.2x</div>
+          <div class="vbar" style="height:60%;background:var(--red);opacity:.75;"></div>
+          <div class="vbar-label">6月</div>
+        </div>
+      </div>
+      <div class="callout warn" style="margin-top:8px;">
+        SP ROAS は3月 10.4x から6月 6.2x へと連続低下中。CPC も ¥41 → ¥47 に上昇（+15%）しており、同一予算でのクリック獲得が困難になっている。
+      </div>
+    </div>
   </div>
 
-  <!-- ── Section 4: ユニットエコノミクス ── -->
-  <div class="section">
-    <div class="section-title"><span class="icon">💰</span>4. ユニットエコノミクス</div>
+  <!-- ===== 4: ユニットエコノミクス ===== -->
+  <div class="section" id="unit">
+    <div class="section-title"><span class="num">4</span> ユニットエコノミクス</div>
 
-    <table style="margin-bottom:24px;">
-      <thead>
-        <tr>
-          <th>月</th>
-          <th class="num">売上金額</th>
-          <th class="num">広告費</th>
-          <th class="num">粗利</th>
-          <th class="num">利益率</th>
-          <th class="num">TACOS</th>
-          <th class="num">ACOS</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="td-month">3月</td>
-          <td class="num">¥6,033,489</td>
-          <td class="num">¥349,312</td>
-          <td class="num">¥2,430,931</td>
-          <td class="num">40.3%</td>
-          <td class="num">5.79% ✅</td>
-          <td class="num">12.53% ✅</td>
-        </tr>
-        <tr style="background:#f0fdf4;">
-          <td class="td-month" style="color:#16a34a;">4月 ✅</td>
-          <td class="num">¥4,896,438</td>
-          <td class="num">¥161,021</td>
-          <td class="num">¥2,253,038</td>
-          <td class="num" style="color:#16a34a;font-weight:700;">46.0%</td>
-          <td class="num" style="color:#16a34a;font-weight:700;">3.29% ✅</td>
-          <td class="num" style="color:#16a34a;">12.27% ✅</td>
-        </tr>
-        <tr>
-          <td class="td-month">5月</td>
-          <td class="num">¥4,465,235</td>
-          <td class="num">¥181,880</td>
-          <td class="num">¥2,005,929</td>
-          <td class="num">44.9%</td>
-          <td class="num">4.07% ✅</td>
-          <td class="num">13.76% ✅</td>
-        </tr>
-        <tr style="background:#fff5f5;">
-          <td class="td-month" style="color:#dc2626;">6月 🚨</td>
-          <td class="num">¥3,153,584</td>
-          <td class="num">¥126,445</td>
-          <td class="num">¥1,378,338</td>
-          <td class="num">43.7%</td>
-          <td class="num">4.01% ✅</td>
-          <td class="num" style="color:#d97706;font-weight:700;">15.63% ⚠️</td>
-        </tr>
-        <tr style="background:#f9fafb;font-weight:700;">
-          <td class="td-month">累計</td>
-          <td class="num">¥18,548,746</td>
-          <td class="num">¥818,658</td>
-          <td class="num">¥8,068,236</td>
-          <td class="num">43.5%</td>
-          <td class="num">4.41%</td>
-          <td class="num">—</td>
-        </tr>
-      </tbody>
-    </table>
+    <div style="font-size:0.85rem; font-weight:700; margin-bottom:12px;">コスト構造（1ユニットあたり / 6月平均 ¥2,987）</div>
+    <div class="cost-grid">
+      <div class="cost-cell">
+        <div class="cl">販売価格（6月平均）</div>
+        <div class="cv">¥2,987</div>
+      </div>
+      <div class="cost-cell">
+        <div class="cl">商品原価</div>
+        <div class="cv" style="color:var(--red);">¥900</div>
+      </div>
+      <div class="cost-cell">
+        <div class="cl">FBA 配送費</div>
+        <div class="cv" style="color:var(--red);">¥506</div>
+      </div>
+      <div class="cost-cell">
+        <div class="cl">在庫保管費用</div>
+        <div class="cv" style="color:var(--red);">¥33.5</div>
+      </div>
+      <div class="cost-cell">
+        <div class="cl">Amazon 手数料（10%）</div>
+        <div class="cv" style="color:var(--red);">¥299</div>
+      </div>
+      <div class="cost-cell" style="border-color:var(--green);">
+        <div class="cl">グロス粗利（広告除く）</div>
+        <div class="cv" style="color:var(--green);">¥1,248.5</div>
+      </div>
+    </div>
 
-    <div style="font-size:.85rem;color:#374151;margin-bottom:10px;font-weight:600;">コスト構造（1個あたり・6月実績ベース）</div>
-    <div style="background:#f9fafb;border-radius:8px;padding:16px;font-size:.88rem;border:1px solid #f3f4f6;margin-bottom:16px;">
-      <table style="margin:0;">
+    <div class="table-wrap" style="margin-top:20px;">
+      <table>
+        <thead>
+          <tr>
+            <th>月</th>
+            <th>売上金額</th>
+            <th>利益</th>
+            <th>利益率</th>
+            <th>前月比（利益）</th>
+            <th>客単価</th>
+          </tr>
+        </thead>
         <tbody>
-          <tr><td>仕入／FBA関連費</td><td class="num">¥900</td></tr>
-          <tr><td>送料</td><td class="num">¥506</td></tr>
-          <tr><td>在庫保管費</td><td class="num">¥34</td></tr>
-          <tr><td>販売手数料（10%）</td><td class="num">約¥300</td></tr>
-          <tr><td>広告費（6月平均）</td><td class="num">約¥117</td></tr>
-          <tr style="font-weight:700;border-top:1px solid #e5e7eb;"><td>合計コスト</td><td class="num">約¥1,857</td></tr>
-          <tr style="font-weight:700;"><td>平均販売価格（6月）</td><td class="num">¥2,998</td></tr>
-          <tr style="font-weight:700;color:#16a34a;"><td>粗利/個（6月）</td><td class="num">約¥1,141</td></tr>
+          <tr>
+            <td>3月</td>
+            <td>¥6,033,489</td>
+            <td>¥2,430,931</td>
+            <td>40.3%</td>
+            <td>—</td>
+            <td>¥2,915</td>
+          </tr>
+          <tr>
+            <td>4月</td>
+            <td>¥4,896,438</td>
+            <td>¥2,253,038</td>
+            <td class="g">46.0%</td>
+            <td class="r">▼7.3%</td>
+            <td>¥3,105</td>
+          </tr>
+          <tr>
+            <td>5月</td>
+            <td>¥4,465,235</td>
+            <td>¥2,005,929</td>
+            <td class="g">44.9%</td>
+            <td class="r">▼11.0%</td>
+            <td>¥3,065</td>
+          </tr>
+          <tr>
+            <td>6月</td>
+            <td class="r">¥3,688,284</td>
+            <td class="r">¥1,597,456</td>
+            <td>43.3%</td>
+            <td class="r">▼20.3%</td>
+            <td>¥2,987</td>
+          </tr>
+          <tr class="total">
+            <td>4ヶ月合計</td>
+            <td>¥19,083,446</td>
+            <td class="g">¥8,287,354</td>
+            <td>43.4%（平均）</td>
+            <td>—</td>
+            <td>¥2,933（平均）</td>
+          </tr>
         </tbody>
       </table>
     </div>
 
-    <div style="font-size:.85rem;color:#374151;margin-bottom:8px;font-weight:600;">売上分解（月別）</div>
-    <div style="background:#f9fafb;border-radius:8px;padding:16px;font-size:.88rem;border:1px solid #f3f4f6;display:flex;flex-direction:column;gap:6px;">
-      <div>3月：30,906アクセス × 6.88% × ¥2,915 ≈ <strong>¥620万</strong>（実績 ¥603万、セール効果大）</div>
-      <div>4月：20,634アクセス × 7.87% × ¥3,105 ≈ <strong>¥504万</strong>（実績 ¥490万）</div>
-      <div>5月：22,810アクセス × 6.53% × ¥2,841 ≈ <strong>¥423万</strong>（実績 ¥447万）</div>
-      <div style="color:#dc2626;">6月：16,483アクセス × 6.54% × ¥2,998 ≈ <strong>¥323万</strong>（実績 ¥315万）※在庫切れ5日分で約¥56万の機会損失含む</div>
+    <div style="margin-top:20px;">
+      <div style="font-size:0.85rem; font-weight:700; margin-bottom:10px;">売上ドライバー分解（5月 → 6月）</div>
+      <div class="callout info">
+        <strong>売上 = アクセス数 × 転換率 × 客単価</strong><br>
+        5月: 22,810 × 6.53% × ¥3,065 ≒ ¥4,563,000<br>
+        6月: 19,333 × 6.75% × ¥2,987 ≒ ¥3,899,000<br><br>
+        <strong>▶ アクセス数 ▲15.2%</strong> が最大の下落要因。転換率は+0.22pt 改善、客単価は▲2.5%。アクセス数の回復が最優先課題。
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:20px;">
+      <div>
+        <div style="font-size:0.8rem; font-weight:700; margin-bottom:10px;">月別 利益（万円）</div>
+        <div class="bar-row">
+          <div class="bar-label"><span>3月</span><span>¥243万</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent2);"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>4月</span><span>¥225万</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:93%;background:var(--accent2);opacity:.85;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>5月</span><span>¥201万</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:83%;background:var(--warn);opacity:.85;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>6月</span><span class="r">¥160万</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:66%;background:var(--red);opacity:.75;"></div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.8rem; font-weight:700; margin-bottom:10px;">利益率推移</div>
+        <div class="bar-row">
+          <div class="bar-label"><span>3月</span><span>40.3%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:80%;background:var(--warn);opacity:.8;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>4月</span><span class="g">46.0%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:92%;background:var(--green);opacity:.8;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>5月</span><span class="g">44.9%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:90%;background:var(--green);opacity:.8;"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>6月</span><span>43.3%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:87%;background:var(--accent2);opacity:.8;"></div></div>
+        </div>
+        <div style="font-size:0.75rem; color:var(--muted); margin-top:8px;">利益率 43〜46% は健全水準。構造的赤字リスクなし。</div>
+      </div>
     </div>
   </div>
 
-  <!-- ── Section 5: 顧客インサイト ── -->
-  <div class="section">
-    <div class="section-title"><span class="icon">💡</span>5. 顧客インサイト</div>
+  <!-- ===== 5: 顧客インサイト ===== -->
+  <div class="section" id="insight">
+    <div class="section-title"><span class="num">5</span> 顧客インサイト</div>
 
-    <div class="insight-grid">
-      <div class="insight-card">
-        <div class="i-title">📅 セール感応度が非常に高い</div>
-        <div class="i-body">3月新生活セールで月間2,127個（4ヶ月中最高）を達成。セール期間中は日次100〜160個超を記録。スタイルSALE等でも特定日に売上が急増する傾向が確認できる。プロモーション施策が売上に直結する商品。</div>
+    <div class="callout info">CSVにレビュー・返品データなし。行動指標（CVR・客単価・購入頻度）から推察。</div>
+
+    <div style="margin-top:16px;">
+      <div class="insight-card success">
+        <div class="ic-title">CVR 6.5〜7.9% で安定：商品ページ品質は高水準</div>
+        4ヶ月を通じて転換率が安定（6.53〜7.86%）。訪問者の約7%が購入に至っており、商品画像・説明文・価格設定の説得力が機能している。ページ自体への大きな改善投資は不要。
       </div>
-      <div class="insight-card">
-        <div class="i-title">📉 アクセス減少がボトルネック</div>
-        <div class="i-body">CVRは6〜8%台で安定しており、ページの転換力に問題はない。4ヶ月で30,906→16,483人（▼47%）とアクセスが急減しており、SEO順位の低下と広告縮小が主因。在庫切れがさらに悪化させている。</div>
+      <div class="insight-card info">
+        <div class="ic-title">セール感応度が非常に高い：価格訴求が購買意欲を増幅</div>
+        3月の新生活セールでアクセス・CVR ともに維持したまま売上が 2〜3倍に急増。¥2,900〜3,100 のプレミアム価格帯においても、クーポン・Lightning Deal への反応は大きい。プライムデーは最大の商機。
       </div>
-      <div class="insight-card">
-        <div class="i-title">💸 CPC上昇がCPO悪化の主因</div>
-        <div class="i-body">SPのCPCが5月以降¥46〜47と3月比+14%上昇。CPC上昇と欠品によるCVR低下（ad CVR 11.4%→9.7%）が重なり、CPOが¥373→¥486（+30%）に悪化。キーワード競合激化の可能性が高い。</div>
+      <div class="insight-card info">
+        <div class="ic-title">ほぼ単品購入（1.03個/件）：贈答・出産準備ニーズが主体</div>
+        1注文あたり平均 1.03個 と、まとめ買いは少ない。ベビー食器としての「ギフト利用」「離乳食開始」などの一回性ニーズが主体。リピート購買を促すクロスセル（カトラリーセット等）の訴求が有効。
       </div>
-      <div class="insight-card">
-        <div class="i-title">🎯 主要KW・ターゲット</div>
-        <div class="i-body">「離乳食 食器」「離乳食食器セット」「子供用食器」「赤ちゃん食器」が主力KW。ターゲットは離乳食開始期（生後5〜6ヶ月〜）の保護者。ASINターゲティングで競合ブランドへの入札も実施中。</div>
+      <div class="insight-card warn">
+        <div class="ic-title">価格受容性は安定だが下落傾向：客単価 ¥3,105→¥2,987</div>
+        4月（セール価格剥落後）¥3,105 をピークに、5月¥3,065・6月¥2,987 と漸減。値引き圧力を避けつつ、プレミアム訴求の維持が重要。
       </div>
-      <div class="insight-card">
-        <div class="i-title">📦 SBはブランド認知に貢献</div>
-        <div class="i-body">SBは月間190〜230万インプレッションを獲得しブランド認知を形成。ROAS 4〜5.6倍とSP（6〜10倍）を下回るが、エントリーポイントとして機能。6月はインプレッションが193万と減少傾向。</div>
-      </div>
-      <div class="insight-card">
-        <div class="i-title">🛒 SKU構成の高単価シフト余地</div>
-        <div class="i-body">4月の客単価¥3,105は他月比+6〜9%高め。7点セット等の高単価SKUが売れた月。高単価SKUへの広告集中（SP優先入札）で全体AOVを引き上げる施策が有効な可能性がある。</div>
+    </div>
+
+    <div style="margin-top:16px;">
+      <div class="kpi-grid" style="grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));">
+        <div class="kpi-card">
+          <div class="label">4ヶ月累計 売上</div>
+          <div class="value" style="font-size:1.2rem;">¥1,908万</div>
+          <div class="sub">6,507個</div>
+        </div>
+        <div class="kpi-card good">
+          <div class="label">4ヶ月累計 利益</div>
+          <div class="value" style="font-size:1.2rem;">¥829万</div>
+          <div class="sub">利益率 43.4% 平均</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">CVR 平均（4ヶ月）</div>
+          <div class="value" style="font-size:1.2rem;">7.0%</div>
+          <div class="sub">安定推移</div>
+        </div>
+        <div class="kpi-card warn">
+          <div class="label">6月 ACOS</div>
+          <div class="value" style="font-size:1.2rem;">18.4%</div>
+          <div class="sub">前月比 +6.2pt↑</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">7月（1〜2日分）</div>
+          <div class="value" style="font-size:1.2rem;">¥15.6万</div>
+          <div class="sub">50個 ／ プライムデー前</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ── Section 6: アクション案 ── -->
-  <div class="section">
-    <div class="section-title"><span class="icon">🎯</span>6. アクション案</div>
+  <!-- ===== 6: アクション案 ===== -->
+  <div class="section" id="action">
+    <div class="section-title"><span class="num">6</span> アクション案</div>
 
     <div class="action-list">
 
-      <!-- HIGH 1 -->
-      <div class="action-item high">
-        <div class="action-title">
-          <span class="priority p-high">HIGH</span>
-          在庫切れ解消とFBA緊急補充
-        </div>
+      <!-- HIGH: プライムデー -->
+      <div class="action-item">
+        <div class="icon icon-amazon">HIGH</div>
         <div class="action-body">
-          6月26〜30日の完全欠品は、Amazon SEOの「直近1週間ウェイト最大」の原則により、7月以降のオーガニック順位に最大級のダメージを与えている。<br>
-          <strong>対応手順：</strong><br>
-          ① FBAへ緊急補充を手配（最低4週間分の安全在庫を確保）<br>
-          ② 在庫回復後、SP広告予算を一時的に1.2〜1.5倍に増額しオーガニック順位を回復<br>
-          ③ 補充後2週間のアクセス数・CVRをモニタリングして回復速度を確認
-        </div>
-        <div class="action-meta">
-          <span>📋 担当：物流・MD</span>
-          <span>📅 期限：即日対応</span>
+          <div class="action-head">
+            <div class="action-title">① プライムデー（7月）に向けた広告・セール準備の最大化</div>
+            <span class="pri high">HIGH</span>
+          </div>
+          <div class="action-desc">
+            7月はプライムデー（先行・本番）が予定されており、3月の新生活セールと同等の爆発的売上が期待できる唯一の機会。
+            <ul>
+              <li>セール価格・クーポン設定を <strong>7月5日まで</strong>に完了</li>
+              <li>プライムデー期間中の SP 広告バジェット +¥30〜50k 増額</li>
+              <li>在庫不足リスクを事前確認（3月は2,127個を消化）</li>
+            </ul>
+          </div>
+          <div class="action-meta">
+            <span><strong>担当：</strong>EC担当</span>
+            <span><strong>期限：</strong>2026年7月5日（設定完了）</span>
+            <span><strong>期待効果：</strong>月次売上 ¥600万超の可能性</span>
+          </div>
         </div>
       </div>
 
-      <!-- HIGH 2 -->
-      <div class="action-item high">
-        <div class="action-title">
-          <span class="priority p-high">HIGH</span>
-          ACOS悪化対策：広告キーワードの精査と入札最適化
-        </div>
+      <!-- HIGH: ACOS KW整理 -->
+      <div class="action-item">
+        <div class="icon icon-amazon">HIGH</div>
         <div class="action-body">
-          6月ACOS 15.63%（基準値15%に到達）、CPO ¥486（3月比+30%）は放置すると赤字化するリスクがある。CPC上昇（¥41→¥47）も継続中。<br>
-          <strong>対応手順：</strong><br>
-          ① 直近1ヶ月でROAS 5以下のキーワードの部分一致を停止または絞り込みに変更<br>
-          ② 「離乳食 食器」「子供用食器」等の主力KWの入札を段階的に見直し（ROAS目標8以上）<br>
-          ③ SB予算を15%削減し、SPへ振り向けてROASの高い施策を強化
-        </div>
-        <div class="action-meta">
-          <span>📋 担当：広告担当</span>
-          <span>📅 期限：2026年7月3日まで</span>
+          <div class="action-head">
+            <div class="action-title">② 6月 ACOS 悪化 KW の緊急整理（ACOS 25%超 → 入札削減・停止）</div>
+            <span class="pri high">HIGH</span>
+          </div>
+          <div class="action-desc">
+            6月の ACOS が 18.4% に急上昇（前月 12.2%）。非効率な KW への予算流出が原因と推察。
+            <ul>
+              <li>直近 30 日で ACOS 25% 超の KW を特定 → 入札削減または停止</li>
+              <li>直近 30 日で ROAS 5x 以上の KW を部分一致から完全一致に追加</li>
+              <li>「ベビーカトラリー」「ベビー食器（ランキング最下位）」は入札抑制維持</li>
+            </ul>
+          </div>
+          <div class="action-meta">
+            <span><strong>担当：</strong>広告担当</span>
+            <span><strong>期限：</strong>2026年7月第2週</span>
+            <span><strong>目標：</strong>ACOS を 14% 以下に戻す</span>
+          </div>
         </div>
       </div>
 
-      <!-- MEDIUM 1 -->
-      <div class="action-item medium">
-        <div class="action-title">
-          <span class="priority p-mid">MEDIUM</span>
-          アクセス数回復のためのSEO・SP強化施策
-        </div>
+      <!-- MEDIUM: SP入札強化 -->
+      <div class="action-item">
+        <div class="icon icon-amazon">MID</div>
         <div class="action-body">
-          アクセス数3月比▼47%（30,906→16,483）が売上低迷の根本原因。CVRは安定しているため、トラフィック獲得が最優先。<br>
-          <strong>対応：</strong>タイトル・バレットポイントのKW最適化（「離乳食 食器セット」「プレミアム ベビー食器」等の上位KWを反映）、A+コンテンツの強化、SP広告でのKW再投資。
-        </div>
-        <div class="action-meta">
-          <span>📋 担当：コンテンツ・広告担当</span>
-          <span>📅 期限：2026年7月中旬</span>
+          <div class="action-head">
+            <div class="action-title">③ SP 広告入札強化でアクセス回復（転換率良好 KW 中心に増額）</div>
+            <span class="pri mid">MEDIUM</span>
+          </div>
+          <div class="action-desc">
+            アクセス数が3月比▼37.4%。CVR は安定（6.75%）しているため、流入を増やせば売上は直接回復する。
+            <ul>
+              <li>「離乳食 食器」「ベビー食器セット」「子供用食器」の SP 入札を +10〜20% 引き上げ</li>
+              <li>SP インプレッション目標：月間 60 万回超（6月比 +16%）</li>
+              <li>プライムデー後のアクセス水準を基準に 8月の調整計画を立案</li>
+            </ul>
+          </div>
+          <div class="action-meta">
+            <span><strong>担当：</strong>広告担当</span>
+            <span><strong>期限：</strong>2026年7月末〜8月</span>
+            <span><strong>目標：</strong>月間アクセス 24,000 人以上（5月水準）</span>
+          </div>
         </div>
       </div>
 
-      <!-- MEDIUM 2 -->
-      <div class="action-item medium">
-        <div class="action-title">
-          <span class="priority p-mid">MEDIUM</span>
-          プライムデー向け準備（在庫確保・セールエントリー）
-        </div>
+      <!-- MEDIUM: SB予算をSPへ -->
+      <div class="action-item">
+        <div class="icon icon-amazon">MID</div>
         <div class="action-body">
-          3月新生活セールで売上2倍超の実績があり、セール感応度が非常に高い商品。プライムデー（7月予定）は最大の回復機会。<br>
-          <strong>対応：</strong>プライムデー向けセールエントリー・クーポン設定を完了させ、在庫はプライムデー需要の2〜3週間分を追加確保する。6月末の欠品再発を避けるため在庫管理を強化。
-        </div>
-        <div class="action-meta">
-          <span>📋 担当：販促・物流</span>
-          <span>📅 期限：2026年7月下旬（プライムデー前）</span>
+          <div class="action-head">
+            <div class="action-title">④ SB 広告の予算を SP へ段階的に移行（ROAS 差が拡大）</div>
+            <span class="pri mid">MEDIUM</span>
+          </div>
+          <div class="action-desc">
+            SP ROAS 6.2x に対し SB ROAS は 3.7x と効率格差が顕著。SB の予算効率を改善しなければ継続投資は非合理。
+            <ul>
+              <li>SB ROAS が 3.5x 未満のキャンペーンの予算を SP に振り替え</li>
+              <li>SB はライフスタイル画像・動画を活用した新クリエイティブで A/B テスト実施</li>
+              <li>SB 改善目標：ROAS 5.0x 以上に回復しない場合は一時停止も検討</li>
+            </ul>
+          </div>
+          <div class="action-meta">
+            <span><strong>担当：</strong>広告担当</span>
+            <span><strong>期限：</strong>2026年8月末</span>
+          </div>
         </div>
       </div>
 
-      <!-- MEDIUM 3 -->
-      <div class="action-item medium">
-        <div class="action-title">
-          <span class="priority p-mid">MEDIUM</span>
-          高単価SKU（7点セット等）への広告集中でAOV向上
-        </div>
+      <!-- LOW: 楽天出品 -->
+      <div class="action-item">
+        <div class="icon icon-amazon" style="background:#f0f4ff;color:#2e7dd1;">LOW</div>
         <div class="action-body">
-          4月の客単価¥3,105（他月比+6〜9%）は高単価SKUが多く売れた結果。SP広告で7点セット等の高単価SKUを優先入札することで、同じアクセス数でも売上・粗利を増やせる可能性がある。<br>
-          <strong>対応：</strong>SKU別ACOS・CVRを分析し、高単価SKUを中心とした入稿戦略に切り替える。
-        </div>
-        <div class="action-meta">
-          <span>📋 担当：広告・MD担当</span>
-          <span>📅 期限：2026年7月中旬</span>
+          <div class="action-head">
+            <div class="action-title">⑤ 楽天市場への出品検討（チャネル分散・売上+20〜40% 想定）</div>
+            <span class="pri low">LOW</span>
+          </div>
+          <div class="action-desc">
+            現在 Amazon 一本依存（楽天売上ゼロ）。ベビー食器カテゴリは楽天でも CVR 5〜8% が期待できる有望カテゴリ。
+            <ul>
+              <li>楽天 ベビー食器セット カテゴリの市場調査・競合価格確認</li>
+              <li>商品登録・楽天向けサムネイル作成（CTR 目標 1〜2%）</li>
+              <li>RPP 広告予算の初期設定（月 ¥3〜5万 からスタート）</li>
+            </ul>
+          </div>
+          <div class="action-meta">
+            <span><strong>担当：</strong>EC担当</span>
+            <span><strong>期限：</strong>2026年9月末（Q3 目標）</span>
+            <span><strong>期待効果：</strong>月間売上 +¥50〜100万</span>
+          </div>
         </div>
       </div>
 
-      <!-- LOW 1 -->
-      <div class="action-item low">
-        <div class="action-title">
-          <span class="priority p-low">LOW</span>
-          SBクリエイティブのA/Bテストによる効率改善
-        </div>
+      <!-- LOW: SEO -->
+      <div class="action-item">
+        <div class="icon icon-amazon" style="background:#f0f4ff;color:#2e7dd1;">LOW</div>
         <div class="action-body">
-          SB CTRは0.19〜0.21%と低水準。バナー・ヘッドライン・ランディングページのバリエーションテストを実施することでROASを現在の4倍台から6倍台に改善を目指す。改善によりSB予算削減なしに効率向上が見込める。
-        </div>
-        <div class="action-meta">
-          <span>📋 担当：クリエイティブ担当</span>
-          <span>📅 期限：2026年8月</span>
+          <div class="action-head">
+            <div class="action-title">⑥ SEO 強化：主要 KW 順位確認とタイトル・バックエンド KW 最適化</div>
+            <span class="pri low">LOW</span>
+          </div>
+          <div class="action-desc">
+            転換率が安定しているにもかかわらずアクセスが減少 = SEO 順位低下が主因の可能性が高い。
+            <ul>
+              <li>「離乳食 食器」「ベビー食器セット」「ベビー食器」の現在の検索順位を確認</li>
+              <li>タイトル・バレット・A+コンテンツのキーワード密度を見直し</li>
+              <li>SP 広告で購入実績のある KW をオーガニック SEO にも反映（バックエンド KW 更新）</li>
+            </ul>
+          </div>
+          <div class="action-meta">
+            <span><strong>担当：</strong>コンテンツ担当</span>
+            <span><strong>期限：</strong>2026年8月末</span>
+          </div>
         </div>
       </div>
 
-      <!-- LOW 2 -->
-      <div class="action-item low">
-        <div class="action-title">
-          <span class="priority p-low">LOW</span>
-          楽天チャネル展開の検討
-        </div>
-        <div class="action-body">
-          現在Amazon単独チャネル。チャネルリスク分散と追加売上獲得の観点から楽天への展開可否を検討する。他商品の楽天実績を参考に、本SKUの楽天ポテンシャルを評価する。
-        </div>
-        <div class="action-meta">
-          <span>📋 担当：事業開発</span>
-          <span>📅 期限：2026年Q3〜Q4</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="margin-top:24px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:16px;">
-      <div style="font-weight:700;color:#991b1b;margin-bottom:8px;">🚨 最重要サマリー</div>
-      <table style="font-size:.85rem;">
-        <tbody>
-          <tr>
-            <td style="padding:4px 12px 4px 0;font-weight:700;">最優先</td>
-            <td style="padding:4px 0;">6月末在庫切れによるSEO毀損の回復 → FBA緊急補充 + SP予算一時増額</td>
-          </tr>
-          <tr>
-            <td style="padding:4px 12px 4px 0;font-weight:700;">最優先</td>
-            <td style="padding:4px 0;">ACOS 15.6%・CPO ¥486の悪化 → KW精査・入札最適化（7/3まで）</td>
-          </tr>
-          <tr>
-            <td style="padding:4px 12px 4px 0;font-weight:700;">中期</td>
-            <td style="padding:4px 0;">アクセス数▼47%の構造的問題 → SEO強化・プライムデー活用</td>
-          </tr>
-          <tr>
-            <td style="padding:4px 12px 4px 0;font-weight:700;">中期</td>
-            <td style="padding:4px 0;">在庫管理の徹底 → 欠品ゼロを最優先方針として運用ルール化</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 
-</div><!-- /container -->
+</div><!-- /main -->
 
-<footer>
-  Amazon Research OS | BabyGoo / fungoo | 株式会社ASAGIRI<br>
-  このレポートは社内限定資料です。無断転用・転送を禁じます。
-</footer>
+<div class="footer">
+  Amazon Research OS | BabyGoo / fungoo | 株式会社ASAGIRI | 社内限定 | 作成日: 2026-07-03
+</div>
 
 </body>
 </html>
