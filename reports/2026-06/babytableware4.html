@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ベビー食器プレミアム4点 月次販売分析 2026年3〜6月 | Amazon Research OS</title>
+  <title>ベビー食器プレミアム4点 月次販売分析 2026年3〜6月（7月速報） | Amazon Research OS</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -78,11 +78,13 @@
     tr:last-child td { border-bottom: none; }
     tr:hover td { background: var(--bg); }
     tr.total td { border-top: 2px solid var(--border); font-weight: 700; background: #f9fafb; }
+    tr.speed td { color: var(--muted); font-style: italic; }
     .g { color: var(--green); font-weight: 700; }
     .r { color: var(--red);   font-weight: 700; }
     .w { color: var(--warn);  font-weight: 700; }
     .badge-danger { background: var(--red); color: #fff; font-size: 0.7rem; padding: 1px 6px; border-radius: 3px; font-weight: 700; }
     .badge-warn   { background: var(--warn); color: #fff; font-size: 0.7rem; padding: 1px 6px; border-radius: 3px; font-weight: 700; }
+    .badge-info   { background: var(--accent2); color: #fff; font-size: 0.7rem; padding: 1px 6px; border-radius: 3px; font-weight: 700; }
 
     /* ── Bar Chart ── */
     .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
@@ -167,7 +169,7 @@
       <div class="breadcrumb">Amazon Research OS › レポート › 2026-06</div>
       <h1>ベビー食器プレミアム4点</h1>
       <div class="meta-row">
-        <span class="meta-chip">2026年3〜6月</span>
+        <span class="meta-chip">2026年3〜6月（7月速報）</span>
         <span class="meta-chip">babytableware4 / babytableware4ss</span>
         <span class="meta-chip">BabyGoo</span>
         <span class="meta-chip">発売 2024/12/03</span>
@@ -193,7 +195,7 @@
 <!-- ── Alert Banner ── -->
 <div class="alert-banner">
   <div class="alert-banner-inner">
-    ⚠️ <strong>重要：</strong>5月21〜31日（11日間）メインASINの売上がゼロ。在庫切れによるSEOスコア毀損が疑われ、5〜6月のCVR低下（8.93%→5.53%）の主因と見られます。また5月にbabytableware4ss（類似ASIN）が31%のシェアを取得しており、実態調査が必要です。
+    ⚠️ <strong>重要：</strong>5月21〜31日（11日間）メインASINの売上がゼロ。在庫切れによるSEOスコア毀損が疑われ、5〜6月のCVR低下（8.93%→5.48%）の主因と見られます。6月スーパーSALEでアクセス12,051まで回復したものの、CVRは3〜4月の8%台に未到達。在庫管理の抜本的強化が急務です。
   </div>
 </div>
 
@@ -220,14 +222,14 @@
       <div class="kpi-card amazon crit">
         <div class="label">5月 売上金額</div>
         <div class="value">104万円</div>
-        <div class="sub">前月比 <span class="r">▲38.6%</span>／在庫切れ疑い</div>
+        <div class="sub">前月比 <span class="r">▲38.6%</span>／在庫切れ</div>
         <div class="diff down">266個 ／ CVR 4.87%</div>
       </div>
       <div class="kpi-card amazon good">
         <div class="label">6月 売上金額</div>
-        <div class="value">235万円</div>
-        <div class="sub">前月比 <span class="g">+125.7%</span>（SALE回復）</div>
-        <div class="diff up">634個 ／ CVR 5.53%</div>
+        <div class="value">246万円</div>
+        <div class="sub">前月比 <span class="g">+135.7%</span>（SALE回復）</div>
+        <div class="diff up">660個 ／ CVR 5.48%</div>
       </div>
     </div>
 
@@ -249,8 +251,8 @@
         <div class="vbar-label">5月</div>
       </div>
       <div class="vbar-col">
-        <div class="vbar-val">235</div>
-        <div class="vbar" style="height:75%;background:var(--green);opacity:.85;"></div>
+        <div class="vbar-val">246</div>
+        <div class="vbar" style="height:78%;background:var(--green);opacity:.85;"></div>
         <div class="vbar-label">6月</div>
       </div>
     </div>
@@ -294,23 +296,32 @@
             <td>266個</td>
             <td>5,459</td>
             <td class="r">4.87%</td>
-            <td><span class="badge-danger">在庫切れ疑い</span> 5/21〜31（11日間）</td>
+            <td><span class="badge-danger">在庫切れ</span> 5/21〜31（11日間）</td>
           </tr>
           <tr>
             <td>6月</td>
-            <td>2,354,920円</td>
-            <td class="g">+125.7%</td>
-            <td>634個</td>
-            <td>11,471</td>
-            <td class="w">5.53%</td>
-            <td>スーパーSALE（6/4〜11）</td>
+            <td>2,458,400円</td>
+            <td class="g">+135.7%</td>
+            <td>660個</td>
+            <td>12,051</td>
+            <td class="w">5.48%</td>
+            <td>スーパーSALE・6月後半マラソン</td>
+          </tr>
+          <tr class="speed">
+            <td><span class="badge-info">7/1速報</span></td>
+            <td>47,760円</td>
+            <td>—</td>
+            <td>12個</td>
+            <td>405</td>
+            <td>2.96%</td>
+            <td>7月前半マラソン開始</td>
           </tr>
           <tr class="total">
             <td>4ヶ月合計</td>
-            <td>8,238,278円</td>
+            <td>8,341,758円</td>
             <td>—</td>
-            <td>2,170個</td>
-            <td>31,602</td>
+            <td>2,196個</td>
+            <td>32,182</td>
             <td>—</td>
             <td>—</td>
           </tr>
@@ -322,30 +333,27 @@
     <div class="stock-wrap">
       <div class="stock-title">5月 メインASIN（babytableware4）日別売上ヒートマップ</div>
       <div class="stock-days">
-        <!-- May 1-9 (low sales) -->
-        <div class="day low" title="5/1: 4個"></div>
-        <div class="day low" title="5/2: 3個"></div>
-        <div class="day low" title="5/3: 1個"></div>
-        <div class="day low" title="5/4: 3個"></div>
-        <div class="day ok"  title="5/5: 10個"></div>
-        <div class="day ok"  title="5/6: 8個"></div>
-        <div class="day low" title="5/7: 5個"></div>
-        <div class="day low" title="5/8: 3個"></div>
-        <div class="day ok"  title="5/9: 10個"></div>
-        <!-- May 10-20 (strong sales) -->
-        <div class="day ok"  title="5/10: 31個"></div>
-        <div class="day ok"  title="5/11: 12個"></div>
-        <div class="day ok"  title="5/12: 13個"></div>
-        <div class="day low" title="5/13: 5個"></div>
-        <div class="day low" title="5/14: 2個"></div>
-        <div class="day ok"  title="5/15: 25個"></div>
-        <div class="day ok"  title="5/16: 16個"></div>
-        <div class="day low" title="5/17: 4個"></div>
-        <div class="day ok"  title="5/18: 16個"></div>
-        <div class="day low" title="5/19: 6個"></div>
-        <div class="day low" title="5/20: 4個"></div>
-        <!-- May 21-31 (out of stock) -->
-        <div class="day zero" title="5/21: 0個（在庫切れ疑い）"></div>
+        <div class="day low"  title="5/1: 4個"></div>
+        <div class="day low"  title="5/2: 3個"></div>
+        <div class="day low"  title="5/3: 1個"></div>
+        <div class="day low"  title="5/4: 3個"></div>
+        <div class="day ok"   title="5/5: 10個"></div>
+        <div class="day ok"   title="5/6: 8個"></div>
+        <div class="day low"  title="5/7: 5個"></div>
+        <div class="day low"  title="5/8: 3個"></div>
+        <div class="day ok"   title="5/9: 10個"></div>
+        <div class="day ok"   title="5/10: 31個"></div>
+        <div class="day ok"   title="5/11: 12個"></div>
+        <div class="day ok"   title="5/12: 13個"></div>
+        <div class="day low"  title="5/13: 5個"></div>
+        <div class="day low"  title="5/14: 2個"></div>
+        <div class="day ok"   title="5/15: 25個"></div>
+        <div class="day ok"   title="5/16: 16個"></div>
+        <div class="day low"  title="5/17: 4個"></div>
+        <div class="day ok"   title="5/18: 16個"></div>
+        <div class="day low"  title="5/19: 6個"></div>
+        <div class="day low"  title="5/20: 4個"></div>
+        <div class="day zero" title="5/21: 0個（在庫切れ）"></div>
         <div class="day zero" title="5/22: 0個"></div>
         <div class="day zero" title="5/23: 0個"></div>
         <div class="day zero" title="5/24: 0個"></div>
@@ -360,17 +368,17 @@
       <div class="stock-legend">
         <span><span class="leg-dot" style="background:#b7e4c7;"></span>販売あり（5個以上）</span>
         <span><span class="leg-dot" style="background:#fde68a;"></span>販売少（1〜4個）</span>
-        <span><span class="leg-dot" style="background:var(--red);"></span>販売ゼロ（在庫切れ疑い）</span>
+        <span><span class="leg-dot" style="background:var(--red);"></span>販売ゼロ（在庫切れ）</span>
       </div>
     </div>
   </div>
 
   <!-- ===== 2: チャネル構成 ===== -->
   <div class="section" id="channel">
-    <div class="section-title"><span class="num">2</span> チャネル構成（ASIN別）</div>
+    <div class="section-title"><span class="num">2</span> チャネル構成（SKU別）</div>
 
-    <div class="callout warn">
-      <strong>要注意：</strong>5月にbabytableware4ss（サブASIN）が85個・322,778円を売上げ、全体の31%を占めました。メインASINの在庫切れ期間と重なっており、コピー品・転売・別バリエーションの可能性があります。実態確認が必要です。
+    <div class="callout info">
+      <strong>補足：</strong>5月にbabytableware4ss（コピーページSKU）が85個・322,778円を売上げ、全体の30.9%を占めました。「コピーページで販売」イベントと重なっており、自社による在庫切れ時の代替出品として機能しています。在庫補充後の6月はメインSKUに自然集約（ss：7個のみ）しています。
     </div>
 
     <div class="table-wrap" style="margin-top:16px;">
@@ -379,7 +387,7 @@
           <tr>
             <th>月</th>
             <th>babytableware4（メイン）</th>
-            <th>babytableware4ss（サブ）</th>
+            <th>babytableware4ss（コピー）</th>
             <th>ss比率</th>
             <th>合計売上</th>
           </tr>
@@ -403,29 +411,29 @@
             <td>5月</td>
             <td>720,380円（181個）</td>
             <td class="r"><strong>322,778円（85個）</strong></td>
-            <td class="r"><strong>31.0%</strong></td>
+            <td class="r"><strong>30.9%</strong></td>
             <td>1,043,158円</td>
           </tr>
           <tr>
             <td>6月</td>
-            <td>2,327,060円（627個）</td>
+            <td>2,430,540円（653個）</td>
             <td>27,860円（7個）</td>
-            <td>1.2%</td>
-            <td>2,354,920円</td>
+            <td>1.1%</td>
+            <td>2,458,400円</td>
           </tr>
           <tr class="total">
             <td>合計</td>
-            <td>7,867,740円（2,073個）</td>
+            <td>7,971,220円（2,099個）</td>
             <td>370,538円（97個）</td>
-            <td>4.5%</td>
-            <td>8,238,278円</td>
+            <td>4.4%</td>
+            <td>8,341,758円</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <div style="margin-top:18px;">
-      <div style="font-size:0.8rem; font-weight:600; color:var(--muted); margin-bottom:12px;">月別 メイン / サブ 売上構成比</div>
+      <div style="font-size:0.8rem; font-weight:600; color:var(--muted); margin-bottom:12px;">月別 メイン / コピーSKU 売上構成比（メイン比率）</div>
       <div class="bar-row">
         <div class="bar-label"><span>3月</span><span>99.4%</span></div>
         <div class="bar-track"><div class="bar-fill" style="width:99.4%;background:var(--accent2);"></div></div>
@@ -435,12 +443,12 @@
         <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent2);"></div></div>
       </div>
       <div class="bar-row">
-        <div class="bar-label"><span>5月</span><span class="r">69.0%</span></div>
-        <div class="bar-track"><div class="bar-fill" style="width:69%;background:var(--red);opacity:.8;"></div></div>
+        <div class="bar-label"><span>5月</span><span class="r">69.1%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:69.1%;background:var(--red);opacity:.8;"></div></div>
       </div>
       <div class="bar-row">
-        <div class="bar-label"><span>6月</span><span>98.8%</span></div>
-        <div class="bar-track"><div class="bar-fill" style="width:98.8%;background:var(--accent2);"></div></div>
+        <div class="bar-label"><span>6月</span><span>98.9%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:98.9%;background:var(--accent2);"></div></div>
       </div>
     </div>
   </div>
@@ -483,8 +491,8 @@
               </tr>
               <tr>
                 <td>6月</td>
-                <td>11,471</td>
-                <td class="w">5.53%</td>
+                <td>12,051</td>
+                <td class="w">5.48%</td>
                 <td class="w">回復途中</td>
               </tr>
             </tbody>
@@ -518,15 +526,15 @@
               </tr>
               <tr>
                 <td>5月</td>
-                <td class="w">7.5%</td>
-                <td class="w">30.4%</td>
+                <td class="w">7.0%</td>
+                <td class="w">30.3%</td>
                 <td class="w">3.29</td>
               </tr>
               <tr>
                 <td>6月</td>
                 <td class="w">7.5%</td>
-                <td class="w">27.5%</td>
-                <td class="w">3.63</td>
+                <td class="w">27.2%</td>
+                <td class="w">3.67</td>
               </tr>
             </tbody>
           </table>
@@ -537,20 +545,20 @@
     <div style="margin-top:20px;">
       <div class="insight-card success">
         <div class="ic-title">強み：CVR・オーガニック比率の高さ</div>
-        3〜4月のCVR8%台は非常に高水準。商品ページ品質・商品力が高い証左。オーガニック売上比率も73〜83%を維持しており、広告依存度が低く利益構造が健全。
+        3〜4月のCVR8%台は非常に高水準。商品ページ品質・商品力が高い証左。オーガニック売上比率も73〜83%を維持しており、広告依存度が低く利益構造が健全。全月でTACOS&lt;8%を達成しており広告効率は良好。
       </div>
       <div class="insight-card warn">
-        <div class="ic-title">警戒：TACOSが5月以降7.5%に上昇</div>
+        <div class="ic-title">警戒：TACOSが5月以降7%台に上昇</div>
         目安15%以内だが、3月4.9%から7.5%へのドリフト上昇が続いている。在庫切れ後のSEO順位低下により広告でのカバーコストが増大している可能性あり。
       </div>
       <div class="insight-card danger">
-        <div class="ic-title">重大：5月21〜31日の売上ゼロ（在庫切れ疑い）</div>
-        Amazon SEOにおいて在庫切れのマイナス影響は最大級。直近1週間の実績がSEOスコアに最も大きく影響するため、11日間の断絶は6月以降のCVR低下（8.93%→5.53%）と順位下落の主因と見られる。
+        <div class="ic-title">重大：5月21〜31日の売上ゼロ（在庫切れ）</div>
+        Amazon SEOにおいて在庫切れのマイナス影響は最大級。直近1週間の実績がSEOスコアに最も大きく影響するため、11日間の断絶は6月以降のCVR低下（8.93%→5.48%）と順位下落の主因と見られる。
       </div>
     </div>
 
     <div style="margin-top:20px;">
-      <div style="font-size:0.85rem; font-weight:700; margin-bottom:10px;">広告費・クリック数・CPC推移</div>
+      <div style="font-size:0.85rem; font-weight:700; margin-bottom:10px;">広告費・クリック数・CPC推移（全SKU合計）</div>
       <div class="table-wrap">
         <table>
           <thead>
@@ -558,9 +566,9 @@
               <th>月</th>
               <th>広告費（実績）</th>
               <th>クリック数</th>
-              <th>CPC</th>
+              <th>CPC（平均）</th>
               <th>CVR（12ヶ月）</th>
-              <th>インプレション</th>
+              <th>インプレッション</th>
             </tr>
           </thead>
           <tbody>
@@ -584,25 +592,25 @@
               <td>5月</td>
               <td>72,459円</td>
               <td>3,256</td>
-              <td>33.19円</td>
+              <td>22.24円</td>
               <td class="r">1.87%</td>
               <td>8,913,342</td>
             </tr>
             <tr>
               <td>6月</td>
-              <td>177,661円</td>
-              <td>6,023</td>
-              <td>29.76円</td>
-              <td class="w">2.87%</td>
-              <td>11,649,857</td>
+              <td>183,518円</td>
+              <td>6,212</td>
+              <td>29.54円</td>
+              <td class="w">2.93%</td>
+              <td>11,964,857</td>
             </tr>
             <tr class="total">
               <td>合計</td>
-              <td>477,514円</td>
-              <td>15,234</td>
+              <td>483,371円</td>
+              <td>15,423</td>
               <td>31.3円（平均）</td>
               <td>—</td>
-              <td>32,460,192</td>
+              <td>32,775,192</td>
             </tr>
           </tbody>
         </table>
@@ -610,7 +618,7 @@
     </div>
 
     <div class="callout info" style="margin-top:14px;">
-      <strong>注目：</strong>5〜6月にインプレションが急増（8.9M→11.6M）しているにもかかわらず、12ヶ月CVRは1.87%→2.87%と低水準のまま。広告は露出できているが購買に繋がっていない状態。在庫切れ後のSEO順位低下で商品品質スコアが落ちている可能性が高い。
+      <strong>注目：</strong>5〜6月にインプレッションが急増（8.9M→12.0M）しているにもかかわらず、12ヶ月CVRは1.87%→2.93%と低水準のまま。広告は露出できているが購買に繋がっていない状態。在庫切れ後のSEO順位低下で商品品質スコアが落ちている可能性が高い。
     </div>
   </div>
 
@@ -652,16 +660,16 @@
             <td>5月</td>
             <td>5,459</td>
             <td class="r">4.87%</td>
-            <td>4,027円</td>
+            <td>4,028円</td>
             <td>1,043,158円</td>
             <td class="r">CVR急落▲40%が主因（在庫切れ）</td>
           </tr>
           <tr>
             <td>6月</td>
-            <td>11,471</td>
-            <td class="w">5.53%</td>
-            <td>3,798円</td>
-            <td>2,354,920円</td>
+            <td>12,051</td>
+            <td class="w">5.48%</td>
+            <td>3,811円</td>
+            <td>2,458,400円</td>
             <td>セールでアクセス回復もCVRが戻らず</td>
           </tr>
         </tbody>
@@ -669,7 +677,7 @@
     </div>
 
     <div class="callout warn" style="margin-top:16px;">
-      <strong>分析：</strong>6月のアクセス数は3月（9,435）を大幅に上回る11,471を記録した。しかしCVRが5.53%にとどまっており、仮に3月のCVR（8.93%）を維持できていれば推定売上 <strong>約3,885,000円</strong>（実績比+165万円）となった計算。CVR回復がいかに重要かを示している。
+      <strong>分析：</strong>6月のアクセス数は3月（9,435）を大幅に上回る12,051を記録した。しかしCVRが5.48%にとどまっており、仮に3月のCVR（8.93%）を維持できていれば推定売上 <strong>約4,098,000円</strong>（実績比＋164万円）となった計算。CVR回復がいかに重要かを示している。
     </div>
 
     <div style="margin-top:20px;">
@@ -713,28 +721,28 @@
             </tr>
             <tr>
               <td>6月</td>
-              <td>2,354,920円</td>
-              <td>177,661円</td>
-              <td>2,177,259円</td>
+              <td>2,458,400円</td>
+              <td>183,518円</td>
+              <td class="g">2,274,882円</td>
               <td class="w">92.5%</td>
               <td>72.6%</td>
             </tr>
             <tr class="total">
               <td>合計</td>
-              <td>8,238,278円</td>
-              <td>477,514円</td>
-              <td>7,760,764円</td>
+              <td>8,341,758円</td>
+              <td>483,371円</td>
+              <td>7,858,387円</td>
               <td>94.2%</td>
               <td>77.1%</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div style="font-size:0.75rem; color:var(--muted); margin-top:6px;">※ 粗利は売上－広告費のみ。仕入・Amazonアーカル手数料・送料・保管費は別途要控除。実質利益の把握には全コスト入力が必要。</div>
+      <div style="font-size:0.75rem; color:var(--muted); margin-top:6px;">※ 粗利は売上－広告費のみ。仕入原価（¥900）・Amazon手数料・送料・保管費（¥33.5）は別途要控除。実質利益の把握には全コスト入力が必要。</div>
     </div>
 
     <div style="margin-top:20px;">
-      <div style="font-size:0.85rem; font-weight:700; margin-bottom:12px;">RPP売上構成（オーガニック vs 広告）</div>
+      <div style="font-size:0.85rem; font-weight:700; margin-bottom:12px;">オーガニック vs 広告 売上構成比</div>
       <div class="bar-row">
         <div class="bar-label"><span>3月 オーガニック</span><span>76.0%</span></div>
         <div class="bar-track"><div class="bar-fill" style="width:76%;background:var(--green);opacity:.75;"></div></div>
@@ -768,19 +776,19 @@
       4ヶ月を通じてオーガニック経由の売上比率が常に70%超を維持。広告なしでも自然検索から安定的に顧客が流入しており、SEOポジションが確立されている。ただし在庫切れ後は比率が低下傾向（82.6%→72.6%）。
     </div>
 
-    <div class="insight-card warn">
-      <div class="ic-title">babytableware4ss（サブASIN）の5月出現</div>
-      5月10〜16日に集中して85個販売。メインASINが在庫切れとなった期間の直前から出現しており、コピー品・無断転売・または自社の別バリエーションASINの可能性がある。
+    <div class="insight-card success">
+      <div class="ic-title">babytableware4ss（コピーページ）：在庫切れ時の代替出品として機能</div>
+      5月21〜31日のメインSKU在庫切れ期間に、自社コピーページ（babytableware4ss）で85個・322,778円を売上げ、在庫切れ時の損失を部分的に補填した。
       <ul style="margin-top:6px;">
-        <li>5月の客単価: 3,582円（メインより低価格で出品）</li>
-        <li>5月売上の31%を占有した</li>
-        <li>6月は7個（27,860円）に急減 → 競争要因か在庫問題か要確認</li>
+        <li>在庫切れ期間の推定機会損失を約32万円補填（代替出品として有効機能）</li>
+        <li>在庫補充後の6月はメインSKUに自然集約（ss：7個のみ）</li>
+        <li>次回在庫切れに備えた代替出品フローの整備が重要</li>
       </ul>
     </div>
 
     <div class="insight-card warn">
-      <div class="ic-title">6月：アクセス回復もCVR未回復の課題</div>
-      スーパーSALEにより6月アクセスは11,471（4ヶ月最高）まで達したが、CVRは5.53%と3〜4月の8%台に戻っていない。在庫切れによるSEOスコア低下（Amazonは直近1週間の実績を最重視）が原因とみられる。SEO回復には数週間〜1ヶ月程度を要する見通し。
+      <div class="ic-title">6月：アクセス最多もCVR未回復の課題</div>
+      スーパーSALEにより6月アクセスは12,051（4ヶ月最高）まで達したが、CVRは5.48%と3〜4月の8%台に戻っていない。在庫切れによるSEOスコア低下（Amazonは直近1週間の実績を最重視）が原因とみられる。SEO回復には数週間〜1ヶ月程度を要する見通し。
     </div>
   </div>
 
@@ -790,65 +798,40 @@
 
     <div class="action-list">
 
-      <!-- HIGH 1 -->
       <div class="action-item">
         <div class="icon icon-amazon">在庫</div>
         <div class="action-body">
           <div class="action-head">
-            <div class="action-title">在庫切れ原因の特定と在庫補充計画の緊急見直し</div>
+            <div class="action-title">在庫管理体制の抜本強化（安全在庫水準の引き上げ）</div>
             <span class="pri high">HIGH</span>
           </div>
           <div class="action-desc">
-            5/21〜31の11日間、メインASINの売上がゼロに。Amazon SEOへのマイナスは最大級で、6月以降のCVR低下（8.93%→5.53%）の主因。
+            5/21〜31の11日間、メインASINの売上がゼロに。Amazon SEOへのマイナスは最大級で、6月以降のCVR低下（8.93%→5.48%）の主因。
             <ul>
-              <li>在庫切れ日時・補充タイミングを正確に特定する</li>
-              <li>リードタイム・安全在庫を見直し、次回SALE前に余裕を持った発注を行う</li>
-              <li>Amazonの在庫補充リードタイム設定を確認・最適化する</li>
+              <li>安全在庫水準を「直近30日平均販売数 × 2ヶ月分」に引き上げる</li>
+              <li>リードタイムを確認し、次回SALE（プライムデー等）前に余裕を持った発注を実施</li>
+              <li>Amazon在庫補充リードタイム設定を最適化する</li>
             </ul>
           </div>
           <div class="action-meta">
-            <span>期限: <strong>即日</strong></span>
+            <span>期限: <strong>即日〜7月中旬</strong></span>
             <span>担当: <strong>在庫管理・EC担当</strong></span>
           </div>
         </div>
       </div>
 
-      <!-- HIGH 2 -->
       <div class="action-item">
-        <div class="icon icon-amazon">調査</div>
-        <div class="action-body">
-          <div class="action-head">
-            <div class="action-title">babytableware4ssの実態調査・対処</div>
-            <span class="pri high">HIGH</span>
-          </div>
-          <div class="action-desc">
-            5月に85個・322,778円（全体比31%）を獲得したサブASINの正体確認。
-            <ul>
-              <li>自社商品の別ASIN・別バリエーションであれば、メインASINへの統合を検討</li>
-              <li>コピー品・無断転売であれば、Amazonセラーサポートへ侵害申告</li>
-              <li>3,580円という低価格設定がメインのブランドイメージを毀損していないか確認</li>
-            </ul>
-          </div>
-          <div class="action-meta">
-            <span>期限: <strong>今週中</strong></span>
-            <span>担当: <strong>ECブランド担当</strong></span>
-          </div>
-        </div>
-      </div>
-
-      <!-- HIGH 3 -->
-      <div class="action-item">
-        <div class="icon icon-amazon">広告</div>
+        <div class="icon icon-amazon">CVR</div>
         <div class="action-body">
           <div class="action-head">
             <div class="action-title">SP広告の低効率KW整理とSEO回復促進</div>
             <span class="pri high">HIGH</span>
           </div>
           <div class="action-desc">
-            5〜6月の12ヶ月CVRが1.87〜2.87%（3〜4月比半減）。広告露出は増えているが購買に繋がっていない。
+            5〜6月の12ヶ月CVRが1.87〜2.93%（3〜4月比半減）。広告露出は増えているが購買に繋がっていない。
             <ul>
               <li>CVR低KW（購買実績のないKW）を一時停止または入札引き下げ</li>
-              <li>「ベビー食器セット」「離乳食食器」など高CVR見込みKWに予算集中</li>
+              <li>「ベビー食器セット」「離乳食食器」等の高CVR見込みKWに予算集中</li>
               <li>SP広告のKW購入実績がオーガニック順位に影響するため、優良KWでの実績積み上げを優先</li>
             </ul>
           </div>
@@ -859,16 +842,37 @@
         </div>
       </div>
 
-      <!-- MID 4 -->
       <div class="action-item">
-        <div class="icon icon-amazon">CVR</div>
+        <div class="icon icon-amazon">整理</div>
+        <div class="action-body">
+          <div class="action-head">
+            <div class="action-title">babytableware4ss（コピーページ）の掲載停止・評価集約</div>
+            <span class="pri mid">MEDIUM</span>
+          </div>
+          <div class="action-desc">
+            在庫切れ時に代替出品したコピーページSKUは役割を終えている。放置するとメインSKUと競合し評価が分散するリスクがある。
+            <ul>
+              <li>babytableware4ssの広告を停止・掲載を非アクティブ化</li>
+              <li>累積レビューがあればメインSKUへの統合を検討</li>
+              <li>次回在庫切れに備えたコピーページ運用ルールを文書化する</li>
+            </ul>
+          </div>
+          <div class="action-meta">
+            <span>期限: <strong>7月末</strong></span>
+            <span>担当: <strong>ECブランド担当</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="icon icon-amazon">ページ</div>
         <div class="action-body">
           <div class="action-head">
             <div class="action-title">商品ページ改善によるCVR回復（8%台へ）</div>
             <span class="pri mid">MEDIUM</span>
           </div>
           <div class="action-desc">
-            6月のCVR5.53%は3〜4月の8%台から大きく低下。在庫切れ後のSEO順位低下が主因だが、ページ品質強化でカバーする。
+            6月のCVR5.48%は3〜4月の8%台から大きく低下。在庫切れ後のSEO順位低下が主因だが、ページ品質強化でカバーする。
             <ul>
               <li>サムネイル：セット全体が映えるメイン画像の見直し、シーン訴求の追加</li>
               <li>A+コンテンツ：4点セットの使いやすさ・素材安全性を視覚化</li>
@@ -882,7 +886,6 @@
         </div>
       </div>
 
-      <!-- MID 5 -->
       <div class="action-item">
         <div class="icon icon-both">SALE</div>
         <div class="action-body">
@@ -891,9 +894,9 @@
             <span class="pri mid">MEDIUM</span>
           </div>
           <div class="action-desc">
-            6月スーパーSALEで11,471アクセスが集中。CVRが3月水準（8.93%）に戻れば約1,023個・推定4,070万円相当の売上ポテンシャル。在庫さえあれば3月超えも視野に入る。
+            6月スーパーSALEで12,051アクセスが集中。CVRが3月水準（8.93%）に戻れば約1,075件・推定約410万円の売上ポテンシャル（実績比＋164万円）。在庫さえあれば3月超えも視野に入る。
             <ul>
-              <li>7月プライムデー（Amazonプライム会員セール）への早期エントリー確認</li>
+              <li>7月プライムデーへの早期エントリー確認</li>
               <li>セール期間中の必要在庫数を逆算し、余裕を持った発注（リードタイム＋2週間）</li>
             </ul>
           </div>
@@ -904,12 +907,11 @@
         </div>
       </div>
 
-      <!-- MID 6 -->
       <div class="action-item">
         <div class="icon icon-amazon">SEO</div>
         <div class="action-body">
           <div class="action-head">
-            <div class="action-title">オーガニック順位回復のためのSPキーワード強化</div>
+            <div class="action-title">オーガニック順位回復のためのKW強化モニタリング</div>
             <span class="pri mid">MEDIUM</span>
           </div>
           <div class="action-desc">
@@ -926,7 +928,6 @@
         </div>
       </div>
 
-      <!-- LOW 7 -->
       <div class="action-item">
         <div class="icon icon-both">KPI</div>
         <div class="action-body">
@@ -935,29 +936,11 @@
             <span class="pri low">LOW</span>
           </div>
           <div class="action-desc">
-            データシートの仕入れ値（900円）・送料（506円）・在庫保管費用（33.5円）・アーカル手数料がすべて未入力。現状の粗利は広告費のみ控除した概算値（売上の92〜96%）であり、実際の利益率が把握できていない。
+            データシートの仕入原価（900円）・送料（506円）・在庫保管費用（33.5円）・Amazon手数料がすべて未入力。現状の粗利は広告費のみ控除した概算値（売上の92〜96%）であり、実際の利益率が把握できていない。
           </div>
           <div class="action-meta">
             <span>期限: <strong>次回レポートまで</strong></span>
             <span>担当: <strong>経理・EC担当</strong></span>
-          </div>
-        </div>
-      </div>
-
-      <!-- LOW 8 -->
-      <div class="action-item">
-        <div class="icon icon-both">分析</div>
-        <div class="action-body">
-          <div class="action-head">
-            <div class="action-title">4〜5月需要低下の競合比較調査</div>
-            <span class="pri low">LOW</span>
-          </div>
-          <div class="action-desc">
-            3月843個→4月427個→5月266個と連続減少。在庫切れ以外にも競合台頭・季節性・SEO順位低下などの要因が考えられる。Chrome拡張で競合ASIN（ベビー食器4点セット カテゴリー上位3商品）のデータを取得し、アクセス・順位の変動を比較する。
-          </div>
-          <div class="action-meta">
-            <span>期限: <strong>2週間以内</strong></span>
-            <span>担当: <strong>EC・分析担当</strong></span>
           </div>
         </div>
       </div>
@@ -968,7 +951,7 @@
 </div><!-- /main -->
 
 <div class="footer">
-  Amazon Research OS | BabyGoo / fungoo | 株式会社ASAGIRI | 社内限定 | 生成日: 2026-07-01
+  Amazon Research OS | BabyGoo / fungoo | 株式会社ASAGIRI | 社内限定 | 更新日: 2026-07-03
 </div>
 
 </body>
