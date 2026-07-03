@@ -3,601 +3,717 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ベビー食器プレート 月次分析レポート 2026年3〜6月 | Amazon Research OS</title>
+  <title>ベビー食器プレート 月次販売分析 2026年3〜6月 | Amazon Research OS</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; color: #1a1a2e; font-size: 14px; line-height: 1.6; }
+    :root {
+      --primary: #1a2b4a;
+      --accent:  #e8630a;
+      --accent2: #2e7dd1;
+      --bg:      #f4f6f9;
+      --card:    #ffffff;
+      --text:    #1e2a3a;
+      --muted:   #6b7a8d;
+      --border:  #dde2ea;
+      --green:   #1a7f4b;
+      --red:     #c0392b;
+      --warn:    #d4860a;
+      --rakuten: #bf0000;
+    }
+    body { font-family: 'Helvetica Neue', 'Noto Sans JP', Arial, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; }
 
     /* ── Header ── */
-    header { background: #1a1a2e; color: #fff; padding: 24px 40px; }
-    .header-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    header h1 { font-size: 1.5rem; font-weight: 700; }
-    .header-meta { font-size: 0.8rem; opacity: 0.55; margin-top: 4px; }
-    .header-badges { display: flex; gap: 8px; }
-    .badge { display: inline-block; font-size: 0.72rem; padding: 3px 10px; border-radius: 20px; font-weight: 600; white-space: nowrap; }
-    .badge-rakuten { background: #fde8e8; color: #b91c1c; }
-    .badge-period { background: #e0f2fe; color: #0369a1; }
+    .header { background: var(--primary); color: #fff; }
+    .header-top { max-width: 1100px; margin: 0 auto; padding: 24px 28px 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+    .header-left .breadcrumb { font-size: 0.72rem; opacity: .45; margin-bottom: 8px; }
+    .header-left h1 { font-size: 1.5rem; font-weight: 800; letter-spacing: -.02em; }
+    .header-left .meta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .header-left .meta-chip { font-size: 0.72rem; background: rgba(255,255,255,.1); padding: 2px 10px; border-radius: 12px; opacity: .8; }
+    .asin-badge { background: rgba(255,255,255,.12); border-radius: 8px; padding: 10px 16px; text-align: right; font-size: 0.76rem; opacity: .75; white-space: nowrap; }
+    .asin-badge .label { opacity: .65; font-size: 0.7rem; margin-bottom: 3px; }
+    .platform-tag { display: inline-block; background: var(--rakuten); color: #fff; font-size: 0.74rem; font-weight: 700; padding: 3px 10px; border-radius: 4px; margin-top: 6px; }
 
-    /* ── Nav breadcrumb ── */
-    .breadcrumb { background: #252545; padding: 10px 40px; font-size: 0.78rem; color: rgba(255,255,255,0.5); }
-    .breadcrumb a { color: rgba(255,255,255,0.6); text-decoration: none; }
-    .breadcrumb a:hover { color: #fff; }
+    /* ── Nav ── */
+    .nav { background: rgba(0,0,0,.22); border-top: 1px solid rgba(255,255,255,.08); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 28px; display: flex; gap: 4px; overflow-x: auto; }
+    .nav a { display: block; padding: 10px 14px; font-size: 0.78rem; color: rgba(255,255,255,.6); text-decoration: none; white-space: nowrap; border-bottom: 2px solid transparent; transition: all .15s; }
+    .nav a:hover { color: #fff; border-bottom-color: var(--accent); }
 
-    /* ── Main layout ── */
-    main { max-width: 1100px; margin: 0 auto; padding: 32px 24px; display: flex; flex-direction: column; gap: 28px; }
+    /* ── Alert Banner ── */
+    .alert-banner { background: #fff8ec; border-left: 4px solid var(--warn); padding: 12px 28px; font-size: 0.83rem; color: #7a4500; }
+    .alert-banner-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
-    /* ── Section card ── */
-    .section { background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; }
-    .section-header { padding: 18px 24px 14px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; gap: 10px; }
-    .section-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
-    .icon-blue { background: #dbeafe; }
-    .icon-green { background: #dcfce7; }
-    .icon-orange { background: #ffedd5; }
-    .icon-purple { background: #ede9fe; }
-    .icon-pink { background: #fce7f3; }
-    .icon-red { background: #fee2e2; }
-    .section-title { font-size: 1rem; font-weight: 700; }
-    .section-body { padding: 20px 24px; }
+    /* ── Main ── */
+    .main { max-width: 1100px; margin: 0 auto; padding: 28px 28px 40px; }
+    .section { background: var(--card); border-radius: 10px; border: 1px solid var(--border); padding: 26px 28px; margin-bottom: 22px; }
 
-    /* ── Summary KPI cards ── */
-    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 20px; }
-    .kpi-card { background: #f9fafb; border-radius: 8px; padding: 14px 16px; border: 1px solid #e5e7eb; }
-    .kpi-label { font-size: 0.72rem; color: #6b7280; margin-bottom: 4px; }
-    .kpi-value { font-size: 1.4rem; font-weight: 700; color: #1a1a2e; line-height: 1.2; }
-    .kpi-sub { font-size: 0.72rem; color: #6b7280; margin-top: 2px; }
-    .kpi-up { color: #16a34a; }
-    .kpi-down { color: #dc2626; }
+    /* ── Section Title ── */
+    .section-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .section-title .num { width: 24px; height: 24px; background: var(--accent); color: #fff; border-radius: 50%; font-size: 0.72rem; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    /* ── KPI Cards ── */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; margin-bottom: 20px; }
+    .kpi-card { background: var(--bg); border-radius: 8px; padding: 16px 18px; border: 1px solid var(--border); }
+    .kpi-card.rakuten { border-top: 3px solid var(--rakuten); }
+    .kpi-card .label { font-size: 0.73rem; color: var(--muted); margin-bottom: 5px; }
+    .kpi-card .value { font-size: 1.5rem; font-weight: 800; color: var(--text); line-height: 1.15; }
+    .kpi-card .sub { font-size: 0.72rem; color: var(--muted); margin-top: 3px; }
+    .kpi-card .diff { font-size: 0.73rem; font-weight: 700; margin-top: 4px; }
+    .kpi-card .diff.up   { color: var(--green); }
+    .kpi-card .diff.down { color: var(--red); }
+    .kpi-card.good .value { color: var(--green); }
+    .kpi-card.bad  .value { color: var(--red); }
+    .kpi-card.warn .value { color: var(--warn); }
+    .kpi-card.crit { border-color: var(--red); background: #fdf5f5; }
+    .kpi-card.crit .value { color: var(--red); }
 
     /* ── Tables ── */
     .table-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-    th { background: #f3f4f6; padding: 9px 14px; text-align: left; font-weight: 600; color: #374151; border-bottom: 2px solid #e5e7eb; white-space: nowrap; }
-    td { padding: 9px 14px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+    thead { background: var(--primary); color: #fff; }
+    th { padding: 9px 12px; text-align: right; font-size: 0.77rem; font-weight: 600; white-space: nowrap; }
+    th:first-child { text-align: left; }
+    td { padding: 9px 12px; border-bottom: 1px solid var(--border); text-align: right; white-space: nowrap; }
+    td:first-child { text-align: left; font-weight: 600; }
     tr:last-child td { border-bottom: none; }
-    tr:hover td { background: #fafafa; }
-    .td-right { text-align: right; }
-    .td-center { text-align: center; }
-    .ok { color: #16a34a; font-weight: 600; }
-    .ng { color: #dc2626; font-weight: 600; }
-    .warn { color: #d97706; font-weight: 600; }
-    .highlight-row td { background: #fffbeb; }
+    tr:hover td { background: var(--bg); }
+    tr.total td { border-top: 2px solid var(--border); font-weight: 700; background: #f9fafb; }
+    .g { color: var(--green); font-weight: 700; }
+    .r { color: var(--red);   font-weight: 700; }
+    .w { color: var(--warn);  font-weight: 700; }
+    .badge-danger { background: var(--red);  color: #fff; font-size: 0.7rem; padding: 1px 6px; border-radius: 3px; font-weight: 700; }
+    .badge-warn   { background: var(--warn); color: #fff; font-size: 0.7rem; padding: 1px 6px; border-radius: 3px; font-weight: 700; }
+    .badge-ok     { background: var(--green);color: #fff; font-size: 0.7rem; padding: 1px 6px; border-radius: 3px; font-weight: 700; }
 
-    /* ── Month section ── */
-    .month-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-    .month-card { border-radius: 10px; border: 1px solid #e5e7eb; padding: 16px; }
-    .month-card h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #f0f0f0; }
-    .month-stat { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; margin-bottom: 5px; color: #374151; }
-    .month-stat strong { color: #1a1a2e; }
-    .month-march { border-top: 3px solid #3b82f6; }
-    .month-april { border-top: 3px solid #8b5cf6; }
-    .month-may { border-top: 3px solid #ef4444; }
-    .month-june { border-top: 3px solid #10b981; }
+    /* ── Bar Chart (horizontal) ── */
+    .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .bar-label { display: flex; justify-content: space-between; width: 160px; flex-shrink: 0; font-size: 0.8rem; }
+    .bar-label span:last-child { font-weight: 700; }
+    .bar-track { flex: 1; background: var(--border); border-radius: 4px; height: 10px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 4px; }
 
-    /* ── Decomp bar ── */
-    .decomp { background: #f9fafb; border-radius: 8px; padding: 16px; margin-top: 16px; }
-    .decomp-title { font-size: 0.78rem; color: #6b7280; margin-bottom: 10px; font-weight: 600; }
-    .decomp-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 0.83rem; flex-wrap: wrap; }
-    .decomp-month { width: 28px; font-weight: 700; color: #6b7280; }
-    .decomp-item { background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 4px 10px; }
-    .decomp-op { color: #9ca3af; font-size: 1rem; }
-    .decomp-eq { color: #9ca3af; }
-    .decomp-result { font-weight: 700; color: #1a1a2e; }
+    /* ── Vertical bar chart ── */
+    .vchart { display: flex; align-items: flex-end; gap: 14px; height: 90px; margin: 12px 0 6px; }
+    .vbar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .vbar-val { font-size: 0.72rem; font-weight: 700; color: var(--text); }
+    .vbar { width: 100%; border-radius: 4px 4px 0 0; }
+    .vbar-label { font-size: 0.7rem; color: var(--muted); }
 
-    /* ── Action items ── */
-    .action-list { display: flex; flex-direction: column; gap: 14px; }
-    .action-item { border-radius: 8px; padding: 16px; border-left: 4px solid; }
-    .action-high { background: #fff1f2; border-color: #ef4444; }
-    .action-medium { background: #fffbeb; border-color: #f59e0b; }
-    .action-low { background: #f0fdf4; border-color: #22c55e; }
-    .action-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-    .action-priority { font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
-    .priority-high { background: #ef4444; color: #fff; }
-    .priority-medium { background: #f59e0b; color: #fff; }
-    .priority-low { background: #22c55e; color: #fff; }
-    .action-title { font-size: 0.92rem; font-weight: 700; }
-    .action-body { font-size: 0.83rem; color: #374151; line-height: 1.65; }
-    .action-footer { display: flex; gap: 16px; margin-top: 10px; font-size: 0.75rem; color: #6b7280; }
-    .action-footer span strong { color: #374151; }
+    /* ── Insight Cards ── */
+    .insight-card { padding: 14px 16px; border-radius: 8px; border-left: 4px solid; font-size: 0.84rem; line-height: 1.7; margin-bottom: 10px; }
+    .insight-card .ic-title { font-weight: 700; margin-bottom: 5px; font-size: 0.85rem; }
+    .insight-card.success { background: #f0faf5; border-color: var(--green); color: #0e4929; }
+    .insight-card.warn    { background: #fffaed; border-color: var(--warn);  color: #6b3800; }
+    .insight-card.danger  { background: #fdf5f5; border-color: var(--red);   color: #7a1a1a; }
 
-    /* ── Alert banner ── */
-    .alert { border-radius: 8px; padding: 14px 16px; font-size: 0.85rem; display: flex; gap: 10px; align-items: flex-start; margin-bottom: 16px; }
-    .alert-red { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
-    .alert-icon { flex-shrink: 0; font-size: 1rem; }
+    /* ── Two column ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-    /* ── Insight list ── */
-    .insight-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .insight-list li { padding: 10px 14px; background: #f9fafb; border-radius: 8px; font-size: 0.85rem; border-left: 3px solid #6366f1; }
-    .insight-list li strong { color: #1a1a2e; }
+    /* ── Action Items ── */
+    .action-list { display: flex; flex-direction: column; gap: 12px; }
+    .action-item { background: var(--bg); border-radius: 8px; border: 1px solid var(--border); padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start; }
+    .icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.68rem; font-weight: 800; flex-shrink: 0; text-align: center; }
+    .icon-ad      { background: #fef3c7; color: #92400e; }
+    .icon-page    { background: #dbeafe; color: #1d4ed8; }
+    .icon-ops     { background: #d1fae5; color: #065f46; }
+    .icon-seo     { background: #ede9fe; color: #5b21b6; }
+    .action-body { flex: 1; }
+    .action-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+    .action-title { font-size: 0.88rem; font-weight: 700; }
+    .pri { font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; }
+    .pri.high { background: #fee2e2; color: #991b1b; }
+    .pri.mid  { background: #fef3c7; color: #92400e; }
+    .pri.low  { background: #d1fae5; color: #065f46; }
+    .action-desc { font-size: 0.81rem; color: var(--muted); line-height: 1.7; }
+    .action-desc ul { padding-left: 18px; margin-top: 4px; }
+    .action-meta { display: flex; gap: 14px; margin-top: 8px; font-size: 0.74rem; color: var(--muted); flex-wrap: wrap; }
+    .action-meta strong { color: var(--text); }
+
+    /* ── Callout Box ── */
+    .callout { border-radius: 8px; padding: 12px 16px; font-size: 0.83rem; margin: 12px 0; }
+    .callout.info  { background: #eef6ff; border: 1px solid #bfdbfe; color: #1e3a5f; }
+    .callout.warn  { background: #fffaed; border: 1px solid #fde68a; color: #6b3800; }
+    .callout.crit  { background: #fdf5f5; border: 1px solid #fca5a5; color: #7a1a1a; }
 
     /* ── Footer ── */
-    footer { text-align: center; padding: 32px; font-size: 0.75rem; color: #9ca3af; }
+    .footer { text-align: center; font-size: 0.72rem; color: var(--muted); padding: 24px; border-top: 1px solid var(--border); margin-top: 8px; }
 
-    @media (max-width: 640px) {
-      header { padding: 18px 20px; }
-      .breadcrumb { padding: 10px 20px; }
-      main { padding: 20px 14px; }
-      .section-body { padding: 16px; }
+    @media(max-width:680px) {
+      .header-top { padding: 18px 16px; }
+      .nav-inner { padding: 0 12px; }
+      .main { padding: 16px; }
+      .section { padding: 18px 16px; }
+      .two-col { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+      .bar-label { width: 80px; font-size: 0.72rem; }
     }
   </style>
 </head>
 <body>
 
-<header>
+<!-- ── Header ── -->
+<div class="header">
   <div class="header-top">
-    <div>
-      <h1>ベビー食器プレート 月次販売分析</h1>
-      <div class="header-meta">babytableware2 / babytableware2ss ｜ Amazon Research OS — BabyGoo / fungoo ｜ 株式会社ASAGIRI</div>
+    <div class="header-left">
+      <div class="breadcrumb">Amazon Research OS › レポート › 2026-06</div>
+      <h1>ベビー食器プレート</h1>
+      <div class="meta-row">
+        <span class="meta-chip">2026年3〜6月</span>
+        <span class="meta-chip">babytableware2 / babytableware2ss</span>
+        <span class="meta-chip">BabyGoo / fungoo</span>
+        <span class="meta-chip">発売 2024/12/03</span>
+      </div>
     </div>
-    <div class="header-badges">
-      <span class="badge badge-rakuten">楽天</span>
-      <span class="badge badge-period">2026年3〜6月</span>
+    <div class="asin-badge">
+      <div class="label">販売チャネル</div>
+      <span class="platform-tag">楽天</span>
     </div>
   </div>
-</header>
-
-<div class="breadcrumb">
-  <a href="../../reports/index.html">ナレッジポータル</a> › ベビー食器プレート › 2026年3〜6月分析レポート
+  <div class="nav">
+    <div class="nav-inner">
+      <a href="#summary">① 月次サマリー</a>
+      <a href="#channel">② チャネル構成</a>
+      <a href="#overview">③ 楽天総括</a>
+      <a href="#unit">④ ユニットエコノミクス</a>
+      <a href="#insight">⑤ 顧客インサイト</a>
+      <a href="#action">⑥ アクション案</a>
+    </div>
+  </div>
 </div>
 
-<main>
+<!-- ── Alert Banner ── -->
+<div class="alert-banner">
+  <div class="alert-banner-inner">
+    ⚠️ <strong>重要：</strong>5月RPP広告ROAS 0.93x（赤字運用）・ACOS 76.5%、6月ACOS 82.4%と全月でKPI目標（50%以下）を大幅超過。5月のKW拡大施策（フード関連入札）でCVRが6.8%→2.9%に急落し、6月スーパーSALEでもCVR未回復。入札KW精査とページCVR改善が最優先課題です。
+  </div>
+</div>
 
-  <!-- ─── 1. 月次サマリー ─── -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon icon-blue">📊</div>
-      <span class="section-title">1｜月次サマリー</span>
+<!-- ── Main ── -->
+<div class="main">
+
+  <!-- ===== 1: 月次サマリー ===== -->
+  <div class="section" id="summary">
+    <div class="section-title"><span class="num">1</span> 月次サマリー</div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card rakuten good">
+        <div class="label">3月 売上金額</div>
+        <div class="value">¥376,180</div>
+        <div class="sub">スーパーSALE月・期間2位</div>
+        <div class="diff up">226個 ／ CVR 6.46%</div>
+      </div>
+      <div class="kpi-card rakuten bad">
+        <div class="label">4月 売上金額</div>
+        <div class="value">¥217,160</div>
+        <div class="sub">前月比 <span class="r">▲42.3%</span>（通常月）</div>
+        <div class="diff up">122個 ／ CVR 6.80%（最高）</div>
+      </div>
+      <div class="kpi-card rakuten crit">
+        <div class="label">5月 売上金額</div>
+        <div class="value">¥135,280</div>
+        <div class="sub">前月比 <span class="r">▲37.7%</span>／CVR急落</div>
+        <div class="diff down">77個 ／ CVR 2.87%（最低）</div>
+      </div>
+      <div class="kpi-card rakuten good">
+        <div class="label">6月 売上金額</div>
+        <div class="value">¥483,160</div>
+        <div class="sub">前月比 <span class="g">+257%</span>（SALE最高月）</div>
+        <div class="diff down">287個 ／ CVR 2.95%（低水準）</div>
+      </div>
     </div>
-    <div class="section-body">
 
-      <div class="kpi-grid">
-        <div class="kpi-card">
-          <div class="kpi-label">4ヶ月累計売上</div>
-          <div class="kpi-value">1,206,440<span style="font-size:0.8rem;font-weight:400">円</span></div>
-          <div class="kpi-sub">3〜6月合計</div>
+    <div style="font-size:0.77rem; color:var(--muted); margin-bottom:4px;">月次売上推移（万円）</div>
+    <div class="vchart">
+      <div class="vbar-col">
+        <div class="vbar-val">37.6</div>
+        <div class="vbar" style="height:78%;background:var(--accent2);"></div>
+        <div class="vbar-label">3月</div>
+      </div>
+      <div class="vbar-col">
+        <div class="vbar-val">21.7</div>
+        <div class="vbar" style="height:45%;background:var(--accent2);"></div>
+        <div class="vbar-label">4月</div>
+      </div>
+      <div class="vbar-col">
+        <div class="vbar-val">13.5</div>
+        <div class="vbar" style="height:28%;background:var(--red);opacity:.8;"></div>
+        <div class="vbar-label">5月</div>
+      </div>
+      <div class="vbar-col">
+        <div class="vbar-val">48.3</div>
+        <div class="vbar" style="height:100%;background:var(--green);opacity:.85;"></div>
+        <div class="vbar-label">6月</div>
+      </div>
+    </div>
+
+    <div class="table-wrap" style="margin-top:18px;">
+      <table>
+        <thead>
+          <tr>
+            <th>月</th>
+            <th>売上金額</th>
+            <th>前月比</th>
+            <th>売上数量</th>
+            <th>アクセス数</th>
+            <th>CVR</th>
+            <th>客単価</th>
+            <th>主要イベント</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3月</td>
+            <td>¥376,180</td>
+            <td>—</td>
+            <td>226個</td>
+            <td>3,496</td>
+            <td class="g">6.46%</td>
+            <td>¥1,702</td>
+            <td>スーパーSALE（3/4頃）</td>
+          </tr>
+          <tr>
+            <td>4月</td>
+            <td>¥217,160</td>
+            <td class="r">▲42.3%</td>
+            <td>122個</td>
+            <td>1,793</td>
+            <td class="g">6.80%</td>
+            <td>¥1,825</td>
+            <td>前半・後半マラソン</td>
+          </tr>
+          <tr>
+            <td>5月</td>
+            <td>¥135,280</td>
+            <td class="r">▲37.7%</td>
+            <td>77個</td>
+            <td>2,680</td>
+            <td class="r">2.87%</td>
+            <td>¥1,853</td>
+            <td><span class="badge-warn">KW拡大</span> フード関連入札強化・前半後半ラソン</td>
+          </tr>
+          <tr>
+            <td>6月</td>
+            <td>¥483,160</td>
+            <td class="g">+257.0%</td>
+            <td>287個</td>
+            <td>9,710</td>
+            <td class="w">2.95%</td>
+            <td>¥1,789</td>
+            <td>スーパーSALE（6/7頃）・入札抑制</td>
+          </tr>
+          <tr class="total">
+            <td>4ヶ月合計</td>
+            <td>¥1,211,780</td>
+            <td>—</td>
+            <td>712個</td>
+            <td>17,679</td>
+            <td>—</td>
+            <td>¥1,702</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== 2: チャネル構成 ===== -->
+  <div class="section" id="channel">
+    <div class="section-title"><span class="num">2</span> チャネル構成（SKU別）</div>
+
+    <div class="callout info">
+      <strong>SKU構成：</strong>babytableware2（メインSKU）が全期間の96.6%を担当。babytableware2ss（コピーSKU）は5月から本格稼働し、5〜6月に各24〜25件を記録。「コピーページで販売」施策が安定した副収益ラインとして機能し始めている。
+    </div>
+
+    <div class="table-wrap" style="margin-top:16px;">
+      <table>
+        <thead>
+          <tr>
+            <th>月</th>
+            <th>babytableware2（メイン）</th>
+            <th>babytableware2ss（コピー）</th>
+            <th>コピー比率</th>
+            <th>合計売上</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3月</td>
+            <td>¥374,400（225個）</td>
+            <td>¥1,780（1個）</td>
+            <td>0.5%</td>
+            <td>¥376,180</td>
+          </tr>
+          <tr>
+            <td>4月</td>
+            <td>¥217,160（122個）</td>
+            <td>¥0（0個）</td>
+            <td>0.0%</td>
+            <td>¥217,160</td>
+          </tr>
+          <tr>
+            <td>5月</td>
+            <td>¥94,340（53個）</td>
+            <td>¥40,940（24個）</td>
+            <td class="w">30.3%</td>
+            <td>¥135,280</td>
+          </tr>
+          <tr>
+            <td>6月</td>
+            <td>¥440,440（262個）</td>
+            <td>¥42,720（25個）</td>
+            <td>8.8%</td>
+            <td>¥483,160</td>
+          </tr>
+          <tr class="total">
+            <td>合計</td>
+            <td>¥1,126,340（662個）</td>
+            <td>¥85,440（50個）</td>
+            <td>7.1%</td>
+            <td>¥1,211,780</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="insight-card warn" style="margin-top:16px;">
+      <div class="ic-title">5月のコピーSKU依存（30.3%）に注意</div>
+      5月はメインSKU（babytableware2）がCVR2.87%に失速し売上が53件に急落した一方、コピーSKU（babytableware2ss）が24件で補完。しかし本質的課題はメインページのCVR低下であり、コピーSKUへの依存は根本解決ではない。
+    </div>
+  </div>
+
+  <!-- ===== 3: 楽天総括 ===== -->
+  <div class="section" id="overview">
+    <div class="section-title"><span class="num">3</span> 楽天総括</div>
+
+    <div class="two-col">
+      <!-- アクセス・CVR -->
+      <div>
+        <div style="font-size:0.8rem; font-weight:700; color:var(--muted); margin-bottom:12px;">アクセス・CVR推移</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>月</th><th>アクセス</th><th>CVR</th><th>判定</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>3月</td><td>3,496</td><td class="g">6.46%</td><td><span class="badge-ok">良好</span></td></tr>
+              <tr><td>4月</td><td>1,793</td><td class="g">6.80%</td><td><span class="badge-ok">最高</span></td></tr>
+              <tr><td>5月</td><td>2,680</td><td class="r">2.87%</td><td><span class="badge-danger">要改善</span></td></tr>
+              <tr><td>6月</td><td>9,710</td><td class="r">2.95%</td><td><span class="badge-danger">要改善</span></td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="kpi-card">
-          <div class="kpi-label">4ヶ月累計数量</div>
-          <div class="kpi-value">709<span style="font-size:0.8rem;font-weight:400">個</span></div>
-          <div class="kpi-sub">3〜6月合計</div>
+        <div style="font-size:0.75rem; color:var(--muted); margin-top:8px;">目標CVR: 5〜8%（楽天ベンチマーク）</div>
+      </div>
+
+      <!-- 広告パフォーマンス -->
+      <div>
+        <div style="font-size:0.8rem; font-weight:700; color:var(--muted); margin-bottom:12px;">RPP広告パフォーマンス</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>月</th><th>TACOS</th><th>ACOS</th><th>ROAS</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>3月</td><td class="g">8.35%</td><td class="g">40.9%</td><td class="g">2.45x</td></tr>
+              <tr><td>4月</td><td class="g">5.29%</td><td class="w">54.8%</td><td class="w">1.83x</td></tr>
+              <tr><td>5月</td><td class="r">19.10%</td><td class="r">76.5%</td><td class="r">0.93x</td></tr>
+              <tr><td>6月</td><td class="r">17.12%</td><td class="r">82.4%</td><td class="w">1.33x</td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="kpi-card">
-          <div class="kpi-label">6月売上（最高月）</div>
-          <div class="kpi-value" style="color:#10b981">477,820<span style="font-size:0.8rem;font-weight:400">円</span></div>
-          <div class="kpi-sub kpi-up">▲253.2% 前月比</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">5月売上（最低月）</div>
-          <div class="kpi-value" style="color:#ef4444">135,280<span style="font-size:0.8rem;font-weight:400">円</span></div>
-          <div class="kpi-sub kpi-down">▼37.7% 前月比</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">4月CVR（最高）</div>
-          <div class="kpi-value" style="color:#10b981">6.80<span style="font-size:0.8rem;font-weight:400">%</span></div>
-          <div class="kpi-sub">KPI目標 5〜8% ✓</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">5月TACOS（課題）</div>
-          <div class="kpi-value" style="color:#ef4444">19.09<span style="font-size:0.8rem;font-weight:400">%</span></div>
-          <div class="kpi-sub">目標 15%以下 ✗</div>
+        <div style="font-size:0.75rem; color:var(--muted); margin-top:8px;">目標: TACOS ≤15% ／ ACOS ≤50%</div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;">
+      <div style="font-size:0.8rem; font-weight:700; color:var(--muted); margin-bottom:10px;">オーガニック vs RPP 売上比率</div>
+      <div class="bar-row">
+        <div class="bar-label"><span>3月</span><span>79.6%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:79.6%;background:var(--green);"></div></div>
+        <span style="font-size:0.75rem;color:var(--muted);">オーガニック</span>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label"><span>4月</span><span>90.3%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:90.3%;background:var(--green);"></div></div>
+        <span style="font-size:0.75rem;color:var(--muted);">オーガニック（最高）</span>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label"><span>5月</span><span>75.0%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:75%;background:var(--warn);"></div></div>
+        <span style="font-size:0.75rem;color:var(--muted);">オーガニック</span>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label"><span>6月</span><span>79.2%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:79.2%;background:var(--accent2);"></div></div>
+        <span style="font-size:0.75rem;color:var(--muted);">オーガニック</span>
+      </div>
+    </div>
+
+    <div class="insight-card danger" style="margin-top:16px;">
+      <div class="ic-title">5月 ROAS 0.93x — 広告が赤字運用</div>
+      5月は広告クリック経由の売上（¥15,462）を広告費（¥25,836）が上回り、ROAS 0.93xの実質赤字。フード関連KWへの入札拡大（5月施策）がターゲット外ユーザーを誘引し、CVR 2.87%まで下落。広告費の増加に対して売上が全く比例せなかった典型的な「入札ミスマッチ」の事例。
+    </div>
+
+    <div class="insight-card warn" style="margin-top:0;">
+      <div class="ic-title">6月 アクセス9,710人でもCVR 2.95%に留まる構造的問題</div>
+      スーパーSALEでアクセスは9,710人（3月比+178%）まで拡大したが、CVRは2.95%と依然低水準。売上金額¥483,160は過去最高だが、CVRが3月水準（6.46%）まで回復すれば9,710×6.46%×¥1,789 = 約¥112万と現状の2.3倍になる計算。CVR改善余地が非常に大きい。
+    </div>
+  </div>
+
+  <!-- ===== 4: ユニットエコノミクス ===== -->
+  <div class="section" id="unit">
+    <div class="section-title"><span class="num">4</span> ユニットエコノミクス</div>
+
+    <div class="callout info">
+      <strong>売上分解公式：</strong>売上 = アクセス数 × 転換率（CVR） × 客単価
+    </div>
+
+    <div class="table-wrap" style="margin-top:16px;">
+      <table>
+        <thead>
+          <tr>
+            <th>月</th>
+            <th>アクセス</th>
+            <th>CVR</th>
+            <th>客単価</th>
+            <th>売上</th>
+            <th>広告費</th>
+            <th>粗利</th>
+            <th>利益率</th>
+            <th>ボトルネック</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3月</td>
+            <td>3,496</td>
+            <td class="g">6.46%</td>
+            <td>¥1,702</td>
+            <td>¥376,180</td>
+            <td>¥31,421</td>
+            <td class="g">¥344,759</td>
+            <td class="g">91.6%</td>
+            <td>—（良好）</td>
+          </tr>
+          <tr>
+            <td>4月</td>
+            <td class="r">1,793</td>
+            <td class="g">6.80%</td>
+            <td>¥1,825</td>
+            <td>¥217,160</td>
+            <td class="g">¥11,492</td>
+            <td>¥205,668</td>
+            <td class="g">94.7%</td>
+            <td>アクセス▲48.7%</td>
+          </tr>
+          <tr>
+            <td>5月</td>
+            <td>2,680</td>
+            <td class="r">2.87%</td>
+            <td>¥1,853</td>
+            <td>¥135,280</td>
+            <td class="r">¥25,836</td>
+            <td class="r">¥109,444</td>
+            <td class="r">80.9%</td>
+            <td><span class="badge-danger">CVR▲58%</span></td>
+          </tr>
+          <tr>
+            <td>6月</td>
+            <td class="g">9,710</td>
+            <td class="r">2.95%</td>
+            <td>¥1,789</td>
+            <td class="g">¥483,160</td>
+            <td class="r">¥82,738</td>
+            <td class="g">¥400,422</td>
+            <td class="w">82.9%</td>
+            <td>CVR低水準・広告費膨張</td>
+          </tr>
+          <tr class="total">
+            <td>合計</td>
+            <td>—</td>
+            <td>—</td>
+            <td>¥1,702</td>
+            <td>¥1,211,780</td>
+            <td>¥151,487</td>
+            <td>¥1,060,293</td>
+            <td>87.5%</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="font-size:0.73rem; color:var(--muted); margin-top:10px;">※粗利は広告費のみ控除。COGS・モール手数料・物流費は別途管理。</div>
+
+    <div style="margin-top:20px;">
+      <div style="font-size:0.8rem; font-weight:700; color:var(--muted); margin-bottom:10px;">CVRポテンシャル試算（6月アクセス9,710人でCVRが改善した場合）</div>
+      <div class="bar-row">
+        <div class="bar-label"><span>現状 2.95%</span><span>¥483,160</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:44%;background:var(--red);opacity:.8;"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label"><span>目標 5.0%</span><span>¥869K</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:79%;background:var(--warn);"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label"><span>4月水準 6.8%</span><span>¥118万</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--green);"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 5: 顧客インサイト ===== -->
+  <div class="section" id="insight">
+    <div class="section-title"><span class="num">5</span> 顧客インサイト</div>
+
+    <div class="insight-card success">
+      <div class="ic-title">セール依存型の明確な売上構造</div>
+      3月スーパーSALE（226個）と6月スーパーSALE（287個）が4ヶ月合計の71.5%（513件）を占める。非セール期（4〜5月）の自然需要は月80〜120件程度が実力値。スーパーSALEへの参加が売上を左右する最大の変数となっている。
+    </div>
+
+    <div class="insight-card warn">
+      <div class="ic-title">5〜6月のCVR急落 — フードKW拡大の副作用</div>
+      3〜4月のCVR 6.4〜6.8%は「ベビー食器・プレート」を検索するコア顧客が購買する優良状態。5月にフード関連キーワード（上位200位の範囲）への入札を拡大した結果、購買意向の低い訪問者が増加しCVRが半減。商品との「KWマッチ度」が極めて重要。
+    </div>
+
+    <div class="insight-card success">
+      <div class="ic-title">babytableware2ss（コピーSKU）の安定稼働</div>
+      5月導入のコピーページ戦略により、5〜6月に各24〜25件の安定した実績を記録。メインページのCVR低下期にも独自のアクセスを獲得しており、副収益ラインとして機能。共食いは限定的で補完関係が成立している。
+    </div>
+
+    <div class="insight-card warn">
+      <div class="ic-title">4月の急落はアクセス消滅が主因（CVRは健全）</div>
+      4月はアクセスが3,496→1,793（▲48.7%）と激減したがCVR 6.80%は全月最高を記録。つまり4月の失速は「集客不足」であり「ページ品質」の問題ではない。3月スーパーSALE終了後の自然需要の底が現れた形。4月の実力値を底上げするにはSEO改善と広告の安定稼働が必要。
+    </div>
+  </div>
+
+  <!-- ===== 6: アクション案 ===== -->
+  <div class="section" id="action">
+    <div class="section-title"><span class="num">6</span> アクション案</div>
+
+    <div class="action-list">
+
+      <div class="action-item">
+        <div class="icon icon-page">CVR</div>
+        <div class="action-body">
+          <div class="action-head">
+            <div class="action-title">① CVR改善（商品ページ刷新）</div>
+            <span class="pri high">HIGH</span>
+          </div>
+          <div class="action-desc">
+            現状CVR 2.87〜2.95%は目標5〜8%の半分以下。フード関連KWからの訪問者が増えた結果、既存ページとのニーズミスマッチが拡大している。
+            <ul>
+              <li>トップ画像にベビー離乳食・プレート用途を明示したキャッチコピーを追加</li>
+              <li>離乳食期の使用シーン・BPA不使用・吸盤対応などベネフィットを訴求文言に盛り込む</li>
+              <li>商品説明文の見直しとレビュー活用でページ信頼度向上</li>
+            </ul>
+          </div>
+          <div class="action-meta">
+            <span><strong>担当：</strong>MD・デザイン</span>
+            <span><strong>期限：</strong>7月中旬</span>
+            <span><strong>期待効果：</strong>CVR 3%→5%でJun試算+¥40万/月</span>
+          </div>
         </div>
       </div>
 
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>月</th>
-              <th class="td-right">売上金額</th>
-              <th class="td-right">売上数量</th>
-              <th class="td-right">前月比</th>
-              <th class="td-right">アクセス数</th>
-              <th class="td-right">CVR</th>
-              <th class="td-right">客単価</th>
-              <th class="td-right">TACOS</th>
-              <th>主要イベント</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>3月</strong></td>
-              <td class="td-right">376,180円</td>
-              <td class="td-right">226個</td>
-              <td class="td-center">—</td>
-              <td class="td-right">3,496</td>
-              <td class="td-right ok">6.46%</td>
-              <td class="td-right">1,702円</td>
-              <td class="td-right ok">8.35%</td>
-              <td>スーパーセール（3/4）・後半ラソン</td>
-            </tr>
-            <tr>
-              <td><strong>4月</strong></td>
-              <td class="td-right">217,160円</td>
-              <td class="td-right">122個</td>
-              <td class="td-right kpi-down">▼42.3%</td>
-              <td class="td-right">1,793</td>
-              <td class="td-right ok">6.80%</td>
-              <td class="td-right">1,825円</td>
-              <td class="td-right ok">5.29%</td>
-              <td>前半・中・後半ラソン</td>
-            </tr>
-            <tr class="highlight-row">
-              <td><strong>5月</strong></td>
-              <td class="td-right">135,280円</td>
-              <td class="td-right">77個</td>
-              <td class="td-right kpi-down">▼37.7%</td>
-              <td class="td-right">2,680</td>
-              <td class="td-right ng">2.87%</td>
-              <td class="td-right">1,853円</td>
-              <td class="td-right ng">19.09%</td>
-              <td>前半・後半ラソン ⚠️ 在庫切れ疑惑</td>
-            </tr>
-            <tr>
-              <td><strong>6月</strong></td>
-              <td class="td-right" style="color:#10b981;font-weight:700">477,820円</td>
-              <td class="td-right">284個</td>
-              <td class="td-right kpi-up">▲253.2%</td>
-              <td class="td-right">9,416</td>
-              <td class="td-right ng">3.02%</td>
-              <td class="td-right">1,790円</td>
-              <td class="td-right ng">17.12%</td>
-              <td>スーパーSALE・後半ラソン</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── 2. チャネル構成 ─── -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon icon-purple">📦</div>
-      <span class="section-title">2｜チャネル構成（SKU別売上内訳）</span>
-    </div>
-    <div class="section-body">
-      <p style="font-size:0.85rem;color:#6b7280;margin-bottom:16px">本データは楽天単モール。メインSKU（babytableware2）とサブSKU（babytableware2ss）の2SKU構成。</p>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>SKU</th>
-              <th class="td-right">3月</th>
-              <th class="td-right">4月</th>
-              <th class="td-right">5月</th>
-              <th class="td-right">6月</th>
-              <th>特記</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>babytableware2</strong><br><span style="font-size:0.75rem;color:#6b7280">メインSKU</span></td>
-              <td class="td-right">374,400円<br><span style="font-size:0.75rem;color:#6b7280">（99.5%）</span></td>
-              <td class="td-right">217,160円<br><span style="font-size:0.75rem;color:#6b7280">（100%）</span></td>
-              <td class="td-right ng">94,340円<br><span style="font-size:0.75rem;color:#6b7280">（69.8%）</span></td>
-              <td class="td-right">435,100円<br><span style="font-size:0.75rem;color:#6b7280">（91.1%）</span></td>
-              <td>5月下旬に在庫切れで売上急減</td>
-            </tr>
-            <tr>
-              <td><strong>babytableware2ss</strong><br><span style="font-size:0.75rem;color:#6b7280">サブSKU</span></td>
-              <td class="td-right">1,780円<br><span style="font-size:0.75rem;color:#6b7280">（0.5%）</span></td>
-              <td class="td-right">0円<br><span style="font-size:0.75rem;color:#6b7280">（0%）</span></td>
-              <td class="td-right warn">40,940円<br><span style="font-size:0.75rem;color:#6b7280">（30.2%）</span></td>
-              <td class="td-right">42,720円<br><span style="font-size:0.75rem;color:#6b7280">（8.9%）</span></td>
-              <td>5月後半からアクセス急増（最大340/日）</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="font-size:0.82rem;color:#374151;margin-top:14px;padding:10px 14px;background:#fffbeb;border-radius:6px;border-left:3px solid #f59e0b;">
-        ⚠️ 5月はメインSKUの在庫切れにより、売上シェアの30%をサブSKUが補完する異常な状態が発生。メインSKU不在時の流入受け皿として、babytableware2ss の在庫確保を検討すべき。
-      </p>
-    </div>
-  </section>
-
-  <!-- ─── 3. モール別総括 ─── -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon icon-orange">🏪</div>
-      <span class="section-title">3｜モール別総括（楽天）</span>
-    </div>
-    <div class="section-body">
-
-      <div class="alert alert-red">
-        <span class="alert-icon">🚨</span>
-        <div>
-          <strong>5月 在庫切れ疑惑（最重要課題）</strong>：babytableware2 のアクセスが5/23〜5/31にほぼゼロ（記録: 0,0,0,1,21,15,19,30,20）。在庫切れによるSEOスコアへのダメージが全課題中最大。
+      <div class="action-item">
+        <div class="icon icon-ad">広告</div>
+        <div class="action-body">
+          <div class="action-head">
+            <div class="action-title">② RPP入札KW精査（ACOS・TACOS是正）</div>
+            <span class="pri high">HIGH</span>
+          </div>
+          <div class="action-desc">
+            ACOS 76〜82%（目標50%以下の約1.5倍）、5月ROAS 0.93x（実質赤字）。入札拡大施策が裏目に出た状態を是正する。
+            <ul>
+              <li>フード関連KWのうちCVR 1%未満のKWを即時削除または入札ゼロ化</li>
+              <li>「ベビー食器」「離乳食プレート」「赤ちゃん食器」など直接KWのみに集中</li>
+              <li>ACOS目標50%以下になるまで入札単価を段階的に引き下げ</li>
+            </ul>
+          </div>
+          <div class="action-meta">
+            <span><strong>担当：</strong>広告担当</span>
+            <span><strong>期限：</strong>即時（7月上旬）</span>
+            <span><strong>期待効果：</strong>TACOS 17%→12%以下に正常化</span>
+          </div>
         </div>
       </div>
 
-      <div class="month-grid">
-        <div class="month-card month-march">
-          <h3>3月｜スーパーセール好調</h3>
-          <div class="month-stat"><span>アクセス</span><strong>3,496</strong></div>
-          <div class="month-stat"><span>CVR</span><strong class="ok">6.46% ✓</strong></div>
-          <div class="month-stat"><span>売上数量</span><strong>226個</strong></div>
-          <div class="month-stat"><span>TACOS</span><strong class="ok">8.35% ✓</strong></div>
-          <div class="month-stat"><span>RPP売上比率</span><strong>20.4%</strong></div>
-          <div class="month-stat"><span>単日最大</span><strong>3/4: 45個</strong></div>
-          <p style="font-size:0.78rem;color:#6b7280;margin-top:8px">3/4スーパーセールで54,400円/日を記録。CVR・TACOS共にKPI基準内。オーガニック主体の健全な売上構成。</p>
-        </div>
-
-        <div class="month-card month-april">
-          <h3>4月｜通常期に安定着地</h3>
-          <div class="month-stat"><span>アクセス</span><strong>1,793</strong></div>
-          <div class="month-stat"><span>CVR</span><strong class="ok">6.80% ✓</strong></div>
-          <div class="month-stat"><span>売上数量</span><strong>122個</strong></div>
-          <div class="month-stat"><span>TACOS</span><strong class="ok">5.29% ✓</strong></div>
-          <div class="month-stat"><span>RPP広告費</span><strong>11,492円</strong></div>
-          <div class="month-stat"><span>CVR順位</span><strong>4ヶ月最高</strong></div>
-          <p style="font-size:0.78rem;color:#6b7280;margin-top:8px">3月反動で売上大幅減だが、CVR 6.80%・TACOS 5.29%は全月最高水準。目的買い顧客の底堅い需要を確認。</p>
-        </div>
-
-        <div class="month-card month-may">
-          <h3>5月｜在庫切れによる急落 ⚠️</h3>
-          <div class="month-stat"><span>アクセス</span><strong>2,680</strong></div>
-          <div class="month-stat"><span>CVR</span><strong class="ng">2.87% ✗</strong></div>
-          <div class="month-stat"><span>売上数量</span><strong>77個</strong></div>
-          <div class="month-stat"><span>TACOS</span><strong class="ng">19.09% ✗</strong></div>
-          <div class="month-stat"><span>RPP広告費</span><strong class="warn">25,836円</strong></div>
-          <div class="month-stat"><span>在庫切れ期間</span><strong class="ng">5/23〜</strong></div>
-          <p style="font-size:0.78rem;color:#6b7280;margin-top:8px">メインSKUが5/23以降に在庫切れ。広告は継続稼働で費用無駄消費。CVR半減・TACOS目標超過。SEOスコアへの打撃が深刻。</p>
-        </div>
-
-        <div class="month-card month-june">
-          <h3>6月｜スーパーSALEで最高売上</h3>
-          <div class="month-stat"><span>アクセス</span><strong>9,416</strong></div>
-          <div class="month-stat"><span>CVR</span><strong class="warn">3.02% △</strong></div>
-          <div class="month-stat"><span>売上数量</span><strong>284個</strong></div>
-          <div class="month-stat"><span>TACOS</span><strong class="warn">17.12% △</strong></div>
-          <div class="month-stat"><span>RPP広告費</span><strong>81,825円</strong></div>
-          <div class="month-stat"><span>単日最大</span><strong>6/11: 41個</strong></div>
-          <p style="font-size:0.78rem;color:#6b7280;margin-top:8px">スーパーSALEで月間最高売上を達成。後半ラソンでアクセス急増（6/29: 895/日）するもCVRが0.1〜0.4%台と低水準。ラソン期間のLP最適化が課題。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── 4. ユニットエコノミクス ─── -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon icon-green">💹</div>
-      <span class="section-title">4｜ユニットエコノミクス</span>
-    </div>
-    <div class="section-body">
-
-      <div class="decomp">
-        <div class="decomp-title">売上分解：アクセス数 × CVR × 客単価</div>
-        <div class="decomp-row">
-          <span class="decomp-month">3月</span>
-          <span class="decomp-item">3,496アクセス</span>
-          <span class="decomp-op">×</span>
-          <span class="decomp-item">CVR 6.46%</span>
-          <span class="decomp-op">×</span>
-          <span class="decomp-item">客単価 1,702円</span>
-          <span class="decomp-eq">≈</span>
-          <span class="decomp-result">376,180円</span>
-        </div>
-        <div class="decomp-row">
-          <span class="decomp-month">4月</span>
-          <span class="decomp-item">1,793アクセス</span>
-          <span class="decomp-op">×</span>
-          <span class="decomp-item">CVR 6.80%</span>
-          <span class="decomp-op">×</span>
-          <span class="decomp-item">客単価 1,825円</span>
-          <span class="decomp-eq">≈</span>
-          <span class="decomp-result">217,160円</span>
-        </div>
-        <div class="decomp-row">
-          <span class="decomp-month" style="color:#ef4444">5月</span>
-          <span class="decomp-item">2,680アクセス</span>
-          <span class="decomp-op">×</span>
-          <span class="decomp-item" style="border-color:#fca5a5;color:#dc2626">CVR 2.87% ⚠️</span>
-          <span class="decomp-op">×</span>
-          <span class="decomp-item">客単価 1,853円</span>
-          <span class="decomp-eq">≈</span>
-          <span class="decomp-result" style="color:#dc2626">135,280円</span>
-        </div>
-        <div class="decomp-row">
-          <span class="decomp-month" style="color:#10b981">6月</span>
-          <span class="decomp-item" style="border-color:#6ee7b7;color:#059669">9,416アクセス ⬆️</span>
-          <span class="decomp-op">×</span>
-          <span class="decomp-item">CVR 3.02%</span>
-          <span class="decomp-op">×</span>
-          <span class="decomp-item">客単価 1,790円</span>
-          <span class="decomp-eq">≈</span>
-          <span class="decomp-result" style="color:#10b981">477,820円</span>
+      <div class="action-item">
+        <div class="icon icon-seo">SEO</div>
+        <div class="action-body">
+          <div class="action-head">
+            <div class="action-title">③ 非セール期の底上げ（自然需要強化）</div>
+            <span class="pri mid">MEDIUM</span>
+          </div>
+          <div class="action-desc">
+            非セール期（4〜5月）の月売上は80〜122件にとどまりセール期の30〜40%水準。SEO定着で自然アクセスを増やす。
+            <ul>
+              <li>7月マラソン（スーパーSALE直後のラソン）への参加でSEOスコアを維持</li>
+              <li>レビュー獲得施策（フォロークーポン配布等）でSEOスコア向上</li>
+              <li>ランキング上位KWを定点観測しSEOの自然改善状況をモニタリング</li>
+            </ul>
+          </div>
+          <div class="action-meta">
+            <span><strong>担当：</strong>MD</span>
+            <span><strong>期限：</strong>7月末</span>
+            <span><strong>期待効果：</strong>非セール期月150件→150件以上への底上げ</span>
+          </div>
         </div>
       </div>
 
-      <div class="table-wrap" style="margin-top:20px">
-        <table>
-          <thead>
-            <tr>
-              <th>月</th>
-              <th class="td-right">RPP広告費</th>
-              <th class="td-right">売上</th>
-              <th class="td-right">TACOS</th>
-              <th class="td-right">RPP売上比率</th>
-              <th class="td-right">粗利（参考値）</th>
-              <th class="td-right">利益率</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>3月</strong></td>
-              <td class="td-right">31,421円</td>
-              <td class="td-right">376,180円</td>
-              <td class="td-right ok">8.35% ✓</td>
-              <td class="td-right">20.4%</td>
-              <td class="td-right">344,759円</td>
-              <td class="td-right">91.6%</td>
-            </tr>
-            <tr>
-              <td><strong>4月</strong></td>
-              <td class="td-right">11,492円</td>
-              <td class="td-right">217,160円</td>
-              <td class="td-right ok">5.29% ✓</td>
-              <td class="td-right">9.7%</td>
-              <td class="td-right">205,668円</td>
-              <td class="td-right">94.7%</td>
-            </tr>
-            <tr class="highlight-row">
-              <td><strong>5月</strong></td>
-              <td class="td-right ng">25,836円 ⚠️</td>
-              <td class="td-right">135,280円</td>
-              <td class="td-right ng">19.09% ✗</td>
-              <td class="td-right warn">25.0%</td>
-              <td class="td-right">109,444円</td>
-              <td class="td-right">80.9%</td>
-            </tr>
-            <tr>
-              <td><strong>6月</strong></td>
-              <td class="td-right">81,825円</td>
-              <td class="td-right" style="color:#10b981;font-weight:700">477,820円</td>
-              <td class="td-right warn">17.12% △</td>
-              <td class="td-right">18.9%</td>
-              <td class="td-right">395,995円</td>
-              <td class="td-right">82.9%</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="action-item">
+        <div class="icon icon-ops">SS</div>
+        <div class="action-body">
+          <div class="action-head">
+            <div class="action-title">④ babytableware2ssの独立成長戦略</div>
+            <span class="pri mid">MEDIUM</span>
+          </div>
+          <div class="action-desc">
+            5〜6月に安定した24〜25件/月を記録し副収益ラインとして確立しつつある。メインとの差別化を明確にし独立した顧客層を獲得する。
+            <ul>
+              <li>メインと異なる訴求（サイズ・カラー・ギフト向け等）を強化し共食いを防止</li>
+              <li>独立したRPP入札戦略（メインとKWが重複しない領域をターゲット）を設計</li>
+              <li>7月以降のマラソンでssページ単独でのエントリを検討</li>
+            </ul>
+          </div>
+          <div class="action-meta">
+            <span><strong>担当：</strong>MD</span>
+            <span><strong>期限：</strong>8月まで</span>
+            <span><strong>期待効果：</strong>月30件以上の独立ラインへ育成</span>
+          </div>
+        </div>
       </div>
-      <p style="font-size:0.75rem;color:#9ca3af;margin-top:8px">※ 粗利・利益率は仕入原価・運賃・在庫保管費が未入力のため参考値。実際の利益はこれより低くなる。</p>
-    </div>
-  </section>
 
-  <!-- ─── 5. 顧客インサイト ─── -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon icon-pink">👥</div>
-      <span class="section-title">5｜顧客インサイト</span>
-    </div>
-    <div class="section-body">
-      <ul class="insight-list">
-        <li><strong>イベント依存度が高い</strong>：3月（226個）と6月（284個）で4ヶ月売上の73%を占める。スーパーセール・スーパーSALEが主要な購入トリガー。イベント外の安定集客が課題。</li>
-        <li><strong>目的買い顧客の存在</strong>：4月の通常期にCVR 6.80%を達成。アクセスは少なくても確実に買う顧客層が存在しており、商品ページの訴求力は高い。</li>
-        <li><strong>価格帯別ニーズ</strong>：基本価格1,780円に対し、一部の日に客単価2,670円を記録（通常の1.5倍）。セット購入・複数購入需要が潜在的に存在。</li>
-        <li><strong>babytableware2ss の新規流入</strong>：5月下旬〜6月にかけて最大340アクセス/日を獲得。メインSKU不在時に別キーワード・流入経路から独自の需要が開拓されている可能性。</li>
-        <li><strong>レビュー・返品</strong>：CSVデータからは直接読み取れないが、通常期のCVR 6〜7%の高さは商品評価・ページ品質への顧客信頼を示唆。</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ─── 6. アクション案 ─── -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-icon icon-red">🎯</div>
-      <span class="section-title">6｜アクション案</span>
-    </div>
-    <div class="section-body">
-      <div class="action-list">
-
-        <!-- HIGH 1 -->
-        <div class="action-item action-high">
-          <div class="action-header">
-            <span class="action-priority priority-high">HIGH</span>
-            <span class="action-title">【1】在庫切れ根本対策・安全在庫の設定</span>
+      <div class="action-item">
+        <div class="icon icon-ops">価格</div>
+        <div class="action-body">
+          <div class="action-head">
+            <div class="action-title">⑤ セール外でのポイント・価格戦略</div>
+            <span class="pri low">LOW</span>
           </div>
-          <div class="action-body">
-            <strong>課題</strong>：5/23以降babytableware2のアクセスがほぼゼロ → 在庫切れ確定的。楽天SEOスコアへのダメージは全課題中最大。一度落ちたSEO順位の回復には数ヶ月かかる。<br>
-            <strong>アクション</strong>：①在庫切れ発生日時・原因の特定（発注ミス/需要予測ミス/納期遅延）。②次回イベント（7月スーパーSALE等）前に安全在庫を設定（目安：3月スーパーセール水準 226個 × 1.5 = 340個）。③毎週月曜に在庫数を確認するチェックリストの運用開始。
+          <div class="action-desc">
+            非セール期の客単価は¥1,780〜1,853で安定しており価格弾力性の余地がある。
+            <ul>
+              <li>5〜10倍ポイント設定でお得感演出（実質値引き負担を抑えながらCVR改善）</li>
+              <li>離乳食グッズとのセット訴求で客単価向上を検討</li>
+            </ul>
           </div>
-          <div class="action-footer">
-            <span>担当: <strong>物流・EC担当</strong></span>
-            <span>期限: <strong>2026年7月第1週</strong></span>
+          <div class="action-meta">
+            <span><strong>担当：</strong>MD</span>
+            <span><strong>期限：</strong>Q3内</span>
           </div>
         </div>
-
-        <!-- HIGH 2 -->
-        <div class="action-item action-high">
-          <div class="action-header">
-            <span class="action-priority priority-high">HIGH</span>
-            <span class="action-title">【2】在庫切れ時の広告自動停止ルールの整備</span>
-          </div>
-          <div class="action-body">
-            <strong>課題</strong>：5月の在庫切れ期間中もRPP広告が稼働し続け25,836円を無駄に消費（TACOS 19.09%の主因）。在庫ゼロ時に広告を流すことは費用を捨てるだけでなくランキングにもマイナス。<br>
-            <strong>アクション</strong>：在庫数が残5個以下になった時点でRPP入札額を最小化（または停止）するルールを設定。楽天RMS上の在庫アラート → Slack通知 → 広告停止の手順をマニュアル化する。
-          </div>
-          <div class="action-footer">
-            <span>担当: <strong>広告担当</strong></span>
-            <span>期限: <strong>2026年7月中旬</strong></span>
-          </div>
-        </div>
-
-        <!-- MEDIUM 3 -->
-        <div class="action-item action-medium">
-          <div class="action-header">
-            <span class="action-priority priority-medium">MEDIUM</span>
-            <span class="action-title">【3】マラソン期間のCVR改善施策</span>
-          </div>
-          <div class="action-body">
-            <strong>課題</strong>：6月後半ラソン（6/21〜）でアクセスが895/日まで急増するも、CVRが0.1〜0.4%台と極めて低い。アクセスに対して購入につながっていない。<br>
-            <strong>アクション</strong>：①マラソン期間限定クーポンの設定（例：◯%OFFクーポン）。②商品ページ1枚目画像に「マラソン期間中◯%OFF」バナーを差し込む。③商品タイトルへのマラソンキーワード追加。次回マラソン（7月前半ラソン）での効果検証を実施。
-          </div>
-          <div class="action-footer">
-            <span>担当: <strong>EC/クリエイティブ担当</strong></span>
-            <span>期限: <strong>7月前半ラソン前（7月中旬まで）</strong></span>
-          </div>
-        </div>
-
-        <!-- MEDIUM 4 -->
-        <div class="action-item action-medium">
-          <div class="action-header">
-            <span class="action-priority priority-medium">MEDIUM</span>
-            <span class="action-title">【4】babytableware2ss の流入経路確認・体制整備</span>
-          </div>
-          <div class="action-body">
-            <strong>課題</strong>：サブSKUが5月後半から独自の流入を獲得（最大340アクセス/日）。メインSKU在庫切れ時の受け皿として機能し始めているが、在庫・広告体制が未整備。<br>
-            <strong>アクション</strong>：①babytableware2ss の流入キーワード・経路をRMSで確認。②メインSKU在庫切れ時の代替SKUとして在庫を厚めに確保する方針を策定。③場合によってはbabytableware2ss 独自のRPP広告強化も検討。
-          </div>
-          <div class="action-footer">
-            <span>担当: <strong>EC担当</strong></span>
-            <span>期限: <strong>2026年7月第1週</strong></span>
-          </div>
-        </div>
-
-        <!-- LOW 5 -->
-        <div class="action-item action-low">
-          <div class="action-header">
-            <span class="action-priority priority-low">LOW</span>
-            <span class="action-title">【5】セット商品の開発検討</span>
-          </div>
-          <div class="action-body">
-            <strong>課題</strong>：一部の日に客単価2,670円（通常1,780円の1.5倍）を記録。複数購入やセット需要が潜在的に存在する。<br>
-            <strong>アクション</strong>：プレート単品に加えて離乳食スプーン・コップ等とのコンビセット商品ページの検討。客単価向上でTACOSの相対的改善と利益率アップも期待できる。
-          </div>
-          <div class="action-footer">
-            <span>担当: <strong>商品企画</strong></span>
-            <span>期限: <strong>2026年8月</strong></span>
-          </div>
-        </div>
-
-        <!-- LOW 6 -->
-        <div class="action-item action-low">
-          <div class="action-header">
-            <span class="action-priority priority-low">LOW</span>
-            <span class="action-title">【6】スーパーSALE購入者へのリテンション施策</span>
-          </div>
-          <div class="action-body">
-            <strong>課題</strong>：6月スーパーSALEで単日41個を購入した顧客層（6/11）への事後フォローが現状なし。レビュー獲得・リピート購入への誘導機会を活かせていない。<br>
-            <strong>アクション</strong>：①購入30日後のレビュー依頼メール設定（楽天RMSのフォローメール機能を活用）。②babytableware2ss など関連商品のレコメンドメール設定。③次回スーパーSALE前の「前回ご購入者様限定クーポン」配信。
-          </div>
-          <div class="action-footer">
-            <span>担当: <strong>EC担当</strong></span>
-            <span>期限: <strong>2026年7月中旬</strong></span>
-          </div>
-        </div>
-
       </div>
+
     </div>
-  </section>
+  </div>
 
-</main>
+</div><!-- /main -->
 
-<footer>
-  <p>Amazon Research OS ｜ BabyGoo / fungoo ｜ 株式会社ASAGIRI ｜ 社内限定資料</p>
-  <p style="margin-top:4px">生成日: 2026年6月30日 ｜ 対象期間: 2026年3月〜6月29日</p>
-</footer>
+<div class="footer">
+  Amazon Research OS | BabyGoo / fungoo | 株式会社ASAGIRI | 社内限定 | 作成: 2026-07-03
+</div>
 
 </body>
 </html>
